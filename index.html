@@ -1,741 +1,351 @@
-<!doctype html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-  <title>啪啪红包马 - 手机网页试玩</title>
-  <style>
-    :root{
-      --bg1:#2b0b0b;
-      --bg2:#ffb457;
-      --panel: rgba(0,0,0,.28);
-      --panel2: rgba(255,255,255,.14);
-      --gold:#ffd56a;
-      --red:#ff3b30;
-      --text:#fff7ea;
-      --shadow: 0 12px 30px rgba(0,0,0,.35);
-      --radius:18px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%; margin:0; font-family: ui-rounded, system-ui, -apple-system, "PingFang TC","Noto Sans TC", Arial;}
-    body{
-      background: radial-gradient(1200px 800px at 50% 30%, #ffcf7e 0%, #ff7c2f 35%, #5c0c0c 100%);
-      color:var(--text);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:12px;
-      overflow:hidden;
-      touch-action: manipulation;
-    }
-
-    /* phone frame */
-    .phone{
-      width:min(420px, 100%);
-      aspect-ratio: 9/16;
-      border-radius: 28px;
-      box-shadow: 0 30px 70px rgba(0,0,0,.55);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.20));
-      border: 1px solid rgba(255,255,255,.15);
-      overflow:hidden;
-      position:relative;
-    }
-
-    /* top header */
-    .top{
-      position:absolute; left:0; right:0; top:0;
-      padding:14px 14px 10px;
-      background: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,0));
-      z-index:6;
-    }
-    .title{
-      display:flex; align-items:center; justify-content:center;
-      font-weight:900;
-      letter-spacing:1px;
-      font-size: 28px;
-      text-shadow: 0 6px 0 rgba(0,0,0,.25);
-      color: #ffe8b3;
-      margin-top:2px;
-    }
-    .subtitle{
-      margin:6px auto 0;
-      width:fit-content;
-      padding:6px 12px;
-      border-radius:999px;
-      background: rgba(255,55,48,.25);
-      border: 1px solid rgba(255,255,255,.18);
-      font-weight:700;
-      font-size:14px;
-      text-shadow: 0 2px 0 rgba(0,0,0,.25);
-    }
-    .hud{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-      margin-top:10px;
-    }
-    .pill{
-      display:flex; gap:10px; align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      background: var(--panel);
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(6px);
-      min-width: 120px;
-    }
-    .pill b{font-weight:900}
-    .pill .label{opacity:.9; font-size:12px}
-    .pill .value{font-size:18px; font-weight:900}
-
-    /* playfield */
-    .field{
-      position:absolute; inset:0;
-      padding-top:120px;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      align-items:center;
-      z-index:1;
-    }
-
-    .stage{
-      position:relative;
-      width:100%;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:0 12px 110px;
-    }
-
-    /* horse card (placeholder art) */
-    .horseWrap{
-      position:relative;
-      width:min(320px, 92%);
-      aspect-ratio: 1/1.05;
-      border-radius: 26px;
-      background:
-        radial-gradient(400px 260px at 50% 35%, rgba(255,255,255,.25), rgba(0,0,0,0) 60%),
-        linear-gradient(180deg, rgba(255,211,140,.35), rgba(0,0,0,.15));
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 22px 50px rgba(0,0,0,.35);
-      overflow:hidden;
-      user-select:none;
-      -webkit-user-select:none;
-      touch-action: manipulation;
-    }
-
-    .lanterns{
-      position:absolute; inset:0;
-      background:
-        radial-gradient(12px 16px at 16% 18%, rgba(255,80,60,.55), rgba(0,0,0,0) 60%),
-        radial-gradient(12px 16px at 84% 22%, rgba(255,80,60,.55), rgba(0,0,0,0) 60%),
-        radial-gradient(18px 22px at 26% 10%, rgba(255,200,120,.45), rgba(0,0,0,0) 60%),
-        radial-gradient(18px 22px at 74% 14%, rgba(255,200,120,.45), rgba(0,0,0,0) 60%);
-      opacity:.85;
-      pointer-events:none;
-    }
-
-    .horse{
-      position:absolute;
-      left:50%; top:52%;
-      transform: translate(-50%,-50%);
-      width: 92%;
-      height: 92%;
-      display:grid;
-      place-items:center;
-      pointer-events:none;
-    }
-
-    /* stylized horse using CSS shapes */
-    .horseBody{
-      position:relative;
-      width: 78%;
-      height: 55%;
-      background: linear-gradient(180deg, #ffb95f, #b35a1e);
-      border-radius: 40% 48% 50% 38% / 55% 60% 40% 45%;
-      box-shadow: inset 0 10px 0 rgba(255,255,255,.18);
-      transform: translateY(10px);
-    }
-    .horseHead{
-      position:absolute;
-      left: 6%;
-      top: 18%;
-      width: 42%;
-      height: 42%;
-      background: linear-gradient(180deg, #ffbf6b, #c56624);
-      border-radius: 55% 45% 55% 45%;
-      transform: rotate(-10deg);
-      box-shadow: inset 0 10px 0 rgba(255,255,255,.16);
-    }
-    .ear{
-      position:absolute; top:-14%;
-      width: 18%;
-      height: 22%;
-      background: linear-gradient(180deg,#ffbf6b,#b65b20);
-      border-radius: 40% 60% 30% 70%;
-    }
-    .ear.e1{left:18%; transform: rotate(-18deg);}
-    .ear.e2{left:44%; transform: rotate(12deg);}
-    .eye{
-      position:absolute; top:42%; left:22%;
-      width: 12px; height: 12px; border-radius:50%;
-      background:#2a120b;
-      box-shadow: 18px 0 0 #2a120b;
-    }
-    .mouth{
-      position:absolute; top:62%; left:18%;
-      width: 52px; height: 26px;
-      border-radius: 0 0 24px 24px;
-      background: rgba(0,0,0,.18);
-      transform: rotate(10deg);
-    }
-    .blush{
-      position:absolute; top:52%; left:52%;
-      width: 26px; height: 18px;
-      border-radius: 999px;
-      background: rgba(255,80,80,.35);
-      transform: rotate(-8deg);
-      filter: blur(.2px);
-    }
-
-    .buttZone{
-      position:absolute;
-      right: 6%;
-      top: 40%;
-      width: 36%;
-      height: 38%;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,.22), rgba(0,0,0,0) 60%);
-      outline: 2px dashed rgba(255,255,255,.22);
-      outline-offset: -6px;
-      pointer-events:auto;
-      cursor:pointer;
-    }
-    .buttLabel{
-      position:absolute;
-      right: 8%;
-      top: 33%;
-      padding: 8px 12px;
-      border-radius: 16px;
-      background: rgba(255,59,48,.18);
-      border: 1px solid rgba(255,255,255,.16);
-      font-weight:900;
-      text-shadow:0 2px 0 rgba(0,0,0,.25);
-      pointer-events:none;
-    }
-
-    .handHint{
-      position:absolute;
-      right: 10%;
-      bottom: 18%;
-      width: 70px; height: 70px;
-      border-radius: 22px;
-      background: rgba(0,0,0,.18);
-      border:1px solid rgba(255,255,255,.12);
-      display:grid; place-items:center;
-      opacity:.85;
-    }
-    .handHint span{
-      font-size:34px;
-      transform: translateY(-2px);
-    }
-
-    /* bottom buttons */
-    .bottom{
-      position:absolute; left:0; right:0; bottom:0;
-      padding:12px 12px 16px;
-      background: linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,0));
-      z-index:6;
-    }
-    .statsRow{
-      display:flex; gap:10px; justify-content:space-between; align-items:center;
-      margin-bottom:10px;
-    }
-    .bar{
-      flex:1;
-      padding:10px 12px;
-      border-radius: 16px;
-      background: var(--panel);
-      border:1px solid rgba(255,255,255,.14);
-      display:flex; justify-content:space-between; align-items:center;
-      box-shadow: var(--shadow);
-      min-height:44px;
-    }
-    .bar .k{opacity:.9; font-size:12px}
-    .bar .v{font-weight:900; font-size:16px}
-    .buttons{
-      display:flex; gap:10px;
-    }
-    button{
-      flex:1;
-      border:none;
-      border-radius: 18px;
-      padding:14px 12px;
-      font-weight:900;
-      font-size:18px;
-      color:#2a120b;
-      background: linear-gradient(180deg, #ffe08a, #ffb75a);
-      box-shadow: 0 14px 28px rgba(0,0,0,.35);
-      cursor:pointer;
-    }
-    button.secondary{
-      color:#fff7ea;
-      background: linear-gradient(180deg, rgba(255,59,48,.9), rgba(175,16,10,.95));
-    }
-    button:active{transform: translateY(1px); filter:saturate(1.1);}
-
-    /* floating pop text & particles */
-    .float{
-      position:absolute;
-      font-weight:900;
-      text-shadow:0 3px 0 rgba(0,0,0,.25);
-      pointer-events:none;
-      will-change: transform, opacity;
-      z-index:10;
-    }
-    .particle{
-      position:absolute;
-      width: 28px; height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(180deg, #ff4540, #b70f0a);
-      border: 2px solid rgba(255,255,255,.18);
-      box-shadow: 0 10px 20px rgba(0,0,0,.28);
-      display:grid; place-items:center;
-      color:#ffe8b3;
-      font-weight:900;
-      pointer-events:none;
-      z-index:9;
-      will-change: transform, opacity;
-    }
-    .coin{
-      width: 30px; height: 30px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #fff3c7, #ffd56a 45%, #cc8a12 100%);
-      border: 2px solid rgba(255,255,255,.14);
-      color:#7a3a00;
-      font-size:14px;
-    }
-
-    /* modal (ranking) */
-    .modalMask{
-      position:absolute; inset:0;
-      background: rgba(0,0,0,.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:20;
-      padding:14px;
-    }
-    .modal{
-      width:min(360px, 100%);
-      border-radius: 22px;
-      background: rgba(15,8,6,.92);
-      border:1px solid rgba(255,255,255,.16);
-      box-shadow: 0 30px 70px rgba(0,0,0,.6);
-      padding:14px;
-    }
-    .modal h3{margin:6px 0 10px; font-size:18px}
-    .modal .row{
-      display:flex; justify-content:space-between; gap:10px;
-      padding:10px 10px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      margin-bottom:8px;
-      font-weight:700;
-    }
-    .modal .row b{color:var(--gold)}
-    .modal .close{
-      margin-top:10px;
-      width:100%;
-      background: linear-gradient(180deg, #ffe08a, #ffb75a);
-      color:#2a120b;
-    }
-
-    /* shake animation for slap */
-    .shake{ animation: shake .18s linear 1; }
-    @keyframes shake{
-      0%{transform: translate(-50%,-50%) rotate(0deg)}
-      25%{transform: translate(-49%,-50%) rotate(-2deg)}
-      50%{transform: translate(-51%,-50%) rotate(2deg)}
-      75%{transform: translate(-49%,-50%) rotate(-1deg)}
-      100%{transform: translate(-50%,-50%) rotate(0deg)}
-    }
-
-    /* small devices */
-    @media (max-height: 680px){
-      .top{padding:10px 12px}
-      .title{font-size:26px}
-      .subtitle{font-size:13px}
-      button{font-size:16px}
-    }
-  </style>
-</head>
-<body>
-  <div class="phone" id="phone">
-    <div class="top">
-      <div class="title">啪啪红包马</div>
-      <div class="subtitle">马年攒着 好运来拍</div>
-
-      <div class="hud">
-        <div class="pill" title="倒计时">
-          <span class="label">⏱</span>
-          <span class="value" id="time">00:30</span>
-        </div>
-        <div class="pill" title="分数">
-          <span class="label">分数</span>
-          <span class="value" id="score">0</span>
-        </div>
-        <div class="pill" title="连击倍数">
-          <span class="label">连击</span>
-          <span class="value" id="mult">x1</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="field">
-      <div class="stage">
-        <div class="horseWrap" id="wrap">
-          <div class="lanterns"></div>
-
-          <div class="buttLabel" id="stateLabel">点击马屁！</div>
-
-          <div class="horse" id="horse">
-            <div class="horseBody" aria-hidden="true">
-              <div class="horseHead" aria-hidden="true">
-                <div class="ear e1"></div>
-                <div class="ear e2"></div>
-                <div class="eye"></div>
-                <div class="blush"></div>
-                <div class="mouth"></div>
-              </div>
-
-              <!-- interactive zone -->
-              <div class="buttZone" id="butt" title="拍这里得分"></div>
-            </div>
-          </div>
-
-          <div class="handHint" id="hint">
-            <span>✋</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bottom">
-      <div class="statsRow">
-        <div class="bar">
-          <div>
-            <div class="k">打击</div>
-            <div class="v" id="hits">0</div>
-          </div>
-          <div>
-            <div class="k">最高连击</div>
-            <div class="v" id="bestCombo">0</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="buttons">
-        <button class="secondary" id="btnStart">开始一局</button>
-        <button id="btnRank">排行榜</button>
-      </div>
-    </div>
-
-    <div class="modalMask" id="mask">
-      <div class="modal">
-        <h3>排行榜（本机示例）</h3>
-        <div id="rankList"></div>
-        <button class="close" id="btnClose">关闭</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ======= 简易手机网页游戏：点击“马屁区”得分 + 连击倍率 + 掉落红包/金币 + 本机排行榜 =======
-
-    const els = {
-      phone: document.getElementById('phone'),
-      wrap: document.getElementById('wrap'),
-      butt: document.getElementById('butt'),
-      horse: document.getElementById('horse'),
-      hint: document.getElementById('hint'),
-      time: document.getElementById('time'),
-      score: document.getElementById('score'),
-      mult: document.getElementById('mult'),
-      hits: document.getElementById('hits'),
-      bestCombo: document.getElementById('bestCombo'),
-      stateLabel: document.getElementById('stateLabel'),
-      btnStart: document.getElementById('btnStart'),
-      btnRank: document.getElementById('btnRank'),
-      mask: document.getElementById('mask'),
-      btnClose: document.getElementById('btnClose'),
-      rankList: document.getElementById('rankList'),
-    };
-
-    const DURATION_SEC = 30;
-    const COMBO_WINDOW_MS = 900;   // 连击判定窗口
-    const BASE_POINTS = 10;
-    const CRIT_CHANCE = 0.13;      // 暴击概率
-    const CRIT_MULT = 2.5;
-
-    let running = false;
-    let tLeft = DURATION_SEC;
-    let timerId = null;
-
-    let score = 0;
-    let hits = 0;
-
-    let combo = 0;
-    let bestCombo = 0;
-    let lastHitAt = 0;
-
-    function pad2(n){ return String(n).padStart(2,'0'); }
-    function fmtTime(sec){
-      const m = Math.floor(sec/60);
-      const s = sec%60;
-      return `${pad2(m)}:${pad2(s)}`;
-    }
-
-    function comboMultiplier(c){
-      // 1–9: x1, 10–19: x2, 20–39: x3, 40–59: x5, 60+: x8
-      if (c >= 60) return 8;
-      if (c >= 40) return 5;
-      if (c >= 20) return 3;
-      if (c >= 10) return 2;
-      return 1;
-    }
-
-    function setHud(){
-      els.time.textContent = fmtTime(tLeft);
-      els.score.textContent = score;
-      els.hits.textContent = hits;
-      els.bestCombo.textContent = bestCombo;
-
-      const mul = comboMultiplier(combo);
-      els.mult.textContent = `x${mul}`;
-    }
-
-    function setStateLabel(text){
-      els.stateLabel.textContent = text;
-    }
-
-    function resetGame(){
-      running = false;
-      tLeft = DURATION_SEC;
-      score = 0;
-      hits = 0;
-      combo = 0;
-      bestCombo = 0;
-      lastHitAt = 0;
-      setStateLabel('点击马屁！');
-      setHud();
-      els.hint.style.opacity = '0.85';
-      clearInterval(timerId);
-      timerId = null;
-    }
-
-    function startGame(){
-      resetGame();
-      running = true;
-      els.hint.style.opacity = '0.0';
-      setStateLabel('开拍！');
-      timerId = setInterval(()=>{
-        tLeft -= 1;
-        if (tLeft <= 0){
-          tLeft = 0;
-          endGame();
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣 2D 動畫行情指南 | VISION MOTION STUDIO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Rajdhani:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS 變數定義 (主題核心) --- */
+        :root {
+            --bg-main: #0a0a0a; /* 極深黑背景 */
+            --bg-secondary: #141414; /* 次級背景 */
+            --text-primary: #ffffff; /* 主要文字 */
+            --text-secondary: #b3b3b3; /* 次要文字 */
+            --accent-cyan: #00f7ff; /* 霓虹青 */
+            --accent-purple: #9d00ff; /* 霓虹紫 */
+            --gradient-accent: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            --section-spacing: 100px;
         }
-        setHud();
-      }, 1000);
-      setHud();
-    }
 
-    function endGame(){
-      running = false;
-      clearInterval(timerId);
-      timerId = null;
-      setStateLabel('结算完成');
-      saveScore(score);
-      // 轻提示
-      spawnFloat(`+${score} 总分`, els.wrap.getBoundingClientRect().left + 40, els.wrap.getBoundingClientRect().top + 170, true);
-      renderRanking();
-    }
+        /* --- 全域設定 --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    // ======= 本机排行榜（localStorage） =======
-    const KEY = 'slap_horse_rank_v1';
+        body {
+            font-family: 'Rajdhani', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    function getRank(){
-      try{
-        const raw = localStorage.getItem(KEY);
-        const arr = raw ? JSON.parse(raw) : [];
-        return Array.isArray(arr) ? arr : [];
-      }catch(e){
-        return [];
-      }
-    }
+        h1, h2, h3, h4 {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    function saveScore(s){
-      const list = getRank();
-      list.push({ score: s, ts: Date.now() });
-      list.sort((a,b)=>b.score - a.score);
-      localStorage.setItem(KEY, JSON.stringify(list.slice(0,10)));
-    }
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-    function renderRanking(){
-      const list = getRank();
-      els.rankList.innerHTML = '';
-      if (!list.length){
-        els.rankList.innerHTML = `<div class="row"><span>暂无记录</span><b>—</b></div>`;
-        return;
-      }
-      list.forEach((it, i)=>{
-        const d = new Date(it.ts);
-        const stamp = `${pad2(d.getMonth()+1)}/${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
-        const row = document.createElement('div');
-        row.className = 'row';
-        row.innerHTML = `<span>#${i+1} <span style="opacity:.75;font-weight:600">${stamp}</span></span><b>${it.score}</b>`;
-        els.rankList.appendChild(row);
-      });
-    }
+        /* 標題下方的帥氣底線 */
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+            transform: skewX(-20deg);
+        }
 
-    // ======= 特效：飘字、红包、金币 =======
-    function spawnFloat(text, x, y, big=false){
-      const div = document.createElement('div');
-      div.className = 'float';
-      div.textContent = text;
-      div.style.left = x + 'px';
-      div.style.top = y + 'px';
-      div.style.fontSize = big ? '22px' : '18px';
-      div.style.color = big ? '#ffe08a' : '#fff7ea';
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
 
-      document.body.appendChild(div);
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-      const start = performance.now();
-      const duration = 650;
+        section {
+            padding: var(--section-spacing) 0;
+        }
 
-      function tick(now){
-        const p = Math.min(1, (now-start)/duration);
-        const dy = -60 * p;
-        const scale = big ? (1 + 0.15*(1-p)) : (1 + 0.08*(1-p));
-        div.style.transform = `translate(0, ${dy}px) scale(${scale})`;
-        div.style.opacity = String(1 - p);
-        if (p < 1) requestAnimationFrame(tick);
-        else div.remove();
-      }
-      requestAnimationFrame(tick);
-    }
+        /* GSAP 動畫初始狀態 (隱藏) */
+        .gsap-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
 
-    function spawnParticle(type, x, y){
-      const div = document.createElement('div');
-      div.className = 'particle';
-      if (type === 'coin'){
-        div.classList.add('coin');
-        div.textContent = '￥';
-      } else {
-        div.textContent = '福';
-      }
+        /* --- 導航列 (Header) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
 
-      document.body.appendChild(div);
+        .logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
 
-      const start = performance.now();
-      const duration = 900;
-      const vx = (Math.random()*2-1) * 90;
-      const vy = - (120 + Math.random()*120);
-      const g  = 420; // gravity px/s^2
+        /* --- Hero Section (主視覺) --- */
+        #hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
 
-      function tick(now){
-        const t = (now - start) / 1000;
-        const p = Math.min(1, (now-start)/duration);
+        /* 背景動態光影效果 - 整合圖片 */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            /* 引入背景圖片 */
+            background-image: url('images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            /* 使用 multiply 混合模式疊加深色，確保文字清晰 */
+            background-blend-mode: multiply; 
+            background-color: rgba(10,10,10,0.7);
 
-        const dx = vx * t;
-        const dy = vy * t + 0.5 * g * t * t;
+            animation: pulseBg 20s infinite alternate linear;
+            z-index: -1;
+        }
 
-        div.style.transform = `translate(${dx}px, ${dy}px) rotate(${(dx/2)}deg)`;
-        div.style.left = x + 'px';
-        div.style.top = y + 'px';
-        div.style.opacity = String(1 - Math.max(0, (p-0.75)/0.25));
+        @keyframes pulseBg {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(5deg) scale(1.1); }
+        }
 
-        if (p < 1) requestAnimationFrame(tick);
-        else div.remove();
-      }
-      requestAnimationFrame(tick);
-    }
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+        }
+        
+        .hero-content h1 span {
+             display: block;
+             font-size: 5rem;
+             background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    function burstDrops(cx, cy, count){
-      for (let i=0;i<count;i++){
-        const type = Math.random() < 0.55 ? 'hongbao' : 'coin';
-        spawnParticle(type, cx + (Math.random()*16-8), cy + (Math.random()*12-6));
-      }
-    }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
 
-    // ======= 点击逻辑 =======
-    function onSlap(ev){
-      ev.preventDefault();
-      if (!running) return;
+        /* --- Section 1: 關鍵因素 (Card Layout) --- */
+        .variables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
 
-      const now = Date.now();
-      if (now - lastHitAt <= COMBO_WINDOW_MS) combo += 1;
-      else combo = 1;
-      lastHitAt = now;
+        .variable-card {
+            background: var(--bg-secondary);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-      bestCombo = Math.max(bestCombo, combo);
+        .variable-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(0, 247, 255, 0.1);
+        }
 
-      const mul = comboMultiplier(combo);
-      const isCrit = Math.random() < CRIT_CHANCE;
+        .variable-card i {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--accent-cyan);
+        }
 
-      let add = BASE_POINTS * mul;
-      if (isCrit) add = Math.round(add * CRIT_MULT);
+        .variable-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
 
-      score += add;
-      hits += 1;
+        /* --- Section 2: 收費模式 (Split Layout) --- */
+        #pricing-models {
+            background: var(--bg-secondary);
+            position: relative;
+        }
 
-      // 视觉反馈：抖动
-      els.horse.classList.remove('shake');
-      // 强制 reflow 以便连续触发动画
-      void els.horse.offsetWidth;
-      els.horse.classList.add('shake');
+        #pricing-models::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 49%, var(--accent-purple) 49%, var(--accent-purple) 51%, transparent 51%);
+            opacity: 0.05;
+            pointer-events: none;
+        }
 
-      // 飘字位置：以点击点为准；无则以区域中心
-      const rect = els.wrap.getBoundingClientRect();
-      const x = (ev.touches && ev.touches[0]) ? ev.touches[0].clientX : ev.clientX;
-      const y = (ev.touches && ev.touches[0]) ? ev.touches[0].clientY : ev.clientY;
-      const fx = Number.isFinite(x) ? x : rect.left + rect.width*0.72;
-      const fy = Number.isFinite(y) ? y : rect.top + rect.height*0.56;
+        .models-container {
+            display: flex;
+            gap: 50px;
+        }
 
-      spawnFloat(isCrit ? `暴击 +${add}` : `+${add}`, fx - 20, fy - 10, isCrit);
+        .model-block {
+            flex: 1;
+            background: rgba(10, 10, 10, 0.8);
+            padding: 50px;
+            border-radius: 20px;
+            border-left: 5px solid var(--accent-cyan);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .model-block.second {
+             border-left-color: var(--accent-purple);
+        }
 
-      // 掉落：暴击更多
-      burstDrops(fx, fy, isCrit ? 10 : 5);
+        .model-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .model-block h3 i {
+            margin-right: 15px;
+        }
 
-      // 状态文案（轻量，避免画面乱）
-      if (isCrit) setStateLabel('暴击！红包雨');
-      else if (mul >= 5) setStateLabel('连击爆表！');
-      else setStateLabel('继续拍！');
+        .pros-cons ul {
+            list-style: none;
+            margin-top: 20px;
+        }
 
-      setHud();
-    }
+        .pros-cons li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-secondary);
+        }
 
-    // ======= UI 事件 =======
-    els.btnStart.addEventListener('click', startGame);
-    els.btnRank.addEventListener('click', ()=>{
-      renderRanking();
-      els.mask.style.display = 'flex';
-    });
-    els.btnClose.addEventListener('click', ()=> els.mask.style.display = 'none');
-    els.mask.addEventListener('click', (e)=>{
-      if (e.target === els.mask) els.mask.style.display = 'none';
-    });
+        .pros-cons li.pro::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent-cyan);
+            position: absolute;
+            left: 0;
+        }
+         .pros-cons li.con::before {
+            content: '\f00d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #ff4757;
+            position: absolute;
+            left: 0;
+        }
 
-    // 点击/触摸：只绑定在马屁区，避免误触
-    els.butt.addEventListener('click', onSlap, {passive:false});
-    els.butt.addEventListener('touchstart', onSlap, {passive:false});
+        /* --- Section 3: 行情階梯 (Visual Tiers) - 整合圖片核心區域 --- */
+        .tiers-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
 
-    // 初始化
-    resetGame();
-  </script>
-</body>
-</html>
+        .tier-block {
+            display: flex;
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            overflow: hidden;
+            min-height: 320px;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* 視覺區域通用設定 */
+        .tier-visual {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 900;
+            font-size: 5rem;
+            color: rgba(255,255,255,0.4); /* 提高亮度 */
+            text-transform: uppercase;
+            /* 新增圖片支援屬性 */
+            background-size: cover;
+            background-position: center;
+            /* 使用 overlay 混合模式，讓圖片與顏色濾鏡融合 */
+            background-blend-mode: overlay;
+            transition: transform 0.5s ease;
+        }
+        
+        /* 滑鼠懸停特效 */
+        .tier-block:hover {
+             border-color: rgba(255,255,255,0.2);
+             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .tier-block:hover .tier-visual {
+            transform: scale(1.05);
+        }
+
+        /* --- Tier A 設定 --- */
+        .tier-a .tier-visual { 
+            background-image: url('images/tier-a-basic.jpg');
+            background-color: rgba(40, 40, 40, 0.9); /* 深灰色濾鏡 */
+        }
+        .tier-a .tier-visual::after { content: 'BASIC'; position:absolute; z-index:0; text-shadow: 0 0 20px rgba(0,0,0,0.5);}
+        
+        /* --- Tier B 設定 --- */
+        .tier-b .tier-visual { 
+            background-image: url('images/tier-b-standard.jpg');
+            background-color: rgba(0, 247, 255, 0.4); /* 青色濾鏡 */
+        }
+        .tier-b .tier-visual::after { 
+            content: 'STANDARD'; position:absolute; z-index:0; 
+            color: rgba(0, 255, 255, 0.6);
+            text-shadow: 0 0 30px rgba(0,247,255,0.8);
+        }
+        .tier-b { border-color: rgba(0, 247, 255, 0.3);}
+        .tier-b:hover { box-shadow: 0 0 30px rgba(0, 247, 255, 0.2);}
+
+        /* --- Tier C 設定 --- */
+        .tier-c .tier-visual { 
+            background-image: url('images/tier-c-high-end.jpg');
+            background-color: rgba(157, 0, 255, 0.
