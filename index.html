@@ -1,351 +1,526 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>台灣 2D 動畫行情指南 | VISION MOTION STUDIO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Rajdhani:wght@500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>HGG Animation Studio | 罕呱呱动画工作室</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* --- CSS 變數定義 (主題核心) --- */
+        /* 品牌色定义 */
         :root {
-            --bg-main: #0a0a0a; /* 極深黑背景 */
-            --bg-secondary: #141414; /* 次級背景 */
-            --text-primary: #ffffff; /* 主要文字 */
-            --text-secondary: #b3b3b3; /* 次要文字 */
-            --accent-cyan: #00f7ff; /* 霓虹青 */
-            --accent-purple: #9d00ff; /* 霓虹紫 */
-            --gradient-accent: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
-            --section-spacing: 100px;
+            --hgg-teal: #008080;
+            --hgg-dark: #1a1a1a;
         }
-
-        /* --- 全域設定 --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Rajdhani', 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
-            display: inline-block;
+        .text-teal-brand { color: var(--hgg-teal); }
+        .bg-teal-brand { background-color: var(--hgg-teal); }
+        .border-teal-brand { border-color: var(--hgg-teal); }
+        
+        /* Hero 视频样式 */
+        .hero-video {
+            position: absolute;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* 標題下方的帥氣底線 */
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient-accent);
-            transform: skewX(-20deg);
-        }
-
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        section {
-            padding: var(--section-spacing) 0;
-        }
-
-        /* GSAP 動畫初始狀態 (隱藏) */
-        .gsap-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        /* --- 導航列 (Header) --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .logo {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
-        }
-
-        /* --- Hero Section (主視覺) --- */
-        #hero {
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
-        }
-
-        /* 背景動態光影效果 - 整合圖片 */
-        #hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            /* 引入背景圖片 */
-            background-image: url('images/hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            /* 使用 multiply 混合模式疊加深色，確保文字清晰 */
-            background-blend-mode: multiply; 
-            background-color: rgba(10,10,10,0.7);
-
-            animation: pulseBg 20s infinite alternate linear;
-            z-index: -1;
-        }
-
-        @keyframes pulseBg {
-            0% { transform: rotate(0deg) scale(1); }
-            100% { transform: rotate(5deg) scale(1.1); }
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
         }
         
-        .hero-content h1 span {
-             display: block;
-             font-size: 5rem;
-             background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
 
-        .hero-subtitle {
-            font-size: 1.5rem;
-            max-width: 700px;
-            margin: 0 auto;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-        }
+    <nav class="fixed w-full bg-white/95 backdrop-blur z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <img class="h-10 w-auto" src="images/logo_header.png" alt="HGG Animation Studio">
+                </div>
+                
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#works" class="text-gray-700 hover:text-teal-brand font-medium">作品</a>
+                    <a href="#services" class="text-gray-700 hover:text-teal-brand font-medium">服务</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-teal-brand font-medium">报价</a>
+                    <a href="#process" class="text-gray-700 hover:text-teal-brand font-medium">流程</a>
+                    <a href="#about" class="text-gray-700 hover:text-teal-brand font-medium">关于</a>
+                    
+                    <button onclick="checkVipPassword()" class="text-teal-700 hover:text-black font-bold border border-teal-600 px-3 py-1 rounded transition flex items-center gap-1">
+                        <span>客户专区</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    </button>
 
-        /* --- Section 1: 關鍵因素 (Card Layout) --- */
-        .variables-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
+                    <a href="#contact" class="bg-black text-white px-5 py-2 rounded hover:bg-teal-600 transition">联系我们</a>
+                </div>
 
-        .variable-card {
-            background: var(--bg-secondary);
-            padding: 40px 30px;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-black focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <a href="#works" class="block py-3 px-4 text-gray-700 hover:bg-gray-100">作品</a>
+            <a href="#services" class="block py-3 px-4 text-gray-700 hover:bg-gray-100">服务</a>
+            <a href="#pricing" class="block py-3 px-4 text-gray-700 hover:bg-gray-100">报价</a>
+            <a href="#process" class="block py-3 px-4 text-gray-700 hover:bg-gray-100">流程</a>
+            <a href="#about" class="block py-3 px-4 text-gray-700 hover:bg-gray-100">关于</a>
+            
+            <button onclick="checkVipPassword()" class="block w-full text-left py-3 px-4 text-teal-700 font-bold hover:bg-gray-100">
+                客户专区 🔒
+            </button>
 
-        .variable-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 10px 30px rgba(0, 247, 255, 0.1);
-        }
+            <a href="#contact" class="block py-3 px-4 bg-gray-900 text-white text-center">联系我们</a>
+        </div>
+    </nav>
 
-        .variable-card i {
-            font-size: 3rem;
-            margin-bottom: 25px;
-            color: var(--accent-cyan);
-        }
+    <header class="relative h-screen flex items-center justify-center overflow-hidden text-white">
+        <div class="absolute inset-0 bg-black">
+            <video autoplay loop muted playsinline poster="images/hero_fallback.jpg" class="hero-video opacity-60">
+                <source src="images/hero_bg.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
 
-        .variable-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-10">
+            <h1 class="text-4xl md:text-6xl font-bold mb-8 leading-tight tracking-wide">
+                赋予品牌灵魂，<br>让想像力具现化。
+            </h1>
+            <p class="text-lg md:text-2xl text-gray-200 mb-10 font-light leading-relaxed">
+                我们将企业策略转译为动人的影像语言。<br>
+                透过透明化的制作流程，将创意从纸上脚本完美落实为屏幕上的精彩瞬间。
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#contact" class="bg-teal-600 hover:bg-teal-500 text-white px-8 py-3 rounded text-lg font-bold transition">联系我们</a>
+                <a href="#works" class="border border-white hover:bg-white hover:text-black text-white px-8 py-3 rounded text-lg font-bold transition">查看作品</a>
+            </div>
+            <div class="mt-12 flex gap-3 justify-center text-sm text-gray-300 opacity-80">
+                <span class="bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">#影视广告</span>
+                <span class="bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">#AI专项评估</span>
+                <span class="bg-white/20 px-4 py-1 rounded-full backdrop-blur-sm">#原创IP</span>
+            </div>
+        </div>
+    </header>
 
-        /* --- Section 2: 收費模式 (Split Layout) --- */
-        #pricing-models {
-            background: var(--bg-secondary);
-            position: relative;
-        }
+    <section class="py-16 bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="p-6">
+                <div class="text-4xl mb-4">🎯</div>
+                <h3 class="text-xl font-bold mb-2">需求精准转化</h3>
+                <p class="text-gray-600">协助企业把模糊的需求，转成可投放、有逻辑的影像内容。</p>
+            </div>
+            <div class="p-6">
+                <div class="text-4xl mb-4">🤝</div>
+                <h3 class="text-xl font-bold mb-2">单一窗口负责</h3>
+                <p class="text-gray-600">从脚本、分镜到制作与后期，全程由 HGG 团队一条线完成。</p>
+            </div>
+            <div class="p-6">
+                <div class="text-4xl mb-4">📋</div>
+                <h3 class="text-xl font-bold mb-2">拒绝无效返工</h3>
+                <p class="text-gray-600">每个项目都有节点确认与交付清单，避免方向偏差。</p>
+            </div>
+        </div>
+    </section>
 
-        #pricing-models::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 49%, var(--accent-purple) 49%, var(--accent-purple) 51%, transparent 51%);
-            opacity: 0.05;
-            pointer-events: none;
-        }
+    <section id="works" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">精选作品 Works</h2>
+                <p class="text-gray-600">影视广告 / AI 专项评估 / 原创 IP</p>
+            </div>
 
-        .models-container {
-            display: flex;
-            gap: 50px;
-        }
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_01.jpg">
+                        <source src="images/work_01.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
+                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">品牌形象广告</h3>
+                            <p class="text-teal-400">Commercial Film</p>
+                        </div>
+                    </div>
+                </div>
 
-        .model-block {
-            flex: 1;
-            background: rgba(10, 10, 10, 0.8);
-            padding: 50px;
-            border-radius: 20px;
-            border-left: 5px solid var(--accent-cyan);
-            border: 1px solid rgba(255,255,255,0.05);
+                <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_02.jpg">
+                        <source src="images/work_02.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
+                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">AI 专项评估</h3>
+                            <p class="text-teal-400">AI 网剧 / AIGC</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_03.jpg">
+                        <source src="images/work_03.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
+                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">产品结构演示</h3>
+                            <p class="text-teal-400">3D Animation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_04.jpg">
+                        <source src="images/work_04.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
+                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">品牌故事短片</h3>
+                            <p class="text-teal-400">2D Animation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_05.jpg">
+                        <source src="images/work_05.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
+                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">资讯解说视频</h3>
+                            <p class="text-teal-400">MG Animation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_06.jpg">
+                        <source src="images/work_06.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
+                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+                        </svg>
+                        <div>
+                            <h3 class="text-white text-xl font-bold">HGG 原创 IP 动画</h3>
+                            <p class="text-teal-400">Original IP / Character</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-block border-b-2 border-black pb-1 hover:text-teal-600 hover:border-teal-600 transition">找不到类似案例？提交需求索取方案 →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">服务与参考价格 Services & Pricing</h2>
+                <p class="text-gray-600">以下为常见区间 (RMB)，正式报价依脚本、镜头与交付规格评估。</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="pricing">
+                
+                <div class="border rounded-xl p-8 hover:shadow-xl transition relative bg-gray-50">
+                    <div class="text-teal-700 font-bold mb-2">FILM</div>
+                    <h3 class="text-2xl font-bold mb-4">影视广告</h3>
+                    <p class="text-sm text-gray-500 mb-6">适用：品牌片、产品片、发布会影像</p>
+                    <div class="text-3xl font-bold mb-6">¥30k <span class="text-sm font-normal text-gray-500">起/案</span></div>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                        <li>✅ 基础版：¥30,000+</li>
+                        <li>⭐ 标准版：¥80,000+</li>
+                        <li>✅ 含多比例交付</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center bg-black text-white py-2 rounded hover:bg-teal-600 transition">咨询方案</a>
+                </div>
+
+                <div class="border rounded-xl p-8 hover:shadow-xl transition relative bg-gray-50">
+                    <div class="text-teal-700 font-bold mb-2">2D ANIMATION</div>
+                    <h3 class="text-2xl font-bold mb-4">2D 动画</h3>
+                    <p class="text-sm text-gray-500 mb-6">适用：资讯解释、流程说明、视觉包装</p>
+                    <div class="text-3xl font-bold mb-6">¥6k <span class="text-sm font-normal text-gray-500">起/分</span></div>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                        <li>✅ MG 动画：¥6,000+</li>
+                        <li>⭐ 逐帧动画：¥30,000+</li>
+                        <li>✅ 风格定制开发</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center bg-teal-600 text-white py-2 rounded hover:bg-teal-700 transition">咨询方案</a>
+                </div>
+
+                <div class="border rounded-xl p-8 hover:shadow-xl transition relative bg-gray-50">
+                    <div class="text-teal-700 font-bold mb-2">3D VISUAL</div>
+                    <h3 class="text-2xl font-bold mb-4">3D 演示</h3>
+                    <p class="text-sm text-gray-500 mb-6">适用：产品结构、工业流程、装配演示</p>
+                    <div class="text-3xl font-bold mb-6">¥300 <span class="text-sm font-normal text-gray-500">起/秒</span></div>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                        <li>✅ 基础展示：¥300+</li>
+                        <li>⭐ 标准拆解：¥800+</li>
+                        <li>✅ 高精度渲染</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center bg-black text-white py-2 rounded hover:bg-teal-600 transition">咨询方案</a>
+                </div>
+
+                <div class="border-2 border-teal-600 rounded-xl p-8 hover:shadow-xl transition relative bg-white transform md:-translate-y-2">
+                    <div class="absolute top-0 right-0 bg-teal-600 text-white text-xs px-3 py-1 rounded-bl-lg">趋势</div>
+                    <div class="text-teal-700 font-bold mb-2">AI SERVICE</div>
+                    <h3 class="text-2xl font-bold mb-4">AI 短剧制作</h3>
+                    <p class="text-sm text-gray-500 mb-6">适用：风格测试、动态分镜、AIGC 成片</p>
+                    <div class="text-3xl font-bold mb-6">¥5k <span class="text-sm font-normal text-gray-500">起/案</span></div>
+                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
+                        <li>✅ 风格样片 (StyleFrame)</li>
+                        <li>⭐ 概念短片 (Concept)</li>
+                        <li>✅ 降本增效评估</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center bg-teal-600 text-white py-2 rounded hover:bg-teal-700 transition">咨询方案</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="py-20 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">合作流程 Process</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 text-center">
+                <div class="relative p-4">
+                    <div class="text-4xl mb-4 font-bold text-teal-400">01</div>
+                    <h3 class="font-bold mb-2">需求确认</h3>
+                    <p class="text-xs text-gray-400">确认目标、平台与交付规格</p>
+                </div>
+                <div class="relative p-4">
+                    <div class="text-4xl mb-4 font-bold text-teal-400">02</div>
+                    <h3 class="font-bold mb-2">脚本与分镜</h3>
+                    <p class="text-xs text-gray-400">方向锁定 (⭐重点确认)</p>
+                </div>
+                <div class="relative p-4">
+                    <div class="text-4xl mb-4 font-bold text-teal-400">03</div>
+                    <h3 class="font-bold mb-2">制作执行</h3>
+                    <p class="text-xs text-gray-400">拍摄 / 2D / 3D / 合成</p>
+                </div>
+                <div class="relative p-4">
+                    <div class="text-4xl mb-4 font-bold text-teal-400">04</div>
+                    <h3 class="font-bold mb-2">粗剪确认</h3>
+                    <p class="text-xs text-gray-400">确认节奏与信息正确</p>
+                </div>
+                <div class="relative p-4">
+                    <div class="text-4xl mb-4 font-bold text-teal-400">05</div>
+                    <h3 class="font-bold mb-2">修改与交付</h3>
+                    <p class="text-xs text-gray-400">按约定轮次与清单交付</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-800 text-white border-t border-gray-700">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-teal-400 font-bold tracking-wider uppercase text-sm">Industry-Academia Collaboration</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">HGG x 校园联盟：AIGC 影像实验室</h2>
+                <div class="w-24 h-1 bg-teal-500 mx-auto mt-6 rounded"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2">
+                    <div class="flex items-center gap-6 mb-8">
+                        <img src="images/director_photo.jpg" alt="Director Hsueh" class="w-32 h-32 rounded-full border-4 border-teal-500 shadow-lg object-cover bg-gray-700">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-1">薛导 (Director Hsueh)</h3>
+                            <p class="text-teal-400 font-medium tracking-wide">HGG 创始人 / AIGC 计划总监</p>
+                        </div>
+                    </div>
+
+                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                        结合 <strong class="text-white">薛导</strong> 多年的影视实战经验，HGG 台湾团队致力于推动 AIGC 技术落地。我们与学校深入合作，将真实商业项目转化为教学实践，缩短“学校所学”与“业界所需”的距离。
+                    </p>
+                    <p class="text-teal-400 font-bold text-xl">
+                        打造台湾最强的 AIGC 创意聚落。
+                    </p>
+                </div>
+
+                <div class="md:w-1/2 grid gap-6">
+                    <div class="bg-gray-700 p-6 rounded-lg border-l-4 border-teal-500">
+                        <h3 class="text-xl font-bold mb-2 flex items-center">
+                            🔬 技术研发 (R&D)
+                        </h3>
+                        <p class="text-gray-300 text-sm">
+                            共同开发专属的 <span class="text-teal-300">LoRA 模型</span> 与 <span class="text-teal-300">ComfyUI</span> 自动化工作流，建立客制化影像生产线。
+                        </p>
+                    </div>
+                    <div class="bg-gray-700 p-6 rounded-lg border-l-4 border-teal-500">
+                        <h3 class="text-xl font-bold mb-2 flex items-center">
+                            🎓 人才培育
+                        </h3>
+                        <p class="text-gray-300 text-sm">
+                            让学生直接参与 <span class="text-teal-300">商业级 AI 短剧</span> 与广告制作，实战中学习最前沿技术。
+                        </p>
+                    </div>
+                    <div class="bg-gray-700 p-6 rounded-lg border-l-4 border-teal-500">
+                        <h3 class="text-xl font-bold mb-2 flex items-center">
+                            ⚡ 制程革新
+                        </h3>
+                        <p class="text-gray-300 text-sm">
+                            实验 AI 在 <span class="text-teal-300">分镜脚本 (Animatic)</span> 与 <span class="text-teal-300">美术设定 (Concept Art)</span> 的极限应用。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/2">
+                <img src="images/team_photo.jpg" alt="About HGG" class="rounded-lg shadow-lg">
+            </div>
+            <div class="md:w-1/2">
+                <h2 class="text-3xl font-bold mb-6">关于 HGG 罕呱呱</h2>
+                <h3 class="text-xl text-teal-700 font-bold mb-4">薛导领军 · 台湾 AIGC 影像先锋</h3>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    HGG 罕呱呱动画工作室由 **薛导 (Director Hsueh)** 于台湾创立。面对 AIGC 技術浪潮，我们不只是一家动画制作公司，更是影像革命的实验场。
+                    <br><br>
+                    我们与国内顶尖院校紧密合作，建立**“AIGC 产学研发基地”**。将业界的高标准製程与学界的创新能量结合，从 AI 辅助分镜、风格化模型训练到全流程生成，致力于培育下一代懂得驾驭 AI 的顶尖创作者。
+                </p>
+                <img src="images/logo_header.png" class="h-8 opacity-50" alt="HGG Logo">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="bg-white p-10 md:p-16 rounded-xl shadow-lg text-center">
+                <h2 class="text-3xl font-bold mb-6">联系我们</h2>
+                <p class="text-gray-600 mb-12 text-lg">
+                    无论是影视广告、2D 或 3D 动画需求，欢迎直接联系我们。<br>
+                    我们将尽速回复您的询问并提供专业建议。
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 group bg-gray-50 hover:bg-white">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">📞</div>
+                        <h3 class="font-bold text-xl mb-3">电话 Phone</h3>
+                        <p class="text-gray-600 font-medium text-lg">19947603560</p>
+                    </div>
+
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 group bg-gray-50 hover:bg-white">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">💬</div>
+                        <h3 class="font-bold text-xl mb-3">微信 WeChat</h3>
+                        <p class="text-gray-600 font-medium text-lg">liagaoo</p>
+                    </div>
+
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 group bg-gray-50 hover:bg-white">
+                        <div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">✉️</div>
+                        <h3 class="font-bold text-xl mb-3">邮箱 Email</h3>
+                        <a href="mailto:liagaoo@qq.com" class="text-teal-600 font-medium text-lg hover:underline break-all">
+                            liagaoo@qq.com
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative flex py-5 items-center mb-12">
+                    <div class="flex-grow border-t border-gray-200"></div>
+                    <span class="flex-shrink-0 mx-4 text-gray-400 font-bold">服务据点 Office Locations</span>
+                    <div class="flex-grow border-t border-gray-200"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 bg-white group text-left">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-4xl">🇹🇼</span>
+                            <h3 class="font-bold text-xl text-black">台湾总部 Taiwan</h3>
+                        </div>
+                        <p class="text-gray-600 font-medium text-lg leading-relaxed">
+                            桃园市大溪区长兴街二段158号<br>
+                            <span class="text-sm text-gray-400">Taoyuan City, Taiwan</span>
+                        </p>
+                    </div>
+                    
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 bg-white group text-left">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-4xl">🇨🇳</span>
+                            <h3 class="font-bold text-xl text-black">武汉分部 Wuhan</h3>
+                        </div>
+                        <p class="text-gray-600 font-medium text-lg leading-relaxed">
+                            友谊大道万利广场A座1单元2203室<br>
+                            <span class="text-sm text-gray-400">Wuhan City, Hubei Province</span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-gray-400 py-12 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <img src="images/logo_footer.png" alt="HGG Footer Logo" class="h-12 mx-auto mb-6 opacity-80">
+            <p class="mb-4 text-sm">© 2026 HGG Animation Studio | 罕呱呱动画工作室</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <a href="#" class="hover:text-white">作品</a>
+                <a href="#" class="hover:text-white">服务</a>
+                <a href="#" class="hover:text-white">隐私权政策</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    var btn = document.getElementById('mobile-menu-btn');
+    var menu = document.getElementById('mobile-menu');
+
+    if(btn && menu){
+        btn.addEventListener('click', function(){
+            if(menu.className.indexOf('hidden') !== -1){
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        });
+    }
+
+    function togglePlay(div){
+        var v = div.querySelector('video');
+        var o = div.querySelector('.overlay-content');
+        if(v.paused){
+            v.play();
+            o.style.opacity = '0';
+        } else {
+            v.pause();
+            o.style.opacity = '1';
         }
+    }
+
+    // 新增：检查 VIP 密码的功能
+    function checkVipPassword() {
+        var password = "8888"; // 您的预设密码
+        var input = prompt("请输入客户专区密码：");
         
-        .model-block.second {
-             border-left-color: var(--accent-purple);
+        if (input === password) {
+            window.location.href = "client_vip.html";
+        } else if (input !== null) {
+            alert("密码错误，请联系 HGG 获取访问权限。");
         }
-
-        .model-block h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .model-block h3 i {
-            margin-right: 15px;
-        }
-
-        .pros-cons ul {
-            list-style: none;
-            margin-top: 20px;
-        }
-
-        .pros-cons li {
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-            color: var(--text-secondary);
-        }
-
-        .pros-cons li.pro::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: var(--accent-cyan);
-            position: absolute;
-            left: 0;
-        }
-         .pros-cons li.con::before {
-            content: '\f00d';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: #ff4757;
-            position: absolute;
-            left: 0;
-        }
-
-        /* --- Section 3: 行情階梯 (Visual Tiers) - 整合圖片核心區域 --- */
-        .tiers-container {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .tier-block {
-            display: flex;
-            background: var(--bg-secondary);
-            border-radius: 20px;
-            overflow: hidden;
-            min-height: 320px;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        /* 視覺區域通用設定 */
-        .tier-visual {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 900;
-            font-size: 5rem;
-            color: rgba(255,255,255,0.4); /* 提高亮度 */
-            text-transform: uppercase;
-            /* 新增圖片支援屬性 */
-            background-size: cover;
-            background-position: center;
-            /* 使用 overlay 混合模式，讓圖片與顏色濾鏡融合 */
-            background-blend-mode: overlay;
-            transition: transform 0.5s ease;
-        }
-        
-        /* 滑鼠懸停特效 */
-        .tier-block:hover {
-             border-color: rgba(255,255,255,0.2);
-             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .tier-block:hover .tier-visual {
-            transform: scale(1.05);
-        }
-
-        /* --- Tier A 設定 --- */
-        .tier-a .tier-visual { 
-            background-image: url('images/tier-a-basic.jpg');
-            background-color: rgba(40, 40, 40, 0.9); /* 深灰色濾鏡 */
-        }
-        .tier-a .tier-visual::after { content: 'BASIC'; position:absolute; z-index:0; text-shadow: 0 0 20px rgba(0,0,0,0.5);}
-        
-        /* --- Tier B 設定 --- */
-        .tier-b .tier-visual { 
-            background-image: url('images/tier-b-standard.jpg');
-            background-color: rgba(0, 247, 255, 0.4); /* 青色濾鏡 */
-        }
-        .tier-b .tier-visual::after { 
-            content: 'STANDARD'; position:absolute; z-index:0; 
-            color: rgba(0, 255, 255, 0.6);
-            text-shadow: 0 0 30px rgba(0,247,255,0.8);
-        }
-        .tier-b { border-color: rgba(0, 247, 255, 0.3);}
-        .tier-b:hover { box-shadow: 0 0 30px rgba(0, 247, 255, 0.2);}
-
-        /* --- Tier C 設定 --- */
-        .tier-c .tier-visual { 
-            background-image: url('images/tier-c-high-end.jpg');
-            background-color: rgba(157, 0, 255, 0.
+    }
+    </script>
+</body>
+</html>
