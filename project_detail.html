@@ -56,31 +56,47 @@
             
             <div class="lg:col-span-2 space-y-8">
                 
-                <div class="bg-black rounded-xl overflow-hidden shadow-2xl relative group">
-                    <video class="w-full aspect-video object-contain" controls poster="images/work_01.jpg">
-                        <source src="images/work_01.mp4" type="video/mp4">
-                        您的浏览器不支持视频播放。
-                    </video>
-                    <div class="p-4 bg-gray-900 text-white flex justify-between items-center">
-                        <span class="font-bold">▶️ 正片预览 (v2.0)</span>
-                        <span class="text-xs text-gray-400">00:30</span>
+                <div>
+                    <h3 class="text-lg font-bold mb-2 text-gray-800 flex items-center gap-2">
+                        <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">FINAL</span>
+                        最终定版 (v2.0)
+                    </h3>
+                    <div class="bg-black rounded-xl overflow-hidden shadow-xl relative group">
+                        <video class="w-full aspect-video object-contain" controls poster="images/work_01.jpg">
+                            <source src="images/work_01.mp4" type="video/mp4">
+                            您的浏览器不支持视频播放。
+                        </video>
                     </div>
                 </div>
 
                 <div>
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                        <span class="text-teal-600">■</span> 关键帧与美术设定
-                    </h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition">
-                            <img src="images/work_01.jpg" class="w-full h-full object-cover" alt="Scene 01">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="w-1 h-6 bg-teal-600 rounded"></span>
+                        <h3 class="text-xl font-bold text-gray-800">细节展示 / 对比视频</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                            <div class="px-4 py-3 bg-gray-50 border-b border-gray-100">
+                                <h4 class="font-bold text-gray-800">🎬 视频 1：角色动态测试</h4>
+                                <p class="text-xs text-gray-500">Character Motion Test</p>
+                            </div>
+                            <video class="w-full aspect-video object-cover" controls>
+                                <source src="images/detail_01.mp4" type="video/mp4">
+                            </video>
                         </div>
-                        <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition">
-                            <img src="images/work_02.jpg" class="w-full h-full object-cover" alt="Scene 02">
+
+                        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+                            <div class="px-4 py-3 bg-gray-50 border-b border-gray-100">
+                                <h4 class="font-bold text-gray-800">🎥 视频 2：AIGC 风格预演</h4>
+                                <p class="text-xs text-gray-500">StyleFrame Preview</p>
+                            </div>
+                            <video class="w-full aspect-video object-cover" controls>
+                                <source src="images/detail_02.mp4" type="video/mp4">
+                            </video>
                         </div>
-                        <div class="aspect-video bg-gray-200 rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition">
-                            <img src="images/work_03.jpg" class="w-full h-full object-cover" alt="Scene 03">
-                        </div>
+
                     </div>
                 </div>
 
@@ -89,54 +105,51 @@
             <div class="lg:col-span-1">
                 <div class="bg-white rounded-xl shadow-md p-6 sticky top-24 border border-gray-100">
                     
-                    <h3 class="text-lg font-bold mb-6 pb-2 border-b border-gray-100">
-                        💬 针对反馈的修改说明
+                    <h3 class="text-lg font-bold mb-6 pb-2 border-b border-gray-100 text-teal-800">
+                        📝 视频内容说明
                     </h3>
 
                     <div class="space-y-6">
                         
-                        <div class="relative pl-6 border-l-2 border-gray-200">
-                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-teal-500"></div>
-                            <p class="text-xs text-gray-400 mb-1">反馈点 01 - 客户提及</p>
-                            <p class="text-sm font-bold text-gray-800 mb-2">
-                                “开头 Logo 出现得太慢，希望能更利落一点。”
+                        <div class="relative pl-6 border-l-2 border-teal-200">
+                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-teal-600"></div>
+                            <p class="text-xs text-gray-400 mb-1">主视频 (00:00 - 00:05)</p>
+                            <p class="text-sm font-bold text-gray-800 mb-1">
+                                开场 Intro 优化
                             </p>
-                            <div class="bg-teal-50 p-3 rounded-lg text-sm text-teal-800">
-                                <span class="font-bold">HGG 回复：</span><br>
-                                已将 Logo 动画从 3秒 缩减至 1.5秒，并加强了光效，看起来更有冲击力。
+                            <div class="text-sm text-gray-600 leading-relaxed">
+                                已将 Logo 动画缩短，并按照反馈加强了金属光泽的渲染质感。
                             </div>
                         </div>
 
-                        <div class="relative pl-6 border-l-2 border-gray-200">
-                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-teal-500"></div>
-                            <p class="text-xs text-gray-400 mb-1">反馈点 02 - 客户提及</p>
-                            <p class="text-sm font-bold text-gray-800 mb-2">
-                                “产品的材质看起来有点暗，不够高级。”
+                        <div class="relative pl-6 border-l-2 border-teal-200">
+                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-teal-600"></div>
+                            <p class="text-xs text-gray-400 mb-1">视频 1 (细节展示)</p>
+                            <p class="text-sm font-bold text-gray-800 mb-1">
+                                角色动态
                             </p>
-                            <div class="bg-teal-50 p-3 rounded-lg text-sm text-teal-800">
-                                <span class="font-bold">HGG 回复：</span><br>
-                                我们重新渲染了产品镜头，提亮了环境光，并增加了金属边缘的高光反射 (参见 00:12 处)。
+                            <div class="text-sm text-gray-600 leading-relaxed">
+                                左下方的视频展示了未合成前的原始动画，您可以清晰看到角色的微表情处理。
                             </div>
                         </div>
 
-                        <div class="relative pl-6 border-l-2 border-gray-200">
-                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-gray-300"></div>
-                            <p class="text-xs text-gray-400 mb-1">反馈点 03 - 待确认</p>
-                            <p class="text-sm font-bold text-gray-800 mb-2">
-                                “结尾的 Slogan 字体是否可以换成黑体？”
+                        <div class="relative pl-6 border-l-2 border-gray-300">
+                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-gray-500"></div>
+                            <p class="text-xs text-gray-400 mb-1">视频 2 (风格预演)</p>
+                            <p class="text-sm font-bold text-gray-800 mb-1">
+                                AIGC 辅助生成
                             </p>
-                            <div class="bg-gray-100 p-3 rounded-lg text-sm text-gray-600">
-                                <span class="font-bold">HGG 说明：</span><br>
-                                目前版本保留了原本的衬线体以维持优雅感。若确定要更换，我们需要您提供指定的字体文件。
+                            <div class="text-sm text-gray-600 leading-relaxed">
+                                右下方的视频展示了使用 Midjourney + Runway 生成的另一种赛博朋克风格，供您参考未来的系列片方向。
                             </div>
                         </div>
 
                     </div>
 
                     <div class="mt-8 pt-6 border-t border-gray-100 text-center">
-                        <p class="text-xs text-gray-400 mb-3">对这个版本还有意见？</p>
+                        <p class="text-xs text-gray-400 mb-3">对内容有疑问？</p>
                         <a href="mailto:liagaoo@qq.com" class="block w-full py-2 border-2 border-teal-600 text-teal-700 font-bold rounded hover:bg-teal-50 transition text-center">
-                            发送邮件反馈
+                            联系制作人
                         </a>
                     </div>
 
