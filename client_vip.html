@@ -3,180 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>项目详情 | 2026 夏季新品发布会 TVC</title>
+    <title>VIP 客户专区 | HGG Animation Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 品牌色定义 */
+        /* 保持品牌色一致 */
         :root {
             --hgg-teal: #008080;
             --hgg-dark: #1a1a1a;
         }
         .text-teal-brand { color: var(--hgg-teal); }
         .bg-teal-brand { background-color: var(--hgg-teal); }
-        .border-teal-brand { border-color: var(--hgg-teal); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col">
+<body class="bg-gray-100 text-gray-800 font-sans min-h-screen flex flex-col">
 
-    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <nav class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
+            <div class="flex justify-between h-20 items-center">
                 <div class="flex items-center gap-3">
-                    <img class="h-8 w-auto" src="images/logo_header.png" alt="HGG Logo">
-                    <div class="border-l border-gray-300 h-5 mx-2"></div>
-                    <span class="font-bold text-gray-700">项目详情页</span>
+                    <img class="h-10 w-auto" src="images/logo_header.png" alt="HGG Logo">
+                    <div class="border-l border-gray-300 h-6 mx-2"></div>
+                    <span class="font-bold text-lg text-gray-700 tracking-wide">VIP CLIENT PORTAL</span>
                 </div>
                 <div>
-                    <a href="client_vip.html" class="flex items-center gap-2 text-sm text-gray-500 hover:text-teal-700 transition font-medium">
+                    <a href="index.html" class="flex items-center gap-2 text-sm text-gray-500 hover:text-teal-700 transition">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                        返回列表
+                        返回官网首页
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 py-8 w-full">
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-12 w-full">
         
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-            <div>
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">2026 夏季新品发布会 TVC</h1>
-                <p class="text-gray-500 text-sm">客户：卢总 / 某某集团 | 版本：v2.0 (修正版) | 日期：2026-02-08</p>
-            </div>
-            <div class="flex gap-3">
-                <span class="px-4 py-2 bg-teal-100 text-teal-800 rounded-full text-sm font-bold">进行中</span>
-                <button class="px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition text-sm flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                    下载此版本
-                </button>
-            </div>
+        <div class="bg-white rounded-xl shadow-md p-8 mb-8 border-t-4 border-teal-600">
+            <h1 class="text-2xl font-bold mb-2">客户业务资料中心</h1>
+            <p class="text-gray-500">请选择您的项目以进入详情页面。</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-700">项目文件列表</h3>
+                <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded-full">更新于：2026/02/10</span>
+            </div>
             
-            <div class="lg:col-span-2">
-                
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="w-1 h-6 bg-teal-600 rounded"></span>
-                    <h3 class="text-xl font-bold text-gray-800">细节展示 / 对比视频</h3>
-                </div>
-                
-                <div class="grid grid-cols-1 gap-8">
-                    
-                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-lg hover:shadow-xl transition">
-                        <div class="px-5 py-4 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
-                            <div>
-                                <h4 class="font-bold text-lg text-gray-900">🎬 视频 1：角色动态测试</h4>
-                                <p class="text-xs text-gray-500">Character Motion Test</p>
-                            </div>
-                            <span class="bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded font-bold">New</span>
-                        </div>
-                        <video class="w-full aspect-video object-cover" controls>
-                            <source src="images/detail_01.mp4" type="video/mp4">
-                        </video>
-                    </div>
-
-                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-lg hover:shadow-xl transition">
-                        <div class="px-5 py-4 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
-                            <div>
-                                <h4 class="font-bold text-lg text-gray-900">🎥 视频 2：新年麻将篇</h4>
-                                <p class="text-xs text-gray-500">StyleFrame Preview</p>
-                            </div>
-                            <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded font-bold">Ref</span>
-                        </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">项目名称</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">客户单位</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
+                            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
                         
-                        <div class="flex justify-center bg-black">
-                            <video class="w-full md:w-1/2 aspect-[9/16] object-cover" controls>
-                                <source src="images/detail_02.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
+                        <tr class="hover:bg-gray-50 transition group cursor-pointer" onclick="window.location.href='project_detail.html'">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <span class="text-2xl mr-3">📺</span>
+                                    <div>
+                                        <a href="project_detail.html" class="text-sm font-bold text-gray-900 group-hover:text-teal-700 hover:underline">
+                                            2026 乐东健新品发布会 TVC
+                                        </a>
+                                        <div class="text-xs text-gray-500">最后更新：2026-02-08</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">中湖康集团</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">进行中</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="project_detail.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition">
+                                    进入项目主页 →
+                                </a>
+                            </td>
+                        </tr>
 
-                </div>
+                        <tr class="hover:bg-gray-50 transition group cursor-pointer" onclick="window.location.href='project_detail_ai.html'">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <span class="text-2xl mr-3">🤖</span>
+                                    <div>
+                                        <a href="project_detail_ai.html" class="text-sm font-bold text-gray-900 group-hover:text-teal-700 hover:underline">
+                                            AI 虚拟代言人开发案
+                                        </a>
+                                        <div class="text-xs text-gray-500">最后更新：2026-02-05</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">武汉文创中心</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">待确认</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <a href="project_detail_ai.html" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition">
+                                    进入项目主页 →
+                                </a>
+                            </td>
+                        </tr>
+
+                        <tr class="bg-gray-50/50">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center opacity-60">
+                                    <span class="text-2xl mr-3 text-gray-400">🏎️</span>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-500">极速动力 Model-X 概念车宣传片</div>
+                                        <div class="text-xs text-gray-400">等待资产上传...</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">极速汽车 (SpeedX)</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-500 border border-gray-200">立项中</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <span class="text-gray-400 cursor-not-allowed px-4 py-2 border border-gray-200 rounded-md text-sm bg-white">暂未开放</span>
+                            </td>
+                        </tr>
+
+                        <tr class="bg-gray-50/50">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center opacity-60">
+                                    <span class="text-2xl mr-3 text-gray-400">🎮</span>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-500">《星际战纪》手游 S3 赛季 CG PV</div>
+                                        <div class="text-xs text-gray-400">剧本保密中</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">星际互娱</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-500 border border-gray-200">前期沟通</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <span class="text-gray-400 cursor-not-allowed px-4 py-2 border border-gray-200 rounded-md text-sm bg-white">暂未开放</span>
+                            </td>
+                        </tr>
+
+                        <tr class="bg-gray-50/50">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center opacity-60">
+                                    <span class="text-2xl mr-3 text-gray-400">💄</span>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-500">花漾美妆·光感精华液 3D 产品渲染</div>
+                                        <div class="text-xs text-gray-400">等待材质确认</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">花漾生物科技</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-500 border border-gray-200">合同签订中</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <span class="text-gray-400 cursor-not-allowed px-4 py-2 border border-gray-200 rounded-md text-sm bg-white">暂未开放</span>
+                            </td>
+                        </tr>
+
+                        <tr class="bg-gray-50/50">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center opacity-60">
+                                    <span class="text-2xl mr-3 text-gray-400">🏠</span>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-500">智家科技·全屋智能系统 MG 演示</div>
+                                        <div class="text-xs text-gray-400">等待分镜脚本</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">智家科技</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-500 border border-gray-200">待排期</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <span class="text-gray-400 cursor-not-allowed px-4 py-2 border border-gray-200 rounded-md text-sm bg-white">暂未开放</span>
+                            </td>
+                        </tr>
+
+                        <tr class="bg-gray-50/50">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center opacity-60">
+                                    <span class="text-2xl mr-3 text-gray-400">🥤</span>
+                                    <div>
+                                        <div class="text-sm font-bold text-gray-500">悦茶·夏季冰爽系列 流体特效广告</div>
+                                        <div class="text-xs text-gray-400">流体解算准备中</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">悦茶集团</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-500 border border-gray-200">待启动</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <span class="text-gray-400 cursor-not-allowed px-4 py-2 border border-gray-200 rounded-md text-sm bg-white">暂未开放</span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
-
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-xl shadow-md p-6 sticky top-24 border border-gray-100">
-                    
-                    <h3 class="text-lg font-bold mb-6 pb-2 border-b border-gray-100 text-teal-800">
-                        📋 需求确认 / 内容说明
-                    </h3>
-                    
-                    <p class="text-xs text-gray-400 mb-4">根据卢总需求执行需求确认单：</p>
-
-                    <div class="space-y-8">
-                        
-                        <div class="relative pl-6 border-l-2 border-teal-200">
-                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-teal-600"></div>
-                            <p class="text-xs text-teal-600 font-bold mb-1">关键点 01</p>
-                            <p class="text-sm font-bold text-gray-800 mb-2">
-                                投放渠道与尺度（风控关键）
-                            </p>
-                            <div class="text-sm text-gray-600 space-y-3">
-                                <div class="p-2 bg-gray-50 rounded">
-                                    <span class="font-bold text-gray-900">📺 公域（抖音/快手）：</span><br>
-                                    需严格遵守平台规则，侧重剧情/科普（避开直接咀嚼特写）。
-                                </div>
-                                <div class="p-2 bg-gray-50 rounded">
-                                    <span class="font-bold text-gray-900">🏢 私域/线下（招商会）：</span><br>
-                                    可大胆展示产品食用画面、强调利润。
-                                </div>
-                                <div class="p-2 border border-teal-200 bg-teal-50 rounded text-teal-800 font-bold mt-2">
-                                    您的选择是？<br>
-                                    □ 侧重公域吸粉<br>
-                                    □ 侧重私域招商
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="relative pl-6 border-l-2 border-teal-200">
-                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-teal-600"></div>
-                            <p class="text-xs text-teal-600 font-bold mb-1">关键点 02</p>
-                            <p class="text-sm font-bold text-gray-800 mb-2">
-                                视觉风格偏好（决定品牌调性）
-                            </p>
-                            <div class="text-sm text-gray-600 space-y-2">
-                                <div class="flex items-start gap-2">
-                                    <span class="mt-1">□</span>
-                                    <span>
-                                        <strong class="text-gray-900">高端科技风：</strong><br>
-                                        强调「国家研发中心」，画面冷静、干净。
-                                    </span>
-                                </div>
-                                <div class="flex items-start gap-2">
-                                    <span class="mt-1">□</span>
-                                    <span>
-                                        <strong class="text-gray-900">商务生活风：</strong><br>
-                                        真人演绎，强调星级酒店、开车提神。
-                                    </span>
-                                </div>
-                                <div class="flex items-start gap-2 bg-teal-50 p-2 rounded -mx-2">
-                                    <span class="mt-1 text-teal-700">☑</span>
-                                    <span>
-                                        <strong class="text-teal-800">年轻潮流风 (New!)：</strong><br>
-                                        针对Z世代。采用<span class="font-bold">「国潮/赛博朋克」</span>配色，结合电竞、熬夜场景，强调「酷、不伤嘴」。
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="mt-8 pt-6 border-t border-gray-100 text-center">
-                        <p class="text-xs text-gray-400 mb-3">需调整确认单内容？</p>
-                        <a href="mailto:liagaoo@qq.com" class="block w-full py-2 border-2 border-teal-600 text-teal-700 font-bold rounded hover:bg-teal-50 transition text-center">
-                            联系项目经理
-                        </a>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </main>
 
-    <footer class="bg-white border-t border-gray-200 mt-auto py-6 text-center">
-        <p class="text-gray-400 text-xs">© 2026 HGG Animation Studio. VIP Project Page.</p>
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8 text-center">
+        <p class="text-gray-500 text-sm mb-2">
+            如需特定项目的下载权限或资料未更新，请联系薛导或项目经理。
+        </p>
+        <p class="text-teal-600 font-bold text-sm">
+            Email: liagaoo@qq.com
+        </p>
+        <p class="text-gray-400 text-xs mt-8">
+            © 2026 HGG Animation Studio. All rights reserved.
+        </p>
     </footer>
 
 </body>
