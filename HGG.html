@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>【罕呱呱 HGG x 紅薏米】本地端商業報價系統</title>
+  <style>
+    :root {
+      --primary-teal: #0d9488;
+      --teal-hover: #0f766e;
+      --teal-light: #ccfbf1;
+      --accent-cyan: #06b6d4;
+      --dark-navy: #0f172a;
+      --dark-card: #1e293b;
+      --bg-slate: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-slate);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    /* HCG Header */
+    header {
+      background-color: var(--dark-navy);
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      border-bottom: 3px solid var(--primary-teal);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary-teal), var(--accent-cyan));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #fff;
+      letter-spacing: -1px;
+      box-shadow: 0 0 12px rgba(13, 148, 136, 0.4);
+    }
+
+    .brand-text h1 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    .brand-text p {
+      font-size: 0.82rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: rgba(13, 148, 136, 0.2);
+      color: var(--accent-cyan);
+      border: 1px solid var(--primary-teal);
+    }
+
+    /* HCG Navigation Bar */
+    nav {
+      background-color: #1e293b;
+      display: flex;
+      padding: 0 40px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      gap: 5px;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      padding: 16px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border-bottom: 3px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    nav button:hover, nav button.active {
+      color: #fff;
+      border-bottom-color: var(--primary-teal);
+      background-color: rgba(255,255,255,0.03);
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
+      border: 1px solid var(--border-color);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--dark-navy);
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title .subtitle {
+      font-size: 0.82rem;
+      color: var(--primary-teal);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #334155;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 10px 14px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      transition: all 0.2s ease;
+      background-color: #fff;
+    }
+
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-teal);
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+    }
+
+    .btn {
+      padding: 10px 22px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-teal {
+      background-color: var(--primary-teal);
+      color: #fff;
+    }
+
+    .btn-teal:hover {
+      background-color: var(--teal-hover);
+      box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+    }
+
+    .btn-dark {
+      background-color: var(--dark-navy);
+      color: #fff;
+    }
+
+    .btn-dark:hover {
+      background-color: #1e293b;
+    }
+
+    .btn-secondary {
+      background-color: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-secondary:hover {
+      background-color: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .btn-danger {
+      background-color: #ef4444;
+      color: #fff;
+    }
+
+    .btn-danger:hover {
+      background-color: #dc2626;
+    }
+
+    .btn-sm {
+      padding: 6px 12px;
+      font-size: 0.82rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: #f8fafc;
+      font-weight: 700;
+      color: #334155;
+      font-size: 0.88rem;
+    }
+
+    td {
+      font-size: 0.92rem;
+      color: #1e293b;
+    }
+
+    /* Print / Preview Document Style */
+    .quote-doc {
+      background: #fff;
+      padding: 55px;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      max-width: 920px;
+      margin: 0 auto;
+      border: 1px solid #cbd5e1;
+    }
+
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--primary-teal);
+      padding-bottom: 22px;
+      margin-bottom: 30px;
+    }
+
+    .doc-company h2 {
+      color: var(--dark-navy);
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .doc-company .sub-brand {
+      color: var(--primary-teal);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .doc-company p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .doc-title {
+      text-align: right;
+    }
+
+    .doc-title h1 {
+      font-size: 2.2rem;
+      color: var(--dark-navy);
+      letter-spacing: 3px;
+      font-weight: 900;
+    }
+
+    .doc-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      margin-bottom: 30px;
+      background: #f8fafc;
+      padding: 18px 20px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .doc-meta-box h4 {
+      font-size: 0.95rem;
+      color: var(--primary-teal);
+      margin-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 4px;
+      font-weight: 800;
+    }
+
+    .doc-meta-box p {
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+    }
+
+    .doc-table {
+      margin-bottom: 25px;
+    }
+
+    .doc-table th {
+      background-color: var(--dark-navy);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .doc-totals {
+      width: 320px;
+      margin-left: auto;
+      margin-top: 20px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .doc-totals td {
+      padding: 10px 16px;
+    }
+
+    .doc-totals tr td:first-child {
+      font-weight: 700;
+      text-align: right;
+      color: var(--text-muted);
+    }
+
+    .doc-totals tr td:last-child {
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .doc-totals .grand-total {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+      background-color: var(--primary-teal);
+    }
+
+    .doc-totals .grand-total td {
+      color: #fff;
+    }
+
+    .doc-terms {
+      margin-top: 35px;
+      padding-top: 20px;
+      border-top: 2px dashed #cbd5e1;
+      font-size: 0.85rem;
+      color: #475569;
+    }
+
+    .doc-terms h4 {
+      color: var(--dark-navy);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .doc-footer {
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 20px;
+    }
+
+    .sig-box {
+      width: 220px;
+      border-top: 2px solid var(--dark-navy);
+      text-align: center;
+      padding-top: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--dark-navy);
+    }
+
+    /* Trend Tag UI */
+    .trend-tag {
+      background: linear-gradient(135deg, var(--primary-teal), var(--accent-cyan));
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      margin-left: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Print styling */
+    @media print {
+      body {
+        background-color: #fff;
+        padding: 0;
+      }
+      header, nav, .no-print, .card-title, .btn, .tab-buttons {
+        display: none !important;
+      }
+      .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .card {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+      }
+      .quote-doc {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HCG Header -->
+  <header>
+    <div class="brand-logo">
+      <div class="logo-icon">HGG</div>
+      <div class="brand-text">
+        <h1>罕呱呱動畫工作室 <span style="font-weight:400; font-size:1.1rem; color:#94a3b8;">x 紅薏米文化傳媒</span></h1>
+        <p>HGG ANIMATION STUDIO • 本地端商業報價系統</p>
+      </div>
+    </div>
+    <div>
+      <span class="badge-pill">🔒 本地離線安全版</span>
+    </div>
+  </header>
+
+  <!-- HCG Navbar -->
+  <nav class="no-print">
+    <button class="active" onclick="switchTab('tab-create')">📝 開立報價單 <span class="subtitle">CREATE</span></button>
+    <button onclick="switchTab('tab-db')">🗃️ 服務價目與內容庫 <span class="subtitle">PRICING DATABASE</span></button>
+    <button onclick="switchTab('tab-history')">📜 歷史報價紀錄 <span class="subtitle">HISTORY</span></button>
+  </nav>
+
+  <div class="container">
+
+    <!-- TAB 1: CREATE QUOTATION -->
+    <div id="tab-create" class="tab-content active">
+      <div class="card no-print">
+        <div class="card-title">
+          <div>
+            <span>專案基本資料與參數設定</span>
+            <span class="subtitle">PROJECT PARAMETERS</span>
+          </div>
+          <div style="font-size: 0.88rem; font-weight: normal; color: var(--text-muted);">
+            報價幣別：
+            <select id="currency-select" onchange="updatePreview()">
+              <option value="RMB">人民幣 (RMB ¥)</option>
+              <option value="NTD">新台幣 (NTD $)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>報價單號</label>
+            <input type="text" id="quote-no" value="QUO-20260801-001">
+          </div>
+          <div class="form-group">
+            <label>報價日期</label>
+            <input type="date" id="quote-date">
+          </div>
+          <div class="form-group">
+            <label>有效期限</label>
+            <input type="date" id="valid-until">
+          </div>
+          <div class="form-group">
+            <label>客戶單位 / 公司名稱</label>
+            <input type="text" id="client-name" placeholder="例如：三溪村鄉建團隊">
+          </div>
+          <div class="form-group">
+            <label>專案名稱</label>
+            <input type="text" id="project-name" placeholder="例如：HCG 品牌視覺與 AI 短片包套專案">
+          </div>
+          <div class="form-group">
+            <label>聯絡人 / 職稱</label>
+            <input type="text" id="client-contact" placeholder="例如：陳總監">
+          </div>
+          <div class="form-group">
+            <label>客戶聯絡電話 / 微信</label>
+            <input type="text" id="client-phone" placeholder="例如：19947603560 / liagaoo">
+          </div>
+        </div>
+      </div>
+
+      <!-- ITEM SELECTOR & FORM -->
+      <div class="card no-print">
+        <div class="card-title">
+          <div>
+            <span>選擇與新增報價明細</span>
+            <span class="subtitle">SERVICE ITEMS</span>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="openCustomItemModal()">+ 自訂非標品項</button>
+        </div>
+
+        <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr 1fr auto; align-items: end;">
+          <div class="form-group">
+            <label>從 HCG 官網標準價目庫選擇</label>
+            <select id="preset-item-select">
+              <option value="">-- 請選擇標準服務項目 --</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>數量</label>
+            <input type="number" id="item-qty" value="1" min="1">
+          </div>
+          <div class="form-group">
+            <label>自訂/調整單價</label>
+            <input type="number" id="item-price" placeholder="預設單價">
+          </div>
+          <div class="form-group">
+            <label>單位</label>
+            <input type="text" id="item-unit" value="案">
+          </div>
+          <div>
+            <button class="btn btn-teal" onclick="addSelectedPreset()">+ 加入報價單</button>
+          </div>
+        </div>
+
+        <table id="selected-items-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th>服務項目</th>
+              <th>規格說明與適用範疇</th>
+              <th style="width: 80px;">數量</th>
+              <th style="width: 80px;">單位</th>
+              <th style="width: 110px;">單價</th>
+              <th style="width: 110px;">小計</th>
+              <th style="width: 70px;" class="no-print">操作</th>
+            </tr>
+          </thead>
+          <tbody id="items-tbody">
+            <!-- Items added dynamically -->
+          </tbody>
+        </table>
+
+        <div class="form-grid" style="margin-top: 20px;">
+          <div class="form-group">
+            <label>專案折讓/優惠金額 (直接扣減)</label>
+            <input type="number" id="discount-amount" value="0" oninput="calculateTotals()">
+          </div>
+          <div class="form-group">
+            <label>稅率 (%) [0為不計稅, 5為5%營業稅]</label>
+            <input type="number" id="tax-rate" value="0" oninput="calculateTotals()">
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label>付款條件說明</label>
+            <input type="text" id="payment-terms" value="預付 40% 訂金啟動專案，成片/美陳驗收完畢後付清 60% 尾款。">
+          </div>
+        </div>
+      </div>
+
+      <!-- PREVIEW & PRINT SECTION -->
+      <div class="card no-print" style="text-align: right; background: none; border: none; box-shadow: none; padding: 0; margin-bottom: 20px;">
+        <button class="btn btn-dark" onclick="saveQuotationToHistory()">💾 儲存此報價單</button>
+        <button class="btn btn-teal" onclick="window.print()">🖨️ 列印 / 導出為 PDF 報價單</button>
+      </div>
+
+      <!-- FORMAL PRINTABLE QUOTATION DOCUMENT (HCG STYLE) -->
+      <div class="quote-doc" id="printable-quote">
+        <div class="doc-header">
+          <div class="doc-company">
+            <h2>罕呱呱動畫工作室 x 紅薏米文化傳媒</h2>
+            <div class="sub-brand">HGG Animation Studio • Red Coix Culture Media</div>
+            <p>創辦人 / 視覺導演：薛穎穜</p>
+            <p>聯絡 Email：liagaoo@qq.com | 微信：liagaoo | 電話：19947603560</p>
+          </div>
+          <div class="doc-title">
+            <h1>商業報價單</h1>
+            <p style="font-weight: 800; color: var(--primary-teal); font-size: 1.1rem; margin-top: 5px;" id="doc-currency-badge">RMB (¥)</p>
+          </div>
+        </div>
+
+        <div class="doc-meta">
+          <div class="doc-meta-box">
+            <h4>【客戶單位資訊】</h4>
+            <p><strong>客戶單位：</strong><span id="p-client-name">三溪村鄉建團隊</span></p>
+            <p><strong>專案名稱：</strong><span id="p-project-name">HCG 品牌視覺與 AI 短片包套專案</span></p>
+            <p><strong>聯 絡 人：</strong><span id="p-client-contact">陳總監</span> (<span id="p-client-phone">19947603560</span>)</p>
+          </div>
+          <div class="doc-meta-box">
+            <h4>【報價單檢核資訊】</h4>
+            <p><strong>報價單號：</strong><span id="p-quote-no">QUO-20260801-001</span></p>
+            <p><strong>報價日期：</strong><span id="p-quote-date">2026-08-01</span></p>
+            <p><strong>有效期限：</strong><span id="p-valid-until">2026-08-31</span> (發出後30日內有效)</p>
+          </div>
+        </div>
+
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th style="width: 40px; text-align: center;">#</th>
+              <th>服務項目</th>
+              <th>規格說明與適用範疇</th>
+              <th style="width: 60px; text-align: center;">數量</th>
+              <th style="width: 60px; text-align: center;">單位</th>
+              <th style="width: 100px; text-align: right;">單價</th>
+              <th style="width: 110px; text-align: right;">複價金額</th>
+            </tr>
+          </thead>
+          <tbody id="p-items-tbody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+
+        <table class="doc-totals">
+          <tr>
+            <td>項目小計：</td>
+            <td id="p-subtotal">¥0</td>
+          </tr>
+          <tr id="p-discount-row">
+            <td>專案折讓：</td>
+            <td id="p-discount">-¥0</td>
+          </tr>
+          <tr id="p-tax-row">
+            <td>稅額 (<span id="p-tax-rate-label">0</span>%)：</td>
+            <td id="p-tax">¥0</td>
+          </tr>
+          <tr class="grand-total">
+            <td>報價總金額：</td>
+            <td id="p-grand-total">¥0</td>
+          </tr>
+        </table>
+
+        <div class="doc-terms">
+          <h4>【交易與服務條款】</h4>
+          <p>1. <strong>付款條件：</strong><span id="p-payment-terms">預付 40% 訂金啟動專案，驗收完畢後付清 60% 尾款。</span></p>
+          <p>2. <strong>修改與調整：</strong>單品/包套含 2 次免費文字腳本或剪輯微調；若中後期大改核心畫風或角色造型另計算圖/算力工本費。</p>
+          <p>3. <strong>商用授權：</strong>本報價含短視頻平台、私域及展播商用授權。正式授權於尾款結清後生效。</p>
+          <p>4. <strong>匯款資訊：</strong>帳號資訊將於確認簽約後於正式合約內提供。</p>
+        </div>
+
+        <div class="doc-footer">
+          <div class="sig-box">
+            客戶簽章 / 確認用印
+          </div>
+          <div class="sig-box">
+            罕呱呱動畫工作室 / 紅薏米傳媒
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: DATABASE & PRESETS (HCG STYLE) -->
+    <div id="tab-db" class="tab-content">
+      <div class="card">
+        <div class="card-title">
+          <div>
+            <span>HCG 罕呱呱標準服務價目庫管理</span>
+            <span class="subtitle">SERVICE DATABASE</span>
+          </div>
+          <div>
+            <button class="btn btn-secondary btn-sm" onclick="resetDefaultDB()">重置為 HCG 官網預設值</button>
+            <button class="btn btn-teal btn-sm" onclick="exportDBJSON()">📥 匯出資料庫 (JSON)</button>
+          </div>
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+          此資料庫預設已同步 <strong>HCG 罕呱呱官網 (https://tonkhsueh777-oss.github.io/hcc/#pricing)</strong> 之服務項目與參考價格（含 FILM 影视广告、2D 动画、3D 演示及 AI 短剧制作）。您可隨時新增或修改，變更將自動儲存於本地瀏覽器。
+        </p>
+
+        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+          <h4 style="margin-bottom: 12px; color: var(--primary-teal); font-weight: 800;">+ 新增 HCG 標準服務項目</h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>分類 (Category)</label>
+              <input type="text" id="new-cat" placeholder="例如：FILM / 2D / 3D / AI SERVICE">
+            </div>
+            <div class="form-group">
+              <label>服務名稱 (Item Name)</label>
+              <input type="text" id="new-name" placeholder="例如：AI 概念短片 (Concept)">
+            </div>
+            <div class="form-group">
+              <label>預設單價 (Standard Price)</label>
+              <input type="number" id="new-price" placeholder="例如：25000">
+            </div>
+            <div class="form-group">
+              <label>單位</label>
+              <input type="text" id="new-unit" value="案">
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label>服務內容與適用範疇說明</label>
+              <input type="text" id="new-desc" placeholder="詳細說明/適用場景/包含內容">
+            </div>
+          </div>
+          <button class="btn btn-teal" onclick="addNewDBItem()" style="margin-top: 5px;">儲存至 HCG 價目庫</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 140px;">分類</th>
+              <th style="width: 220px;">服務項目</th>
+              <th>服務內容與適用範疇說明</th>
+              <th style="width: 120px;">標準單價</th>
+              <th style="width: 60px;">單位</th>
+              <th style="width: 80px;">操作</th>
+            </tr>
+          </thead>
+          <tbody id="db-tbody">
+            <!-- DB Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 3: HISTORY -->
+    <div id="tab-history" class="tab-content">
+      <div class="card">
+        <div class="card-title">
+          <div>
+            <span>歷史開立報價單紀錄</span>
+            <span class="subtitle">HISTORY LOG</span>
+          </div>
+          <button class="btn btn-danger btn-sm" onclick="clearHistory()">清空歷史紀錄</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>報價單號</th>
+              <th>開立日期</th>
+              <th>客戶單位</th>
+              <th>專案名稱</th>
+              <th>總金額</th>
+              <th>幣別</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody">
+            <!-- History Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // PRESET DATABASE (Synchronized from HCG website https://tonkhsueh777-oss.github.io/hcc/#pricing)
+    const defaultServices = [
+      { id: "1", cat: "FILM 影视广告", name: "影视广告 - 基础版", price: 120000, unit: "案", desc: "适用品牌片、产品片、发布会影像；含多比例交付" },
+      { id: "2", cat: "FILM 影视广告", name: "影视广告 - 标准版", price: 240000, unit: "案", desc: "全案高规格影音包装、高阶导演视觉与全面交付" },
+      { id: "3", cat: "2D ANIMATION", name: "2D 动画 - MG 动画", price: 24000, unit: "分", desc: "资讯解释、流程说明、MG 视觉包装" },
+      { id: "4", cat: "2D ANIMATION", name: "2D 动画 - 逐帧动画", price: 120000, unit: "分", desc: "手绘/逐帧精细动画、风格定制开发" },
+      { id: "5", cat: "3D VISUAL", name: "3D 演示 - 基础展示", price: 1200, unit: "秒", desc: "产品结构、工业流程、高精度 3D 渲染" },
+      { id: "6", cat: "3D VISUAL", name: "3D 演示 - 标准拆解", price: 3200, unit: "秒", desc: "复杂装配演示、内部结构剖析与高阶光影" },
+      { id: "7", cat: "AI SERVICE 趋势", name: "AI 风格样片 (StyleFrame)", price: 4000, unit: "支", desc: "风格测试、动态分镜、降本增效评估" },
+      { id: "8", cat: "AI SERVICE 趋势", name: "AI 概念短片 (Concept / 品牌级)", price: 25000, unit: "支", desc: "30-45秒 品牌级 AI 片、精细分镜、角色/场景一致性锁定" },
+      { id: "9", cat: "AI SERVICE 趋势", name: "AI 品牌视觉整合包 (月费)", price: 60000, unit: "月", desc: "每月4支 (30~45秒) 或整合大片、IP 角色鎖定、前瞻腳本與 AE 後製" },
+      { id: "10", cat: "IP 宇宙與美陳", name: "鄉村振興 IP 宇宙與 3D 錯覺美陳", price: 100000, unit: "專案", desc: "故事化 IP 矩陣設計、3D 裸眼/錯覺藝術牆繪與動線規劃" }
+    ];
+
+    let currentDB = JSON.parse(localStorage.getItem("hcg_service_db")) || defaultServices;
+    let selectedItems = [];
+    let quotationHistory = JSON.parse(localStorage.getItem("hcg_quote_history")) || [];
+
+    // Initialize
+    window.onload = function() {
+      const today = new Date().toISOString().split('T')[0];
+      const validDate = new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0];
+      document.getElementById("quote-date").value = today;
+      document.getElementById("valid-until").value = validDate;
+
+      renderPresetOptions();
+      renderDBTable();
+      renderHistoryTable();
+
+      // Add default item
+      selectedItems.push({
+        name: "AI 概念短片 (Concept / 品牌级)",
+        desc: "30-45秒 品牌级 AI 片、精细分镜、角色/场景一致性锁定",
+        qty: 1,
+        unit: "支",
+        price: 25000
+      });
+      renderSelectedItems();
+      updatePreview();
+    };
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+      document.querySelectorAll("nav button").forEach(el => el.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      event.target.classList.add("active");
+    }
+
+    function renderPresetOptions() {
+      const select = document.getElementById("preset-item-select");
+      select.innerHTML = '<option value="">-- 請選擇 HCG 標準服務項目 --</option>';
+      currentDB.forEach(item => {
+        const opt = document.createElement("option");
+        opt.value = item.id;
+        opt.textContent = `[${item.cat}] ${item.name} (${item.price} 元/${item.unit})`;
+        select.appendChild(opt);
+      });
+    }
+
+    document.getElementById("preset-item-select").addEventListener("change", function() {
+      const selectedId = this.value;
+      const item = currentDB.find(i => i.id === selectedId);
+      if (item) {
+        document.getElementById("item-price").value = item.price;
+        document.getElementById("item-unit").value = item.unit;
+      }
+    });
+
+    function addSelectedPreset() {
+      const select = document.getElementById("preset-item-select");
+      const selectedId = select.value;
+      const qty = parseFloat(document.getElementById("item-qty").value) || 1;
+      const customPrice = parseFloat(document.getElementById("item-price").value);
+      const customUnit = document.getElementById("item-unit").value;
+
+      if (!selectedId) {
+        alert("請選擇標準項目或使用自訂品項！");
+        return;
+      }
+
+      const item = currentDB.find(i => i.id === selectedId);
+      selectedItems.push({
+        name: item.name,
+        desc: item.desc,
+        qty: qty,
+        unit: customUnit || item.unit,
+        price: !isNaN(customPrice) ? customPrice : item.price
+      });
+
+      renderSelectedItems();
+      updatePreview();
+      select.value = "";
+      document.getElementById("item-price").value = "";
+    }
+
+    function openCustomItemModal() {
+      const name = prompt("請輸入自訂服務項目名稱：", "客製化專案企劃");
+      if (!name) return;
+      const desc = prompt("請輸入詳細規格與服務內容：", "包含前瞻腳本與專屬提案");
+      const qty = parseFloat(prompt("數量：", "1")) || 1;
+      const unit = prompt("單位：", "案") || "案";
+      const price = parseFloat(prompt("單價：", "10000")) || 0;
+
+      selectedItems.push({ name, desc, qty, unit, price });
+      renderSelectedItems();
+      updatePreview();
+    }
+
+    function removeItem(index) {
+      selectedItems.splice(index, 1);
+      renderSelectedItems();
+      updatePreview();
+    }
+
+    function renderSelectedItems() {
+      const tbody = document.getElementById("items-tbody");
+      tbody.innerHTML = "";
+      selectedItems.forEach((item, idx) => {
+        const total = item.qty * item.price;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td><strong>${item.name}</strong></td>
+          <td><span style="font-size:0.88rem; color:var(--text-muted);">${item.desc}</span></td>
+          <td><input type="number" value="${item.qty}" min="1" style="width:60px;" onchange="updateItemQty(${idx}, this.value)"></td>
+          <td>${item.unit}</td>
+          <td><input type="number" value="${item.price}" style="width:90px;" onchange="updateItemPrice(${idx}, this.value)"></td>
+          <td><strong>${total.toLocaleString()}</strong></td>
+          <td class="no-print"><button class="btn btn-danger btn-sm" onclick="removeItem(${idx})">刪除</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      calculateTotals();
+    }
+
+    function updateItemQty(idx, val) {
+      selectedItems[idx].qty = parseFloat(val) || 1;
+      renderSelectedItems();
+      updatePreview();
+    }
+
+    function updateItemPrice(idx, val) {
+      selectedItems[idx].price = parseFloat(val) || 0;
+      renderSelectedItems();
+      updatePreview();
+    }
+
+    function calculateTotals() {
+      let subtotal = 0;
+      selectedItems.forEach(i => subtotal += (i.qty * i.price));
+
+      const discount = parseFloat(document.getElementById("discount-amount").value) || 0;
+      const taxRate = parseFloat(document.getElementById("tax-rate").value) || 0;
+
+      const taxableAmount = Math.max(0, subtotal - discount);
+      const tax = taxableAmount * (taxRate / 100);
+      const grandTotal = taxableAmount + tax;
+
+      return { subtotal, discount, taxRate, tax, grandTotal };
+    }
+
+    function updatePreview() {
+      const currency = document.getElementById("currency-select").value;
+      const symbol = currency === "RMB" ? "¥" : "$";
+
+      document.getElementById("doc-currency-badge").textContent = currency === "RMB" ? "RMB (¥)" : "NTD ($)";
+      document.getElementById("p-quote-no").textContent = document.getElementById("quote-no").value || "QUO-001";
+      document.getElementById("p-quote-date").textContent = document.getElementById("quote-date").value;
+      document.getElementById("p-valid-until").textContent = document.getElementById("valid-until").value;
+      document.getElementById("p-client-name").textContent = document.getElementById("client-name").value || "（請輸入客戶單位）";
+      document.getElementById("p-project-name").textContent = document.getElementById("project-name").value || "（請輸入專案名稱）";
+      document.getElementById("p-client-contact").textContent = document.getElementById("client-contact").value || "（聯絡人）";
+      document.getElementById("p-client-phone").textContent = document.getElementById("client-phone").value || "-";
+      document.getElementById("p-payment-terms").textContent = document.getElementById("payment-terms").value;
+
+      // Render Print Table
+      const ptbody = document.getElementById("p-items-tbody");
+      ptbody.innerHTML = "";
+      selectedItems.forEach((item, idx) => {
+        const total = item.qty * item.price;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td style="text-align: center;">${idx + 1}</td>
+          <td><strong>${item.name}</strong></td>
+          <td style="font-size:0.88rem; color:#475569;">${item.desc}</td>
+          <td style="text-align: center;">${item.qty}</td>
+          <td style="text-align: center;">${item.unit}</td>
+          <td style="text-align: right;">${symbol}${item.price.toLocaleString()}</td>
+          <td style="text-align: right; font-weight:bold;">${symbol}${total.toLocaleString()}</td>
+        `;
+        ptbody.appendChild(tr);
+      });
+
+      // Render Totals
+      const totals = calculateTotals();
+      document.getElementById("p-subtotal").textContent = symbol + totals.subtotal.toLocaleString();
+      document.getElementById("p-discount").textContent = "-" + symbol + totals.discount.toLocaleString();
+      document.getElementById("p-tax-rate-label").textContent = totals.taxRate;
+      document.getElementById("p-tax").textContent = symbol + totals.tax.toLocaleString();
+      document.getElementById("p-grand-total").textContent = symbol + totals.grandTotal.toLocaleString();
+    }
+
+    // Input listeners for real-time preview
+    ["quote-no", "client-name", "project-name", "client-contact", "client-phone", "payment-terms", "quote-date", "valid-until"].forEach(id => {
+      document.getElementById(id).addEventListener("input", updatePreview);
+    });
+
+    // Database Management Functions
+    function renderDBTable() {
+      const tbody = document.getElementById("db-tbody");
+      tbody.innerHTML = "";
+      currentDB.forEach((item, idx) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><span style="font-size:0.82rem; background:#f1f5f9; color:var(--primary-teal); font-weight:700; padding:3px 8px; border-radius:4px;">${item.cat}</span></td>
+          <td><strong>${item.name}</strong></td>
+          <td style="font-size:0.88rem; color:var(--text-muted);">${item.desc}</td>
+          <td><strong>${item.price.toLocaleString()}</strong></td>
+          <td>${item.unit}</td>
+          <td><button class="btn btn-danger btn-sm" onclick="deleteDBItem(${idx})">刪除</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function addNewDBItem() {
+      const cat = document.getElementById("new-cat").value || "自訂分類";
+      const name = document.getElementById("new-name").value;
+      const price = parseFloat(document.getElementById("new-price").value) || 0;
+      const unit = document.getElementById("new-unit").value || "案";
+      const desc = document.getElementById("new-desc").value || "";
+
+      if (!name) { alert("請輸入服務名稱！"); return; }
+
+      currentDB.push({ id: Date.now().toString(), cat, name, price, unit, desc });
+      localStorage.setItem("hcg_service_db", JSON.stringify(currentDB));
+      renderDBTable();
+      renderPresetOptions();
+
+      // Clear inputs
+      document.getElementById("new-name").value = "";
+      document.getElementById("new-price").value = "";
+      document.getElementById("new-desc").value = "";
+      alert("成功新增至 HCG 服務價目庫！");
+    }
+
+    function deleteDBItem(idx) {
+      if (confirm("確定要從價目庫中刪除此品項嗎？")) {
+        currentDB.splice(idx, 1);
+        localStorage.setItem("hcg_service_db", JSON.stringify(currentDB));
+        renderDBTable();
+        renderPresetOptions();
+      }
+    }
+
+    function resetDefaultDB() {
+      if (confirm("重置將還原為 HCG 官網之預設價目庫，確定重置嗎？")) {
+        currentDB = [...defaultServices];
+        localStorage.setItem("hcg_service_db", JSON.stringify(currentDB));
+        renderDBTable();
+        renderPresetOptions();
+      }
+    }
+
+    function exportDBJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentDB, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "HCG_罕呱呱標準服務價目庫.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    // Quotation History
+    function saveQuotationToHistory() {
+      const totals = calculateTotals();
+      const quoteRecord = {
+        no: document.getElementById("quote-no").value,
+        date: document.getElementById("quote-date").value,
+        client: document.getElementById("client-name").value || "未填寫客戶",
+        project: document.getElementById("project-name").value || "未填寫專案",
+        total: totals.grandTotal,
+        currency: document.getElementById("currency-select").value,
+        items: [...selectedItems]
+      };
+
+      quotationHistory.push(quoteRecord);
+      localStorage.setItem("hcg_quote_history", JSON.stringify(quotationHistory));
+      renderHistoryTable();
+      alert("報價單已成功儲存至歷史紀錄！");
+    }
+
+    function renderHistoryTable() {
+      const tbody = document.getElementById("history-tbody");
+      tbody.innerHTML = "";
+      if (quotationHistory.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#888;">尚無歷史開立紀錄</td></tr>';
+        return;
+      }
+      quotationHistory.forEach((rec, idx) => {
+        const symbol = rec.currency === "RMB" ? "¥" : "$";
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${rec.no}</strong></td>
+          <td>${rec.date}</td>
+          <td>${rec.client}</td>
+          <td>${rec.project}</td>
+          <td><strong>${symbol}${rec.total.toLocaleString()}</strong></td>
+          <td>${rec.currency}</td>
+          <td>
+            <button class="btn btn-secondary btn-sm" onclick="loadHistoryQuote(${idx})">載入</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteHistoryQuote(${idx})">刪除</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function loadHistoryQuote(idx) {
+      const rec = quotationHistory[idx];
+      document.getElementById("quote-no").value = rec.no;
+      document.getElementById("quote-date").value = rec.date;
+      document.getElementById("client-name").value = rec.client;
+      document.getElementById("project-name").value = rec.project;
+      document.getElementById("currency-select").value = rec.currency;
+      selectedItems = [...rec.items];
+      renderSelectedItems();
+      updatePreview();
+      switchTab('tab-create');
+    }
+
+    function deleteHistoryQuote(idx) {
+      if (confirm("確定要刪除此筆歷史報價紀錄嗎？")) {
+        quotationHistory.splice(idx, 1);
+        localStorage.setItem("hcg_quote_history", JSON.stringify(quotationHistory));
+        renderHistoryTable();
+      }
+    }
+
+    function clearHistory() {
+      if (confirm("確定要清空所有歷史紀錄嗎？")) {
+        quotationHistory = [];
+        localStorage.removeItem("hcg_quote_history");
+        renderHistoryTable();
+      }
+    }
+  </script>
+</body>
+</html>
