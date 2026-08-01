@@ -8,18 +8,19 @@
     :root {
       --primary-teal: #0d9488;
       --teal-hover: #0f766e;
-      --teal-light: #ccfbf1;
-      --accent-cyan: #06b6d4;
+      --teal-light: #f0fdf4;
+      --accent-cyan: #0284c7;
       --dark-navy: #0f172a;
       --dark-card: #1e293b;
-      --bg-slate: #f8fafc;
+      --bg-slate: #f1f5f9;
       --card-bg: #ffffff;
       --text-main: #0f172a;
-      --text-muted: #64748b;
-      --border-color: #e2e8f0;
-      --radius: 12px;
+      --text-muted: #475569;
+      --border-color: #cbd5e1;
+      --radius: 10px;
     }
 
+    /* Force clean high-contrast styling across all browsers and system dark-mode overlays */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -34,10 +35,10 @@
       padding-bottom: 60px;
     }
 
-    /* HCG Header */
+    /* Header */
     header {
       background-color: var(--dark-navy);
-      color: #fff;
+      color: #ffffff;
       padding: 20px 40px;
       display: flex;
       justify-content: space-between;
@@ -53,58 +54,58 @@
     }
 
     .logo-icon {
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, var(--primary-teal), var(--accent-cyan));
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #0d9488, #0284c7);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
       font-size: 1.2rem;
-      color: #fff;
-      letter-spacing: -1px;
+      color: #ffffff;
+      letter-spacing: -0.5px;
       box-shadow: 0 0 12px rgba(13, 148, 136, 0.4);
     }
 
     .brand-text h1 {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 800;
-      letter-spacing: 1px;
-      color: #fff;
+      letter-spacing: 0.5px;
+      color: #ffffff;
     }
 
     .brand-text p {
       font-size: 0.82rem;
-      color: var(--accent-cyan);
+      color: #38bdf8;
       font-weight: 600;
       letter-spacing: 0.5px;
     }
 
     .badge-pill {
       display: inline-block;
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 20px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      background: rgba(13, 148, 136, 0.2);
-      color: var(--accent-cyan);
+      background: rgba(13, 148, 136, 0.25);
+      color: #38bdf8;
       border: 1px solid var(--primary-teal);
     }
 
-    /* HCG Navigation Bar */
+    /* Navbar */
     nav {
       background-color: #1e293b;
       display: flex;
       padding: 0 40px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      gap: 5px;
+      gap: 8px;
     }
 
     nav button {
       background: none;
       border: none;
-      color: #94a3b8;
+      color: #cbd5e1;
       padding: 16px 24px;
       font-size: 0.95rem;
       font-weight: 700;
@@ -117,14 +118,14 @@
     }
 
     nav button:hover, nav button.active {
-      color: #fff;
+      color: #ffffff;
       border-bottom-color: var(--primary-teal);
-      background-color: rgba(255,255,255,0.03);
+      background-color: rgba(255,255,255,0.05);
     }
 
     .container {
       max-width: 1150px;
-      margin: 35px auto;
+      margin: 30px auto;
       padding: 0 20px;
     }
 
@@ -136,40 +137,44 @@
       display: block;
     }
 
-    /* Cards */
+    /* Card Styling - High Contrast White Cards */
     .card {
-      background: var(--card-bg);
+      background-color: #ffffff;
       border-radius: var(--radius);
       padding: 28px;
       margin-bottom: 25px;
-      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.04);
-      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
     }
 
     .card-title {
       font-size: 1.2rem;
       font-weight: 800;
-      color: var(--dark-navy);
+      color: #0f172a;
       margin-bottom: 22px;
       padding-bottom: 12px;
-      border-bottom: 2px solid #f1f5f9;
+      border-bottom: 2px solid #e2e8f0;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .card-title .subtitle {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--primary-teal);
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      font-weight: 700;
+      font-weight: 800;
       margin-left: 8px;
     }
 
+    /* Form Grid */
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
       margin-bottom: 20px;
     }
@@ -180,27 +185,37 @@
     }
 
     .form-group label {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
       margin-bottom: 6px;
-      color: #334155;
+      color: #1e293b;
     }
 
-    .form-group input, .form-group select, .form-group textarea {
+    /* Form Controls with Explicit White Backgrounds & Dark Text */
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea,
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
       padding: 10px 14px;
-      border: 1.5px solid var(--border-color);
+      border: 1.5px solid #94a3b8;
       border-radius: 8px;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
+      color: #0f172a !important;
+      background-color: #ffffff !important;
       transition: all 0.2s ease;
-      background-color: #fff;
+      font-weight: 600;
     }
 
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
       outline: none;
-      border-color: var(--primary-teal);
-      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+      border-color: var(--primary-teal) !important;
+      box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
     }
 
+    /* Buttons */
     .btn {
       padding: 10px 22px;
       border: none;
@@ -213,11 +228,12 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      height: 42px;
     }
 
     .btn-teal {
       background-color: var(--primary-teal);
-      color: #fff;
+      color: #ffffff !important;
     }
 
     .btn-teal:hover {
@@ -227,7 +243,7 @@
 
     .btn-dark {
       background-color: var(--dark-navy);
-      color: #fff;
+      color: #ffffff !important;
     }
 
     .btn-dark:hover {
@@ -236,18 +252,18 @@
 
     .btn-secondary {
       background-color: #f1f5f9;
-      color: #475569;
-      border: 1px solid #cbd5e1;
+      color: #334155 !important;
+      border: 1.5px solid #cbd5e1;
     }
 
     .btn-secondary:hover {
       background-color: #e2e8f0;
-      color: #0f172a;
+      color: #0f172a !important;
     }
 
     .btn-danger {
       background-color: #ef4444;
-      color: #fff;
+      color: #ffffff !important;
     }
 
     .btn-danger:hover {
@@ -255,10 +271,12 @@
     }
 
     .btn-sm {
-      padding: 6px 12px;
+      padding: 6px 14px;
       font-size: 0.82rem;
+      height: auto;
     }
 
+    /* Tables */
     table {
       width: 100%;
       border-collapse: separate;
@@ -266,36 +284,39 @@
       margin-top: 15px;
       border-radius: 8px;
       overflow: hidden;
-      border: 1px solid var(--border-color);
+      border: 1px solid #cbd5e1;
+      background-color: #ffffff;
     }
 
     th, td {
       padding: 12px 16px;
       text-align: left;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid #e2e8f0;
+      color: #0f172a !important;
     }
 
     th {
-      background-color: #f8fafc;
-      font-weight: 700;
-      color: #334155;
-      font-size: 0.88rem;
+      background-color: #f8fafc !important;
+      font-weight: 800;
+      color: #1e293b !important;
+      font-size: 0.9rem;
     }
 
     td {
       font-size: 0.92rem;
-      color: #1e293b;
+      background-color: #ffffff;
     }
 
-    /* Print / Preview Document Style */
+    /* Quotation Preview Document Styling (Explicit High Contrast) */
     .quote-doc {
-      background: #fff;
+      background-color: #ffffff !important;
+      color: #0f172a !important;
       padding: 55px;
       border-radius: var(--radius);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
       max-width: 920px;
       margin: 0 auto;
-      border: 1px solid #cbd5e1;
+      border: 2px solid #cbd5e1;
     }
 
     .doc-header {
@@ -307,14 +328,14 @@
     }
 
     .doc-company h2 {
-      color: var(--dark-navy);
+      color: var(--dark-navy) !important;
       font-size: 1.75rem;
       font-weight: 800;
       margin-bottom: 4px;
     }
 
     .doc-company .sub-brand {
-      color: var(--primary-teal);
+      color: var(--primary-teal) !important;
       font-weight: 700;
       font-size: 0.95rem;
       margin-bottom: 8px;
@@ -322,7 +343,7 @@
 
     .doc-company p {
       font-size: 0.88rem;
-      color: var(--text-muted);
+      color: #475569 !important;
     }
 
     .doc-title {
@@ -331,7 +352,7 @@
 
     .doc-title h1 {
       font-size: 2.2rem;
-      color: var(--dark-navy);
+      color: var(--dark-navy) !important;
       letter-spacing: 3px;
       font-weight: 900;
     }
@@ -341,17 +362,17 @@
       grid-template-columns: 1fr 1fr;
       gap: 25px;
       margin-bottom: 30px;
-      background: #f8fafc;
+      background-color: #f8fafc !important;
       padding: 18px 20px;
       border-radius: 8px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #cbd5e1;
     }
 
     .doc-meta-box h4 {
       font-size: 0.95rem;
-      color: var(--primary-teal);
+      color: var(--primary-teal) !important;
       margin-bottom: 10px;
-      border-bottom: 2px solid #e2e8f0;
+      border-bottom: 2px solid #cbd5e1;
       padding-bottom: 4px;
       font-weight: 800;
     }
@@ -359,15 +380,17 @@
     .doc-meta-box p {
       font-size: 0.88rem;
       margin-bottom: 4px;
+      color: #0f172a !important;
     }
 
     .doc-table {
       margin-bottom: 25px;
+      border: 1px solid #cbd5e1;
     }
 
     .doc-table th {
-      background-color: var(--dark-navy);
-      color: #fff;
+      background-color: var(--dark-navy) !important;
+      color: #ffffff !important;
       font-weight: 700;
     }
 
@@ -375,19 +398,21 @@
       width: 320px;
       margin-left: auto;
       margin-top: 20px;
-      border: 1px solid #e2e8f0;
+      border: 1.5px solid #cbd5e1;
       border-radius: 8px;
       overflow: hidden;
+      background-color: #ffffff;
     }
 
     .doc-totals td {
       padding: 10px 16px;
+      color: #0f172a !important;
     }
 
     .doc-totals tr td:first-child {
       font-weight: 700;
       text-align: right;
-      color: var(--text-muted);
+      color: #475569 !important;
     }
 
     .doc-totals tr td:last-child {
@@ -398,24 +423,23 @@
     .doc-totals .grand-total {
       font-size: 1.2rem;
       font-weight: 800;
-      color: #fff;
-      background-color: var(--primary-teal);
+      background-color: var(--primary-teal) !important;
     }
 
     .doc-totals .grand-total td {
-      color: #fff;
+      color: #ffffff !important;
     }
 
     .doc-terms {
       margin-top: 35px;
       padding-top: 20px;
       border-top: 2px dashed #cbd5e1;
-      font-size: 0.85rem;
-      color: #475569;
+      font-size: 0.88rem;
+      color: #334155 !important;
     }
 
     .doc-terms h4 {
-      color: var(--dark-navy);
+      color: var(--dark-navy) !important;
       margin-bottom: 8px;
       font-size: 0.95rem;
       font-weight: 800;
@@ -435,25 +459,13 @@
       padding-top: 8px;
       font-weight: 700;
       font-size: 0.9rem;
-      color: var(--dark-navy);
-    }
-
-    /* Trend Tag UI */
-    .trend-tag {
-      background: linear-gradient(135deg, var(--primary-teal), var(--accent-cyan));
-      color: #fff;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      margin-left: 6px;
-      letter-spacing: 0.5px;
+      color: var(--dark-navy) !important;
     }
 
     /* Print styling */
     @media print {
       body {
-        background-color: #fff;
+        background-color: #ffffff !important;
         padding: 0;
       }
       header, nav, .no-print, .card-title, .btn, .tab-buttons {
@@ -485,20 +497,20 @@
     <div class="brand-logo">
       <div class="logo-icon">HGG</div>
       <div class="brand-text">
-        <h1>罕呱呱動畫工作室 <span style="font-weight:400; font-size:1.1rem; color:#94a3b8;">x 紅薏米文化傳媒</span></h1>
+        <h1>罕呱呱動畫工作室 <span style="font-weight:400; font-size:1.05rem; color:#cbd5e1;">x 紅薏米文化傳媒</span></h1>
         <p>HGG ANIMATION STUDIO • 本地端商業報價系統</p>
       </div>
     </div>
     <div>
-      <span class="badge-pill">🔒 本地離線安全版</span>
+      <span class="badge-pill">🔒 本地高對比離線版</span>
     </div>
   </header>
 
   <!-- HCG Navbar -->
   <nav class="no-print">
-    <button class="active" onclick="switchTab('tab-create')">📝 開立報價單 <span class="subtitle">CREATE</span></button>
-    <button onclick="switchTab('tab-db')">🗃️ 服務價目與內容庫 <span class="subtitle">PRICING DATABASE</span></button>
-    <button onclick="switchTab('tab-history')">📜 歷史報價紀錄 <span class="subtitle">HISTORY</span></button>
+    <button class="active" onclick="switchTab('tab-create')">📝 開立報價單 <span style="font-size:0.75rem; color:#94a3b8; font-weight:700;">CREATE</span></button>
+    <button onclick="switchTab('tab-db')">🗃️ 服務價目與內容庫 <span style="font-size:0.75rem; color:#94a3b8; font-weight:700;">PRICING DATABASE</span></button>
+    <button onclick="switchTab('tab-history')">📜 歷史報價紀錄 <span style="font-size:0.75rem; color:#94a3b8; font-weight:700;">HISTORY</span></button>
   </nav>
 
   <div class="container">
@@ -511,7 +523,7 @@
             <span>專案基本資料與參數設定</span>
             <span class="subtitle">PROJECT PARAMETERS</span>
           </div>
-          <div style="font-size: 0.88rem; font-weight: normal; color: var(--text-muted);">
+          <div style="font-size: 0.88rem; font-weight: 700; color: #475569;">
             報價幣別：
             <select id="currency-select" onchange="updatePreview()">
               <option value="RMB">人民幣 (RMB ¥)</option>
@@ -562,7 +574,7 @@
           <button class="btn btn-secondary btn-sm" onclick="openCustomItemModal()">+ 自訂非標品項</button>
         </div>
 
-        <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr 1fr auto; align-items: end;">
+        <div class="form-grid" style="grid-template-columns: 2fr 100px 120px 80px auto; align-items: flex-end;">
           <div class="form-group">
             <label>從 HCG 官網標準價目庫選擇</label>
             <select id="preset-item-select">
@@ -589,12 +601,12 @@
         <table id="selected-items-table">
           <thead>
             <tr>
-              <th style="width: 50px;">#</th>
+              <th style="width: 40px;">#</th>
               <th>服務項目</th>
               <th>規格說明與適用範疇</th>
-              <th style="width: 80px;">數量</th>
-              <th style="width: 80px;">單位</th>
-              <th style="width: 110px;">單價</th>
+              <th style="width: 70px;">數量</th>
+              <th style="width: 70px;">單位</th>
+              <th style="width: 100px;">單價</th>
               <th style="width: 110px;">小計</th>
               <th style="width: 70px;" class="no-print">操作</th>
             </tr>
@@ -620,13 +632,13 @@
         </div>
       </div>
 
-      <!-- PREVIEW & PRINT SECTION -->
+      <!-- PREVIEW & PRINT BUTTONS -->
       <div class="card no-print" style="text-align: right; background: none; border: none; box-shadow: none; padding: 0; margin-bottom: 20px;">
         <button class="btn btn-dark" onclick="saveQuotationToHistory()">💾 儲存此報價單</button>
         <button class="btn btn-teal" onclick="window.print()">🖨️ 列印 / 導出為 PDF 報價單</button>
       </div>
 
-      <!-- FORMAL PRINTABLE QUOTATION DOCUMENT (HCG STYLE) -->
+      <!-- FORMAL PRINTABLE QUOTATION DOCUMENT -->
       <div class="quote-doc" id="printable-quote">
         <div class="doc-header">
           <div class="doc-company">
@@ -711,7 +723,7 @@
       </div>
     </div>
 
-    <!-- TAB 2: DATABASE & PRESETS (HCG STYLE) -->
+    <!-- TAB 2: DATABASE & PRESETS -->
     <div id="tab-db" class="tab-content">
       <div class="card">
         <div class="card-title">
@@ -725,11 +737,11 @@
           </div>
         </div>
 
-        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+        <p style="font-size: 0.88rem; color: #475569; margin-bottom: 20px;">
           此資料庫預設已同步 <strong>HCG 罕呱呱官網 (https://tonkhsueh777-oss.github.io/hcc/#pricing)</strong> 之服務項目與參考價格（含 FILM 影视广告、2D 动画、3D 演示及 AI 短剧制作）。您可隨時新增或修改，變更將自動儲存於本地瀏覽器。
         </p>
 
-        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #e2e8f0;">
+        <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1.5px solid #cbd5e1;">
           <h4 style="margin-bottom: 12px; color: var(--primary-teal); font-weight: 800;">+ 新增 HCG 標準服務項目</h4>
           <div class="form-grid">
             <div class="form-group">
@@ -930,7 +942,7 @@
         tr.innerHTML = `
           <td>${idx + 1}</td>
           <td><strong>${item.name}</strong></td>
-          <td><span style="font-size:0.88rem; color:var(--text-muted);">${item.desc}</span></td>
+          <td><span style="font-size:0.88rem; color:#475569;">${item.desc}</span></td>
           <td><input type="number" value="${item.qty}" min="1" style="width:60px;" onchange="updateItemQty(${idx}, this.value)"></td>
           <td>${item.unit}</td>
           <td><input type="number" value="${item.price}" style="width:90px;" onchange="updateItemPrice(${idx}, this.value)"></td>
@@ -1023,7 +1035,7 @@
         tr.innerHTML = `
           <td><span style="font-size:0.82rem; background:#f1f5f9; color:var(--primary-teal); font-weight:700; padding:3px 8px; border-radius:4px;">${item.cat}</span></td>
           <td><strong>${item.name}</strong></td>
-          <td style="font-size:0.88rem; color:var(--text-muted);">${item.desc}</td>
+          <td style="font-size:0.88rem; color:#475569;">${item.desc}</td>
           <td><strong>${item.price.toLocaleString()}</strong></td>
           <td>${item.unit}</td>
           <td><button class="btn btn-danger btn-sm" onclick="deleteDBItem(${idx})">刪除</button></td>
