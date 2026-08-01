@@ -3,41 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>專案待辦與獲利結算管理系統</title>
+    <title>罕呱呱動畫工作室 x 紅薏米文化傳媒 - 專案獲利與待辦結算看板</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
+            --bg-color: #0b1320;
+            --card-bg: #132235;
+            --card-border: #1e344f;
+            --text-color: #f1f5f9;
             --text-muted: #94a3b8;
-            --border-color: #334155;
-            --primary-color: #10b981;
-            --primary-hover: #059669;
-            --accent-color: #6366f1;
+            --teal-accent: #02c39a;
+            --teal-hover: #00a884;
+            --cyan-accent: #00b4d8;
+            --gold-accent: #fbbf24;
             --danger-color: #ef4444;
             --warning-color: #f59e0b;
-            --gold-color: #fbbf24;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
             --radius: 12px;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
         }
 
         [data-theme="light"] {
-            --bg-color: #f4f6f9;
+            --bg-color: #f0f4f8;
             --card-bg: #ffffff;
-            --text-color: #1e293b;
+            --card-border: #cbd5e1;
+            --text-color: #0f172a;
             --text-muted: #64748b;
-            --border-color: #cbd5e1;
-            --primary-color: #059669;
-            --primary-hover: #047857;
-            --accent-color: #4f46e5;
-            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --teal-accent: #059669;
+            --teal-hover: #047857;
+            --cyan-accent: #0284c7;
+            --gold-accent: #d97706;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
             transition: background-color 0.2s, color 0.2s, border-color 0.2s;
         }
 
@@ -52,71 +53,103 @@
 
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 860px;
         }
 
-        .header {
+        .brand-header {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
 
-        .title-area h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
+        .brand-title {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .title-area p {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-        }
-
-        .actions-header {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .icon-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 0.5rem 0.75rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 0.25rem;
         }
 
-        .icon-btn:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
+        .brand-title h1 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-title h1 span.highlight {
+            color: var(--teal-accent);
+        }
+
+        .brand-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-header {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            padding: 0.5rem 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .btn-header:hover {
+            border-color: var(--teal-accent);
+            color: var(--teal-accent);
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1rem;
             margin-bottom: 1.5rem;
         }
 
         .stat-card {
             background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--card-border);
             border-radius: var(--radius);
             padding: 1.25rem;
             box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background-color: var(--teal-accent);
+        }
+
+        .stat-card.gold::before {
+            background-color: var(--gold-accent);
         }
 
         .stat-card .label {
@@ -126,171 +159,155 @@
         }
 
         .stat-card .value {
-            font-size: 1.6rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--gold-color);
+            color: var(--gold-accent);
+            font-family: "Courier New", Courier, monospace;
         }
 
         .stat-card .subtext {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--text-muted);
         }
 
-        .monthly-summary-card {
+        .monthly-card {
             background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--card-border);
             border-radius: var(--radius);
-            padding: 1.25rem;
+            padding: 1.25rem 1.5rem;
             margin-bottom: 1.5rem;
             box-shadow: var(--shadow);
         }
 
-        .summary-header {
+        .monthly-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
-        .summary-header h3 {
-            font-size: 1.05rem;
+        .monthly-header h3 {
+            font-size: 1rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 0.5rem;
+            color: var(--teal-accent);
         }
 
-        .monthly-list {
+        .monthly-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
             gap: 0.75rem;
-            margin-top: 0.75rem;
         }
 
-        .monthly-item {
+        .monthly-pill {
             background-color: var(--bg-color);
-            padding: 0.6rem 0.8rem;
+            border: 1px solid var(--card-border);
+            padding: 0.75rem;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             gap: 0.25rem;
         }
 
-        .monthly-item .month-title {
-            font-size: 0.8rem;
+        .monthly-pill .month-label {
+            font-size: 0.78rem;
             color: var(--text-muted);
         }
 
-        .monthly-item .month-amount {
-            font-size: 1.1rem;
+        .monthly-pill .month-val {
+            font-size: 1.15rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--teal-accent);
+            font-family: monospace;
         }
 
         .card {
             background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
         }
 
-        .todo-form {
-            display: flex;
-            flex-direction: column;
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 0.75rem;
         }
 
-        .input-group {
-            display: flex;
-            gap: 0.5rem;
+        @media (max-width: 640px) {
+            .form-grid { grid-template-columns: 1fr; }
         }
 
-        .input-main {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            border: 1px solid var(--border-color);
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-control {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .form-control label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .input-text, .input-select, .input-date, .input-number {
+            padding: 0.65rem 0.85rem;
+            border: 1px solid var(--card-border);
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             background-color: var(--bg-color);
             color: var(--text-color);
             outline: none;
         }
 
-        .input-main:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        .input-text:focus, .input-select:focus, .input-date:focus, .input-number:focus {
+            border-color: var(--teal-accent);
+            box-shadow: 0 0 0 2px rgba(2, 195, 154, 0.2);
         }
 
-        .btn-add {
-            background-color: var(--accent-color);
-            color: white;
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.88rem;
+            color: var(--text-color);
+            user-select: none;
+            padding-top: 0.5rem;
+        }
+
+        .btn-submit {
+            background-color: var(--teal-accent);
+            color: #0b1320;
             border: none;
-            padding: 0.75rem 1.25rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 8px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             font-size: 0.95rem;
-            white-space: nowrap;
+            width: 100%;
+            margin-top: 0.5rem;
         }
 
-        .btn-add:hover {
-            opacity: 0.9;
-        }
-
-        .form-details {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .select-custom, .input-date, .input-number {
-            padding: 0.45rem 0.65rem;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 0.85rem;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            outline: none;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .progress-section {
-            margin-bottom: 1rem;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
-        }
-
-        .progress-bar-bg {
-            height: 8px;
-            background-color: var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background-color: var(--primary-color);
-            width: 0%;
-            transition: width 0.3s ease;
+        .btn-submit:hover {
+            background-color: var(--teal-hover);
         }
 
         .toolbar {
@@ -301,7 +318,7 @@
             gap: 0.75rem;
             margin-bottom: 1rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--card-border);
         }
 
         .filters {
@@ -315,9 +332,9 @@
         .filter-btn {
             background: none;
             border: none;
-            padding: 0.35rem 0.75rem;
+            padding: 0.4rem 0.85rem;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--text-muted);
             cursor: pointer;
             font-weight: 500;
@@ -325,46 +342,44 @@
 
         .filter-btn.active {
             background-color: var(--card-bg);
-            color: var(--accent-color);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            font-weight: 600;
+            color: var(--teal-accent);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
         }
 
-        .search-input {
-            padding: 0.4rem 0.75rem;
-            border: 1px solid var(--border-color);
+        .search-box {
+            padding: 0.45rem 0.85rem;
+            border: 1px solid var(--card-border);
             border-radius: 6px;
             font-size: 0.85rem;
             background-color: var(--bg-color);
             color: var(--text-color);
             outline: none;
-            width: 160px;
+            width: 180px;
         }
 
         .todo-list {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
         .todo-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 0.9rem 1.1rem;
             display: flex;
             align-items: center;
-            padding: 0.85rem 1rem;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            gap: 0.75rem;
-            animation: fadeIn 0.2s ease;
+            gap: 0.85rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
+        .todo-item.completed {
+            opacity: 0.7;
         }
 
-        .todo-item.completed .todo-text {
+        .todo-item.completed .project-name {
             text-decoration: line-through;
             color: var(--text-muted);
         }
@@ -372,11 +387,11 @@
         .checkbox-custom {
             width: 18px;
             height: 18px;
+            accent-color: var(--teal-accent);
             cursor: pointer;
-            accent-color: var(--primary-color);
         }
 
-        .todo-content {
+        .project-details {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -384,119 +399,97 @@
             overflow: hidden;
         }
 
-        .todo-title-row {
+        .project-header-row {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             flex-wrap: wrap;
         }
 
-        .todo-text {
-            font-size: 0.95rem;
-            font-weight: 500;
-            word-break: break-all;
+        .project-code {
+            font-size: 0.75rem;
+            color: var(--teal-accent);
+            font-family: monospace;
+            font-weight: 700;
+            background: rgba(2, 195, 154, 0.1);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
         }
 
-        .revenue-badge {
+        .project-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .revenue-tag {
             background-color: rgba(251, 191, 36, 0.15);
-            color: var(--gold-color);
-            padding: 0.15rem 0.5rem;
+            color: var(--gold-accent);
+            padding: 0.15rem 0.55rem;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             font-weight: 700;
             border: 1px solid rgba(251, 191, 36, 0.3);
-            display: inline-flex;
-            align-items: center;
-            gap: 0.2rem;
+            font-family: monospace;
         }
 
-        .todo-meta {
+        .project-subrow {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.6rem;
             align-items: center;
-            font-size: 0.75rem;
+            font-size: 0.76rem;
             color: var(--text-muted);
             flex-wrap: wrap;
         }
 
-        .badge {
-            padding: 0.15rem 0.4rem;
+        .badge-priority {
+            padding: 0.1rem 0.4rem;
             border-radius: 4px;
-            font-weight: 600;
             font-size: 0.7rem;
+            font-weight: 700;
         }
 
-        .badge-high { background-color: rgba(239, 68, 68, 0.15); color: var(--danger-color); }
-        .badge-medium { background-color: rgba(245, 158, 11, 0.15); color: var(--warning-color); }
-        .badge-low { background-color: rgba(16, 185, 129, 0.15); color: var(--primary-color); }
+        .badge-high { background: rgba(239, 68, 68, 0.2); color: var(--danger-color); }
+        .badge-medium { background: rgba(245, 158, 11, 0.2); color: var(--warning-color); }
+        .badge-low { background: rgba(2, 195, 154, 0.2); color: var(--teal-accent); }
 
-        .badge-deal {
-            background-color: rgba(16, 185, 129, 0.2);
+        .badge-deal-status {
+            background: rgba(16, 185, 129, 0.2);
             color: #34d399;
             font-weight: 700;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
         }
 
         .item-actions {
             display: flex;
-            gap: 0.25rem;
-            opacity: 0.8;
+            gap: 0.3rem;
         }
 
-        .item-actions:hover {
-            opacity: 1;
-        }
-
-        .btn-action {
+        .btn-act {
             background: none;
             border: none;
             color: var(--text-muted);
-            padding: 0.3rem;
+            padding: 0.35rem;
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.85rem;
         }
 
-        .btn-action:hover {
-            color: var(--accent-color);
+        .btn-act:hover {
+            color: var(--teal-accent);
             background-color: var(--bg-color);
         }
 
-        .btn-action.delete:hover {
+        .btn-act.del:hover {
             color: var(--danger-color);
-        }
-
-        .footer-tools {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .btn-link {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            font-size: 0.85rem;
-            text-decoration: underline;
-        }
-
-        .btn-link:hover {
-            color: var(--danger-color);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 2.5rem 1rem;
-            color: var(--text-muted);
         }
 
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.65);
             display: none;
             justify-content: center;
             align-items: center;
@@ -508,21 +501,22 @@
         }
 
         .modal {
-            background: var(--card-bg);
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
             padding: 1.5rem;
             border-radius: var(--radius);
             width: 90%;
-            max-width: 480px;
+            max-width: 500px;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
         }
 
         .modal h2 {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             margin-bottom: 1rem;
+            color: var(--teal-accent);
         }
 
-        .modal-actions {
+        .modal-footer {
             display: flex;
             justify-content: flex-end;
             gap: 0.5rem;
@@ -533,157 +527,191 @@
 <body>
 
 <div class="container">
-    <div class="header">
-        <div class="title-area">
-            <h1>專案待辦與獲利結算管理系統</h1>
-            <p>追蹤每日專案進度，自動統計每月與累計成交金額</p>
+    <div class="brand-header">
+        <div class="brand-title">
+            <h1>罕呱呱動畫工作室 <span class="highlight">x</span> 紅薏米文化傳媒</h1>
+            <span class="brand-subtitle">HGG ANIMATION STUDIO - PROJECT & REVENUE BOARD</span>
         </div>
-        <div class="actions-header">
-            <button class="icon-btn" id="themeToggleBtn" title="切換主題">🌙 模式</button>
-            <button class="icon-btn" id="exportBtn" title="導出 JSON 備份">📥 導出</button>
-            <button class="icon-btn" id="importBtn" title="導入 JSON 數據">📤 導入</button>
+        <div class="header-actions">
+            <button class="btn-header" id="themeToggleBtn">🌙 模式</button>
+            <button class="btn-header" id="exportBtn">📥 匯出 JSON</button>
+            <button class="btn-header" id="importBtn">📤 匯入 JSON</button>
             <input type="file" id="importInput" accept=".json" style="display: none;">
         </div>
     </div>
 
-    <!-- Revenue Dashboard -->
     <div class="stats-grid">
-        <div class="stat-card">
-            <span class="label">💰 總累計成交/獲利金額</span>
-            <span class="value" id="totalRevenueDisplay">¥0</span>
-            <span class="subtext" id="totalDealsCount">已結算成交 0 個專案</span>
+        <div class="stat-card gold">
+            <span class="label">💰 累計總成交/獲利金額</span>
+            <span class="value" id="totalRevenueDisplay">RMB ¥0</span>
+            <span class="subtext" id="totalDealsCount">共已結算 0 個專案</span>
         </div>
         <div class="stat-card">
-            <span class="label">📅 本月成交金額</span>
-            <span class="value" id="currentMonthRevenueDisplay">¥0</span>
-            <span class="subtext" id="currentMonthCount">本月完成 0 筆成交</span>
+            <span class="label">📅 當月成交/結算金額</span>
+            <span class="value" id="currentMonthRevenueDisplay">RMB ¥0</span>
+            <span class="subtext" id="currentMonthCount">本月完成 0 筆專案</span>
         </div>
     </div>
 
-    <!-- Monthly Breakdown Card -->
-    <div class="monthly-summary-card">
-        <div class="summary-header">
-            <h3>📊 每月成交金額統計 (Monthly Breakdown)</h3>
-            <select id="currencySelect" class="select-custom" style="width: auto;">
+    <div class="monthly-card">
+        <div class="monthly-header">
+            <h3>📊 每月成交金額統計 (Monthly Revenue Breakdown)</h3>
+            <select id="currencySelect" class="input-select" style="width: auto; padding: 0.35rem 0.6rem;">
                 <option value="RMB" selected>RMB (¥)</option>
                 <option value="NTD">NTD ($)</option>
                 <option value="USD">USD ($)</option>
             </select>
         </div>
-        <div class="monthly-list" id="monthlyList">
-            <!-- Dynamically Populated -->
+        <div class="monthly-grid" id="monthlyGrid">
         </div>
     </div>
 
-    <!-- Main Todo Input Card -->
     <div class="card">
-        <form class="todo-form" id="todoForm">
-            <div class="input-group">
-                <input type="text" id="todoInput" class="input-main" placeholder="輸入專案名稱或待辦事項..." required autocomplete="off">
-                <button type="submit" class="btn-add">新增專案/任務</button>
-            </div>
-            <div class="form-details">
-                <select id="priorityInput" class="select-custom">
-                    <option value="low">優先度：低</option>
-                    <option value="medium" selected>優先度：中</option>
-                    <option value="high">優先度：高</option>
-                </select>
-
-                <input type="number" id="amountInput" class="input-number" placeholder="成交金額 (元)" min="0" step="100" style="width: 140px;">
-
-                <input type="date" id="dueDateInput" class="input-date" title="截止/結算日期">
-
-                <input type="text" id="categoryInput" class="select-custom" placeholder="客戶/類別 (如: 動畫/設計)" style="width: 150px;">
-
-                <label class="checkbox-label">
-                    <input type="checkbox" id="isDealInput"> 標記為成交專案
-                </label>
+        <div class="card-title">➕ 新增專案 / 報價項目</div>
+        <form id="projectForm">
+            <div class="form-grid">
+                <div class="form-control">
+                    <label>專案/報價單號 (或自動生成)</label>
+                    <input type="text" id="projectCodeInput" class="input-text" placeholder="例: GGG-202608-001">
+                </div>
+                <div class="form-control">
+                    <label>客戶單位 / 公司名稱</label>
+                    <input type="text" id="clientInput" class="input-text" placeholder="例: 阿里巴巴 / 浙江天貓">
+                </div>
+                <div class="form-control full-width">
+                    <label>專案名稱 / 服務項目 *</label>
+                    <input type="text" id="projectNameInput" class="input-text" placeholder="例: AI 概念短片製作 (Concept/品牌片)" required autocomplete="off">
+                </div>
+                <div class="form-control">
+                    <label>成交金額 (元)</label>
+                    <input type="number" id="amountInput" class="input-number" placeholder="25000" min="0" step="100">
+                </div>
+                <div class="form-control">
+                    <label>結算/截止日期</label>
+                    <input type="date" id="dueDateInput" class="input-date">
+                </div>
+                <div class="form-control">
+                    <label>優先度</label>
+                    <select id="priorityInput" class="input-select">
+                        <option value="low">低 (Low)</option>
+                        <option value="medium" selected>中 (Medium)</option>
+                        <option value="high">高 (High)</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="isDealInput"> 標記為成交獲利專案
+                    </label>
+                </div>
+                <div class="full-width">
+                    <button type="submit" class="btn-submit">新增至專案看板</button>
+                </div>
             </div>
         </form>
     </div>
 
     <div class="card">
-        <!-- Progress Bar -->
-        <div class="progress-section">
-            <div class="progress-header">
-                <span id="progressText">進度：0 / 0 已完成</span>
-                <span id="progressPercent">0%</span>
-            </div>
-            <div class="progress-bar-bg">
-                <div class="progress-bar-fill" id="progressFill"></div>
-            </div>
-        </div>
-
-        <!-- Toolbar / Filters -->
         <div class="toolbar">
             <div class="filters">
                 <button class="filter-btn active" data-filter="all">全部</button>
                 <button class="filter-btn" data-filter="active">進行中</button>
-                <button class="filter-btn" data-filter="completed">已完成/已結算</button>
-                <button class="filter-btn" data-filter="deal">💰 僅成交專案</button>
+                <button class="filter-btn" data-filter="completed">已結算/完成</button>
+                <button class="filter-btn" data-filter="deal">💰 成交專案</button>
             </div>
-            <input type="text" id="searchInput" class="search-input" placeholder="🔍 搜尋專案/客戶...">
+            <input type="text" id="searchBox" class="search-box" placeholder="🔍 搜尋專案/客戶...">
         </div>
 
-        <!-- Task List -->
         <ul class="todo-list" id="todoList"></ul>
 
-        <!-- Footer Tools -->
-        <div class="footer-tools">
-            <span id="itemsLeftCount">0 個專案進行中</span>
-            <button class="btn-link" id="clearCompletedBtn">清理已完成任務</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: 0.82rem; color: var(--text-muted);">
+            <span id="activeCountText">0 個專案進行中</span>
+            <button id="clearCompletedBtn" style="background:none; border:none; color:var(--text-muted); cursor:pointer; text-decoration:underline;">清理已完成項目</button>
         </div>
     </div>
 </div>
 
-<!-- Modal for Edit -->
 <div class="modal-overlay" id="editModal">
     <div class="modal">
-        <h2>編輯專案/任務</h2>
-        <input type="text" id="editTaskText" class="input-main" style="width: 100%; margin-bottom: 0.75rem;">
-        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
-            <select id="editTaskPriority" class="select-custom" style="flex:1;">
-                <option value="low">優先度：低</option>
-                <option value="medium">優先度：中</option>
-                <option value="high">優先度：高</option>
-            </select>
-            <input type="number" id="editTaskAmount" class="input-number" placeholder="成交金額" style="flex:1;" min="0">
-            <input type="date" id="editTaskDueDate" class="input-date" style="flex:1;">
+        <h2>✏️ 編輯專案與成交金額</h2>
+        <div class="form-grid">
+            <div class="form-control">
+                <label>專案單號</label>
+                <input type="text" id="editCode" class="input-text">
+            </div>
+            <div class="form-control">
+                <label>客戶單位</label>
+                <input type="text" id="editClient" class="input-text">
+            </div>
+            <div class="form-control full-width">
+                <label>專案名稱</label>
+                <input type="text" id="editName" class="input-text">
+            </div>
+            <div class="form-control">
+                <label>成交金額</label>
+                <input type="number" id="editAmount" class="input-number" min="0">
+            </div>
+            <div class="form-control">
+                <label>結算日期</label>
+                <input type="date" id="editDueDate" class="input-date">
+            </div>
+            <div class="form-control">
+                <label>優先度</label>
+                <select id="editPriority" class="input-select">
+                    <option value="low">低</option>
+                    <option value="medium">中</option>
+                    <option value="high">高</option>
+                </select>
+            </div>
+            <div class="form-control">
+                <label class="checkbox-container">
+                    <input type="checkbox" id="editIsDeal"> 標記為成交專案
+                </label>
+            </div>
         </div>
-        <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem;">
-            <input type="text" id="editTaskCategory" class="input-main" placeholder="客戶/類別" style="flex:1;">
-            <label class="checkbox-label">
-                <input type="checkbox" id="editTaskIsDeal"> 標記為成交專案
-            </label>
-        </div>
-        <div class="modal-actions">
-            <button class="icon-btn" id="cancelEditBtn">取消</button>
-            <button class="btn-add" id="saveEditBtn">保存修改</button>
+        <div class="modal-footer">
+            <button class="btn-header" id="cancelEditBtn">取消</button>
+            <button class="btn-submit" id="saveEditBtn" style="width: auto;">保存修改</button>
         </div>
     </div>
 </div>
 
 <script>
-    let todos = JSON.parse(localStorage.getItem('project_todos_data')) || [];
+    let todos = JSON.parse(localStorage.getItem('hgg_projects_data')) || [
+        {
+            id: '1001',
+            code: 'GGG-20260301-001',
+            client: '阿里巴巴 / 浙江天貓',
+            text: 'AI 概念短片製作 (Concept/品牌片)',
+            amount: 25000,
+            completed: true,
+            isDeal: true,
+            priority: 'high',
+            dueDate: '2026-03-31',
+            dealMonth: '2026-03'
+        }
+    ];
+
     let currentFilter = 'all';
     let searchQuery = '';
-    let currencySymbol = '¥';
-    let editingTodoId = null;
+    let currencySymbol = 'RMB ¥';
+    let editingId = null;
 
-    const todoForm = document.getElementById('todoForm');
-    const todoInput = document.getElementById('todoInput');
-    const priorityInput = document.getElementById('priorityInput');
+    const projectForm = document.getElementById('projectForm');
+    const projectCodeInput = document.getElementById('projectCodeInput');
+    const clientInput = document.getElementById('clientInput');
+    const projectNameInput = document.getElementById('projectNameInput');
     const amountInput = document.getElementById('amountInput');
     const dueDateInput = document.getElementById('dueDateInput');
-    const categoryInput = document.getElementById('categoryInput');
+    const priorityInput = document.getElementById('priorityInput');
     const isDealInput = document.getElementById('isDealInput');
+
     const todoList = document.getElementById('todoList');
-    const progressText = document.getElementById('progressText');
-    const progressPercent = document.getElementById('progressPercent');
-    const progressFill = document.getElementById('progressFill');
-    const itemsLeftCount = document.getElementById('itemsLeftCount');
-    const clearCompletedBtn = document.getElementById('clearCompletedBtn');
-    const searchInput = document.getElementById('searchInput');
+    const totalRevenueDisplay = document.getElementById('totalRevenueDisplay');
+    const totalDealsCount = document.getElementById('totalDealsCount');
+    const currentMonthRevenueDisplay = document.getElementById('currentMonthRevenueDisplay');
+    const currentMonthCount = document.getElementById('currentMonthCount');
+    const monthlyGrid = document.getElementById('monthlyGrid');
+    const searchBox = document.getElementById('searchBox');
     const filterBtns = document.querySelectorAll('.filter-btn');
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const exportBtn = document.getElementById('exportBtn');
@@ -691,150 +719,147 @@
     const importInput = document.getElementById('importInput');
     const currencySelect = document.getElementById('currencySelect');
 
-    const totalRevenueDisplay = document.getElementById('totalRevenueDisplay');
-    const totalDealsCount = document.getElementById('totalDealsCount');
-    const currentMonthRevenueDisplay = document.getElementById('currentMonthRevenueDisplay');
-    const currentMonthCount = document.getElementById('currentMonthCount');
-    const monthlyList = document.getElementById('monthlyList');
-
     const editModal = document.getElementById('editModal');
-    const editTaskText = document.getElementById('editTaskText');
-    const editTaskPriority = document.getElementById('editTaskPriority');
-    const editTaskAmount = document.getElementById('editTaskAmount');
-    const editTaskDueDate = document.getElementById('editTaskDueDate');
-    const editTaskCategory = document.getElementById('editTaskCategory');
-    const editTaskIsDeal = document.getElementById('editTaskIsDeal');
+    const editCode = document.getElementById('editCode');
+    const editClient = document.getElementById('editClient');
+    const editName = document.getElementById('editName');
+    const editAmount = document.getElementById('editAmount');
+    const editDueDate = document.getElementById('editDueDate');
+    const editPriority = document.getElementById('editPriority');
+    const editIsDeal = document.getElementById('editIsDeal');
     const cancelEditBtn = document.getElementById('cancelEditBtn');
     const saveEditBtn = document.getElementById('saveEditBtn');
 
-    const savedTheme = localStorage.getItem('todo_theme') || 'dark';
+    const savedTheme = localStorage.getItem('hgg_theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     themeToggleBtn.textContent = savedTheme === 'dark' ? '☀️ 模式' : '🌙 模式';
 
     themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('todo_theme', newTheme);
-        themeToggleBtn.textContent = newTheme === 'dark' ? '☀️ 模式' : '🌙 模式';
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('hgg_theme', next);
+        themeToggleBtn.textContent = next === 'dark' ? '☀️ 模式' : '🌙 模式';
     });
 
     currencySelect.addEventListener('change', (e) => {
-        const val = e.target.value;
-        if (val === 'RMB') currencySymbol = '¥';
-        else if (val === 'NTD') currencySymbol = 'NT$';
+        const v = e.target.value;
+        if (v === 'RMB') currencySymbol = 'RMB ¥';
+        else if (v === 'NTD') currencySymbol = 'NT$';
         else currencySymbol = '$';
         render();
     });
 
-    function saveTodos() {
-        localStorage.setItem('project_todos_data', JSON.stringify(todos));
+    function save() {
+        localStorage.setItem('hgg_projects_data', JSON.stringify(todos));
         render();
     }
 
-    todoForm.addEventListener('submit', (e) => {
+    function genCode() {
+        const ym = new Date().toISOString().slice(0, 7).replace('-', '');
+        return `GGG-${ym}-${Math.floor(100 + Math.random() * 900)}`;
+    }
+
+    projectForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const text = todoInput.value.trim();
+        const text = projectNameInput.value.trim();
         if (!text) return;
 
-        const amountVal = parseFloat(amountInput.value) || 0;
+        const amt = parseFloat(amountInput.value) || 0;
         const nowIso = new Date().toISOString();
-        const selectedDate = dueDateInput.value || nowIso.slice(0, 10);
+        const selDate = dueDateInput.value || nowIso.slice(0, 10);
 
-        const newTodo = {
+        const newProj = {
             id: Date.now().toString(),
+            code: projectCodeInput.value.trim() || genCode(),
+            client: clientInput.value.trim() || '通用客戶',
             text: text,
+            amount: amt,
             completed: false,
+            isDeal: isDealInput.checked || amt > 0,
+            dueDate: selDate,
             priority: priorityInput.value,
-            amount: amountVal,
-            isDeal: isDealInput.checked || amountVal > 0,
-            dueDate: selectedDate,
-            category: categoryInput.value.trim() || '',
-            createdAt: nowIso,
-            dealMonth: selectedDate.slice(0, 7)
+            dealMonth: selDate.slice(0, 7)
         };
 
-        todos.unshift(newTodo);
-        todoInput.value = '';
+        todos.unshift(newProj);
+        projectCodeInput.value = '';
+        clientInput.value = '';
+        projectNameInput.value = '';
         amountInput.value = '';
-        categoryInput.value = '';
         dueDateInput.value = '';
         isDealInput.checked = false;
-        saveTodos();
+        save();
     });
 
-    function toggleTodo(id) {
-        todos = todos.map(todo => {
-            if (todo.id === id) {
-                const isNowCompleted = !todo.completed;
-                return { 
-                    ...todo, 
-                    completed: isNowCompleted,
-                    isDeal: todo.amount > 0 ? true : todo.isDeal
-                };
+    function toggleComplete(id) {
+        todos = todos.map(t => {
+            if (t.id === id) {
+                return { ...t, completed: !t.completed, isDeal: t.amount > 0 ? true : t.isDeal };
             }
-            return todo;
+            return t;
         });
-        saveTodos();
+        save();
     }
 
-    function deleteTodo(id) {
-        todos = todos.filter(todo => todo.id !== id);
-        saveTodos();
+    function deleteProj(id) {
+        todos = todos.filter(t => t.id !== id);
+        save();
     }
 
-    function openEditModal(id) {
-        const todo = todos.find(t => t.id === id);
-        if (!todo) return;
-        editingTodoId = id;
-        editTaskText.value = todo.text;
-        editTaskPriority.value = todo.priority || 'medium';
-        editTaskAmount.value = todo.amount || '';
-        editTaskDueDate.value = todo.dueDate || '';
-        editTaskCategory.value = todo.category || '';
-        editTaskIsDeal.checked = !!todo.isDeal;
+    function openEdit(id) {
+        const t = todos.find(item => item.id === id);
+        if (!t) return;
+        editingId = id;
+        editCode.value = t.code || '';
+        editClient.value = t.client || '';
+        editName.value = t.text || '';
+        editAmount.value = t.amount || 0;
+        editDueDate.value = t.dueDate || '';
+        editPriority.value = t.priority || 'medium';
+        editIsDeal.checked = !!t.isDeal;
         editModal.classList.add('active');
     }
 
-    function closeEditModal() {
+    cancelEditBtn.addEventListener('click', () => {
         editModal.classList.remove('active');
-        editingTodoId = null;
-    }
-
-    cancelEditBtn.addEventListener('click', closeEditModal);
-
-    saveEditBtn.addEventListener('click', () => {
-        if (!editingTodoId) return;
-        const text = editTaskText.value.trim();
-        if (!text) return;
-
-        const amt = parseFloat(editTaskAmount.value) || 0;
-        const selectedDate = editTaskDueDate.value || new Date().toISOString().slice(0, 10);
-
-        todos = todos.map(todo => {
-            if (todo.id === editingTodoId) {
-                return {
-                    ...todo,
-                    text: text,
-                    priority: editTaskPriority.value,
-                    amount: amt,
-                    dueDate: selectedDate,
-                    category: editTaskCategory.value.trim(),
-                    isDeal: editTaskIsDeal.checked || amt > 0,
-                    dealMonth: selectedDate.slice(0, 7)
-                };
-            }
-            return todo;
-        });
-
-        closeEditModal();
-        saveTodos();
+        editingId = null;
     });
 
-    clearCompletedBtn.addEventListener('click', () => {
-        if (confirm('確認清理所有已完成/已結算的專案？')) {
+    saveEditBtn.addEventListener('click', () => {
+        if (!editingId) return;
+        const nameVal = editName.value.trim();
+        if (!nameVal) return;
+
+        const amt = parseFloat(editAmount.value) || 0;
+        const dDate = editDueDate.value || new Date().toISOString().slice(0, 10);
+
+        todos = todos.map(t => {
+            if (t.id === editingId) {
+                return {
+                    ...t,
+                    code: editCode.value.trim() || t.code,
+                    client: editClient.value.trim() || t.client,
+                    text: nameVal,
+                    amount: amt,
+                    dueDate: dDate,
+                    priority: editPriority.value,
+                    isDeal: editIsDeal.checked || amt > 0,
+                    dealMonth: dDate.slice(0, 7)
+                };
+            }
+            return t;
+        });
+
+        editModal.classList.remove('active');
+        editingId = null;
+        save();
+    });
+
+    document.getElementById('clearCompletedBtn').addEventListener('click', () => {
+        if (confirm('確認清理已結算/已完成的項目？')) {
             todos = todos.filter(t => !t.completed);
-            saveTodos();
+            save();
         }
     });
 
@@ -847,137 +872,119 @@
         });
     });
 
-    searchInput.addEventListener('input', (e) => {
+    searchBox.addEventListener('input', (e) => {
         searchQuery = e.target.value.toLowerCase();
         render();
     });
 
-    function formatMoney(num) {
-        return currencySymbol + num.toLocaleString('zh-TW', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+    function fmtMoney(num) {
+        return `${currencySymbol} ${num.toLocaleString('zh-TW', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}`;
     }
 
     function render() {
-        let totalRevenue = 0;
-        let totalDealCount = 0;
+        let totalRev = 0;
+        let totalDeals = 0;
         const monthlyStats = {};
-
         const nowYm = new Date().toISOString().slice(0, 7);
 
-        todos.forEach(todo => {
-            if (todo.completed || todo.isDeal) {
-                const amt = todo.amount || 0;
-                totalRevenue += amt;
-                if (amt > 0 || todo.isDeal) totalDealCount++;
+        todos.forEach(t => {
+            if (t.completed || t.isDeal) {
+                const amt = t.amount || 0;
+                totalRev += amt;
+                if (amt > 0 || t.isDeal) totalDeals++;
 
-                const ym = todo.dealMonth || (todo.dueDate ? todo.dueDate.slice(0, 7) : nowYm);
+                const ym = t.dealMonth || (t.dueDate ? t.dueDate.slice(0, 7) : nowYm);
                 monthlyStats[ym] = (monthlyStats[ym] || 0) + amt;
             }
         });
 
-        totalRevenueDisplay.textContent = formatMoney(totalRevenue);
-        totalDealsCount.textContent = `已結算成交 ${totalDealCount} 個專案`;
+        totalRevenueDisplay.textContent = fmtMoney(totalRev);
+        totalDealsCount.textContent = `共已結算 ${totalDeals} 個成交專案`;
 
-        const currentMonthRev = monthlyStats[nowYm] || 0;
-        currentMonthRevenueDisplay.textContent = formatMoney(currentMonthRev);
+        const curMonthRev = monthlyStats[nowYm] || 0;
+        currentMonthRevenueDisplay.textContent = fmtMoney(curMonthRev);
 
-        const currentMonthDeals = todos.filter(t => (t.completed || t.isDeal) && (t.dealMonth === nowYm || (t.dueDate && t.dueDate.slice(0,7) === nowYm))).length;
-        currentMonthCount.textContent = `本月完成/成交 ${currentMonthDeals} 筆`;
+        const curMonthDeals = todos.filter(t => (t.completed || t.isDeal) && (t.dealMonth === nowYm || (t.dueDate && t.dueDate.slice(0,7) === nowYm))).length;
+        currentMonthCount.textContent = `本月成交/完成 ${curMonthDeals} 筆`;
 
-        const sortedMonths = Object.keys(monthlyStats).sort().reverse();
-        if (sortedMonths.length === 0) {
-            monthlyList.innerHTML = `<div style="font-size:0.85rem; color:var(--text-muted); grid-column:1/-1;">尚無月份獲利數據，可於新增專案時填寫「成交金額」。</div>`;
+        const monthsSorted = Object.keys(monthlyStats).sort().reverse();
+        if (monthsSorted.length === 0) {
+            monthlyGrid.innerHTML = `<div style="font-size:0.83rem; color:var(--text-muted); grid-column:1/-1;">尚無月份成交紀錄，可以在上方新增專案並填寫成交金額。</div>`;
         } else {
-            monthlyList.innerHTML = sortedMonths.map(ym => `
-                <div class="monthly-item">
-                    <span class="month-title">📅 ${ym}</span>
-                    <span class="month-amount">${formatMoney(monthlyStats[ym])}</span>
+            monthlyGrid.innerHTML = monthsSorted.map(ym => `
+                <div class="monthly-pill">
+                    <span class="month-label">📅 ${ym} 結算</span>
+                    <span class="month-val">${fmtMoney(monthlyStats[ym])}</span>
                 </div>
             `).join('');
         }
 
-        let filteredTodos = todos.filter(todo => {
-            if (currentFilter === 'active') return !todo.completed;
-            if (currentFilter === 'completed') return todo.completed;
-            if (currentFilter === 'deal') return todo.isDeal || todo.amount > 0;
+        let list = todos.filter(t => {
+            if (currentFilter === 'active') return !t.completed;
+            if (currentFilter === 'completed') return t.completed;
+            if (currentFilter === 'deal') return t.isDeal || t.amount > 0;
             return true;
         });
 
         if (searchQuery) {
-            filteredTodos = filteredTodos.filter(todo =>
-                todo.text.toLowerCase().includes(searchQuery) ||
-                (todo.category && todo.category.toLowerCase().includes(searchQuery))
+            list = list.filter(t =>
+                t.text.toLowerCase().includes(searchQuery) ||
+                (t.client && t.client.toLowerCase().includes(searchQuery)) ||
+                (t.code && t.code.toLowerCase().includes(searchQuery))
             );
         }
 
-        if (filteredTodos.length === 0) {
-            todoList.innerHTML = `
-                <div class="empty-state">
-                    <p style="margin-top:1rem; font-size:0.95rem;">${todos.length === 0 ? '暫無專案，請於上方輸入新增專案與成交金額！' : '沒有匹配的專案或任務'}</p>
-                </div>
-            `;
+        if (list.length === 0) {
+            todoList.innerHTML = `<li style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.9rem;">無符合条件的專案紀錄</li>`;
         } else {
-            todoList.innerHTML = filteredTodos.map(todo => {
-                const priorityLabels = { low: '低', medium: '中', high: '高' };
-                const dueDateStr = todo.dueDate ? `📅 ${todo.dueDate}` : '';
-                const categoryStr = todo.category ? `🏷️ ${escapeHtml(todo.category)}` : '';
-                const amountBadge = todo.amount > 0 ? `<span class="revenue-badge">💰 ${formatMoney(todo.amount)}</span>` : '';
-                const dealBadge = todo.isDeal ? `<span class="badge badge-deal">🤝 成交專案</span>` : '';
+            todoList.innerHTML = list.map(t => {
+                const priorityMap = { low: '低', medium: '中', high: '高' };
+                const amtBadge = t.amount > 0 ? `<span class="revenue-tag">💰 ${fmtMoney(t.amount)}</span>` : '';
+                const dealBadge = t.isDeal ? `<span class="badge-deal-status">🤝 已成交</span>` : '';
 
                 return `
-                    <li class="todo-item ${todo.completed ? 'completed' : ''}">
-                        <input type="checkbox" class="checkbox-custom" ${todo.completed ? 'checked' : ''} onchange="toggleTodo('${todo.id}')">
-                        <div class="todo-content">
-                            <div class="todo-title-row">
-                                <span class="todo-text">${escapeHtml(todo.text)}</span>
-                                ${amountBadge}
+                    <li class="todo-item ${t.completed ? 'completed' : ''}">
+                        <input type="checkbox" class="checkbox-custom" ${t.completed ? 'checked' : ''} onchange="toggleComplete('${t.id}')">
+                        <div class="project-details">
+                            <div class="project-header-row">
+                                <span class="project-code">${escapeHtml(t.code || 'PRJ')}</span>
+                                <span class="project-name">${escapeHtml(t.text)}</span>
+                                ${amtBadge}
                                 ${dealBadge}
                             </div>
-                            <div class="todo-meta">
-                                <span class="badge badge-${todo.priority}">${priorityLabels[todo.priority] || '中'}</span>
-                                ${dueDateStr ? `<span>${dueDateStr}</span>` : ''}
-                                ${categoryStr ? `<span>${categoryStr}</span>` : ''}
+                            <div class="project-subrow">
+                                <span>🏢 客戶: ${escapeHtml(t.client || '未指定')}</span>
+                                <span class="badge-priority badge-${t.priority}">${priorityMap[t.priority] || '中'}</span>
+                                ${t.dueDate ? `<span>📅 結算: ${t.dueDate}</span>` : ''}
                             </div>
                         </div>
                         <div class="item-actions">
-                            <button class="btn-action" onclick="openEditModal('${todo.id}')" title="編輯">✏️</button>
-                            <button class="btn-action delete" onclick="deleteTodo('${todo.id}')" title="刪除">🗑️</button>
+                            <button class="btn-act" onclick="openEdit('${t.id}')" title="編輯">✏️</button>
+                            <button class="btn-act del" onclick="deleteProj('${t.id}')" title="刪除">🗑️</button>
                         </div>
                     </li>
                 `;
             }).join('');
         }
 
-        const total = todos.length;
-        const completedCount = todos.filter(t => t.completed).length;
-        const activeCount = total - completedCount;
-        const percent = total === 0 ? 0 : Math.round((completedCount / total) * 100);
-
-        progressText.textContent = `專案進度：${completedCount} / ${total} 已完成`;
-        progressPercent.textContent = `${percent}%`;
-        progressFill.style.width = `${percent}%`;
-        itemsLeftCount.textContent = `${activeCount} 個專案/任務進行中`;
+        const activeCnt = todos.filter(t => !t.completed).length;
+        document.getElementById('activeCountText').textContent = `${activeCnt} 個專案進行中`;
     }
 
-    function escapeHtml(text) {
-        return text.replace(/[&<>"']/g, function(m) {
-            return {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            }[m];
+    function escapeHtml(str) {
+        return str.replace(/[&<>"']/g, function(m) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
         });
     }
 
     exportBtn.addEventListener('click', () => {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(todos, null, 2));
-        const downloadAnchor = document.createElement('a');
-        downloadAnchor.setAttribute("href", dataStr);
-        downloadAnchor.setAttribute("download", `project_revenue_backup_${new Date().toISOString().slice(0,10)}.json`);
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
+        const dl = document.createElement('a');
+        dl.setAttribute("href", dataStr);
+        dl.setAttribute("download", `HGG_Projects_Backup_${new Date().toISOString().slice(0,10)}.json`);
+        document.body.appendChild(dl);
+        dl.click();
+        dl.remove();
     });
 
     importBtn.addEventListener('click', () => importInput.click());
@@ -987,18 +994,18 @@
         if (!file) return;
 
         const reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = function(evt) {
             try {
-                const importedTodos = JSON.parse(event.target.result);
-                if (Array.isArray(importedTodos)) {
-                    todos = importedTodos;
-                    saveTodos();
-                    alert('數據導入成功！');
+                const parsed = JSON.parse(evt.target.result);
+                if (Array.isArray(parsed)) {
+                    todos = parsed;
+                    save();
+                    alert('專案數據匯入成功！');
                 } else {
-                    alert('文件格式錯誤：必須為 JSON 數組。');
+                    alert('格式錯誤：必須為 JSON 專案陣列。');
                 }
             } catch (err) {
-                alert('解析 JSON 失敗，請檢查文件格式。');
+                alert('解析 JSON 失敗。');
             }
         };
         reader.readAsText(file);
