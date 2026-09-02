@@ -6,7 +6,6 @@
     <title>HGG Animation Studio | 罕呱呱动画工作室</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 品牌色定义 */
         :root {
             --hgg-teal: #008080;
             --hgg-dark: #1a1a1a;
@@ -14,8 +13,6 @@
         .text-teal-brand { color: var(--hgg-teal); }
         .bg-teal-brand { background-color: var(--hgg-teal); }
         .border-teal-brand { border-color: var(--hgg-teal); }
-        
-        /* Hero 视频样式 */
         .hero-video {
             position: absolute;
             top: 50%;
@@ -27,8 +24,209 @@
             transform: translate(-50%, -50%);
             object-fit: cover;
         }
-        
         html { scroll-behavior: smooth; }
+
+        /* 新版报价区：延续 HGG 白底、灰阶、青绿色品牌调性 */
+        .pricing-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 34px;
+        }
+        .pricing-tab {
+            padding: 10px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 999px;
+            background: #fff;
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s ease;
+        }
+        .pricing-tab:hover {
+            color: var(--hgg-teal);
+            border-color: var(--hgg-teal);
+        }
+        .pricing-tab.active {
+            background: var(--hgg-teal);
+            color: #fff;
+            border-color: var(--hgg-teal);
+            box-shadow: 0 8px 24px rgba(0,128,128,.15);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 20px;
+        }
+        .pricing-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            padding: 26px;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 3px 14px rgba(17,24,39,.035);
+            transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0,128,128,.55);
+            box-shadow: 0 16px 34px rgba(17,24,39,.08);
+        }
+        .pricing-card.is-hidden { display: none; }
+        .pricing-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .pricing-code {
+            color: var(--hgg-teal);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .08em;
+        }
+        .pricing-category {
+            color: #9ca3af;
+            font-size: 12px;
+            text-align: right;
+        }
+        .pricing-card h3 {
+            color: #111827;
+            font-size: 21px;
+            line-height: 1.35;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .pricing-desc {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.75;
+            min-height: 70px;
+            margin-bottom: 18px;
+        }
+        .pricing-price {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            color: #111827;
+            font-size: 32px;
+            line-height: 1;
+            font-weight: 900;
+            padding: 18px 0;
+            border-top: 1px solid #f0f2f4;
+            border-bottom: 1px solid #f0f2f4;
+            margin-bottom: 18px;
+        }
+        .pricing-price .currency {
+            color: var(--hgg-teal);
+            font-size: 18px;
+            font-weight: 800;
+        }
+        .pricing-unit {
+            color: #9ca3af;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 22px;
+            display: grid;
+            gap: 9px;
+            flex: 1;
+        }
+        .pricing-features li {
+            position: relative;
+            padding-left: 16px;
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.55;
+        }
+        .pricing-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: .6em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--hgg-teal);
+        }
+        .pricing-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f2f4;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+        .pricing-meta a {
+            color: var(--hgg-teal);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .pricing-notes {
+            display: grid;
+            grid-template-columns: repeat(3,minmax(0,1fr));
+            gap: 14px;
+            margin-top: 28px;
+        }
+        .pricing-note {
+            padding: 20px;
+            border-radius: 14px;
+            background: #f8fafc;
+            border: 1px solid #eef0f2;
+        }
+        .pricing-note strong {
+            display: block;
+            color: #111827;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .pricing-note span {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.65;
+        }
+        .pricing-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 24px;
+            padding: 0 9px;
+            margin-left: 7px;
+            border-radius: 999px;
+            background: #ecfdf5;
+            color: #047857;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        @media (max-width: 1024px) {
+            .pricing-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+        }
+        @media (max-width: 640px) {
+            .pricing-tabs {
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 6px;
+                scrollbar-width: none;
+            }
+            .pricing-tabs::-webkit-scrollbar { display: none; }
+            .pricing-tab { flex: 0 0 auto; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .pricing-card { padding: 22px 20px; }
+            .pricing-desc { min-height: auto; }
+            .pricing-notes { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
@@ -39,22 +237,18 @@
                 <div class="flex-shrink-0 flex items-center">
                     <img class="h-10 w-auto" src="images/logo_header.png" alt="HGG Animation Studio">
                 </div>
-                
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#works" class="text-gray-700 hover:text-teal-brand font-medium">作品</a>
                     <a href="#services" class="text-gray-700 hover:text-teal-brand font-medium">服务</a>
                     <a href="#pricing" class="text-gray-700 hover:text-teal-brand font-medium">报价</a>
                     <a href="#process" class="text-gray-700 hover:text-teal-brand font-medium">流程</a>
                     <a href="#about" class="text-gray-700 hover:text-teal-brand font-medium">关于</a>
-                    
                     <button onclick="checkVipPassword()" class="text-teal-700 hover:text-black font-bold border border-teal-600 px-3 py-1 rounded transition flex items-center gap-1">
                         <span>客户专区</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
                     </button>
-
                     <a href="#contact" class="bg-black text-white px-5 py-2 rounded hover:bg-teal-600 transition">联系我们</a>
                 </div>
-
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-gray-700 hover:text-black focus:outline-none">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -70,11 +264,7 @@
             <a href="#pricing" class="block py-3 px-4 text-gray-700 hover:bg-gray-100">报价</a>
             <a href="#process" class="block py-3 px-4 text-gray-700 hover:bg-gray-100">流程</a>
             <a href="#about" class="block py-3 px-4 text-gray-700 hover:bg-gray-100">关于</a>
-            
-            <button onclick="checkVipPassword()" class="block w-full text-left py-3 px-4 text-teal-700 font-bold hover:bg-gray-100">
-                客户专区 🔒
-            </button>
-
+            <button onclick="checkVipPassword()" class="block w-full text-left py-3 px-4 text-teal-700 font-bold hover:bg-gray-100">客户专区 🔒</button>
             <a href="#contact" class="block py-3 px-4 bg-gray-900 text-white text-center">联系我们</a>
         </div>
     </nav>
@@ -86,15 +276,9 @@
             </video>
             <div class="absolute inset-0 bg-black/50"></div>
         </div>
-
         <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-10">
-            <h1 class="text-4xl md:text-6xl font-bold mb-8 leading-tight tracking-wide">
-                赋予品牌灵魂，<br>让想像力具现化。
-            </h1>
-            <p class="text-lg md:text-2xl text-gray-200 mb-10 font-light leading-relaxed">
-                我们将企业策略转译为动人的影像语言。<br>
-                透过透明化的制作流程，将创意从纸上脚本完美落实为屏幕上的精彩瞬间。
-            </p>
+            <h1 class="text-4xl md:text-6xl font-bold mb-8 leading-tight tracking-wide">赋予品牌灵魂，<br>让想像力具现化。</h1>
+            <p class="text-lg md:text-2xl text-gray-200 mb-10 font-light leading-relaxed">我们将企业策略转译为动人的影像语言。<br>透过透明化的制作流程，将创意从纸上脚本完美落实为屏幕上的精彩瞬间。</p>
             <div class="flex flex-col md:flex-row gap-4 justify-center">
                 <a href="#contact" class="bg-teal-600 hover:bg-teal-500 text-white px-8 py-3 rounded text-lg font-bold transition">联系我们</a>
                 <a href="#works" class="border border-white hover:bg-white hover:text-black text-white px-8 py-3 rounded text-lg font-bold transition">查看作品</a>
@@ -109,127 +293,42 @@
 
     <section class="py-16 bg-white border-b">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div class="p-6">
-                <div class="text-4xl mb-4">🎯</div>
-                <h3 class="text-xl font-bold mb-2">需求精准转化</h3>
-                <p class="text-gray-600">协助企业把模糊的需求，转成可投放、有逻辑的影像内容。</p>
-            </div>
-            <div class="p-6">
-                <div class="text-4xl mb-4">🤝</div>
-                <h3 class="text-xl font-bold mb-2">单一窗口负责</h3>
-                <p class="text-gray-600">从脚本、分镜到制作与后期，全程由 HGG 团队一条线完成。</p>
-            </div>
-            <div class="p-6">
-                <div class="text-4xl mb-4">📋</div>
-                <h3 class="text-xl font-bold mb-2">拒绝无效返工</h3>
-                <p class="text-gray-600">每个项目都有节点确认与交付清单，避免方向偏差。</p>
-            </div>
+            <div class="p-6"><div class="text-4xl mb-4">🎯</div><h3 class="text-xl font-bold mb-2">需求精准转化</h3><p class="text-gray-600">协助企业把模糊的需求，转成可投放、有逻辑的影像内容。</p></div>
+            <div class="p-6"><div class="text-4xl mb-4">🤝</div><h3 class="text-xl font-bold mb-2">单一窗口负责</h3><p class="text-gray-600">从脚本、分镜到制作与后期，全程由 HGG 团队一条线完成。</p></div>
+            <div class="p-6"><div class="text-4xl mb-4">📋</div><h3 class="text-xl font-bold mb-2">拒绝无效返工</h3><p class="text-gray-600">每个项目都有节点确认与交付清单，避免方向偏差。</p></div>
         </div>
     </section>
 
     <section id="works" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">精选作品 Works</h2>
-                <p class="text-gray-600">影视广告 / AI 专项评估 / 原创 IP</p>
-            </div>
-
+            <div class="text-center mb-12"><h2 class="text-3xl font-bold mb-4">精选作品 Works</h2><p class="text-gray-600">影视广告 / AI 专项评估 / 原创 IP</p></div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
                 <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
-                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_01.jpg">
-                        <source src="images/work_01.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
-                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                        </svg>
-                        <div>
-                            <h3 class="text-white text-xl font-bold">品牌形象广告</h3>
-                            <p class="text-teal-400">Commercial Film</p>
-                        </div>
-                    </div>
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_01.jpg"><source src="images/work_01.mp4" type="video/mp4"></video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content"><svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg><div><h3 class="text-white text-xl font-bold">品牌形象广告</h3><p class="text-teal-400">Commercial Film</p></div></div>
                 </div>
-
                 <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
-                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_02.jpg">
-                        <source src="images/work_02.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
-                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                        </svg>
-                        <div>
-                            <h3 class="text-white text-xl font-bold">AI 专项评估</h3>
-                            <p class="text-teal-400">AI 网剧 / AIGC</p>
-                        </div>
-                    </div>
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_02.jpg"><source src="images/work_02.mp4" type="video/mp4"></video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content"><svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg><div><h3 class="text-white text-xl font-bold">AI 专项评估</h3><p class="text-teal-400">AI 网剧 / AIGC</p></div></div>
                 </div>
-
                 <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
-                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_03.jpg">
-                        <source src="images/work_03.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
-                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                        </svg>
-                        <div>
-                            <h3 class="text-white text-xl font-bold">产品结构演示</h3>
-                            <p class="text-teal-400">3D Animation</p>
-                        </div>
-                    </div>
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_03.jpg"><source src="images/work_03.mp4" type="video/mp4"></video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content"><svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg><div><h3 class="text-white text-xl font-bold">产品结构演示</h3><p class="text-teal-400">3D Animation</p></div></div>
                 </div>
-
                 <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
-                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_04.jpg">
-                        <source src="images/work_04.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
-                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                        </svg>
-                        <div>
-                            <h3 class="text-white text-xl font-bold">品牌故事短片</h3>
-                            <p class="text-teal-400">2D Animation</p>
-                        </div>
-                    </div>
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_04.jpg"><source src="images/work_04.mp4" type="video/mp4"></video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content"><svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg><div><h3 class="text-white text-xl font-bold">品牌故事短片</h3><p class="text-teal-400">2D Animation</p></div></div>
                 </div>
-
                 <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
-                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_05.jpg">
-                        <source src="images/work_05.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
-                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                        </svg>
-                        <div>
-                            <h3 class="text-white text-xl font-bold">资讯解说视频</h3>
-                            <p class="text-teal-400">MG Animation</p>
-                        </div>
-                    </div>
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_05.jpg"><source src="images/work_05.mp4" type="video/mp4"></video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content"><svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg><div><h3 class="text-white text-xl font-bold">资讯解说视频</h3><p class="text-teal-400">MG Animation</p></div></div>
                 </div>
-
                 <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer" onclick="togglePlay(this)">
-                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_06.jpg">
-                        <source src="images/work_06.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content">
-                        <svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-                        </svg>
-                        <div>
-                            <h3 class="text-white text-xl font-bold">HGG 原创 IP 动画</h3>
-                            <p class="text-teal-400">Original IP / Character</p>
-                        </div>
-                    </div>
+                    <video class="w-full h-64 object-cover" loop muted playsinline poster="images/work_06.jpg"><source src="images/work_06.mp4" type="video/mp4"></video>
+                    <div class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center p-4 transition-opacity duration-300 overlay-content"><svg class="w-16 h-16 text-white opacity-90 mb-3 hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg><div><h3 class="text-white text-xl font-bold">HGG 原创 IP 动画</h3><p class="text-teal-400">Original IP / Character</p></div></div>
                 </div>
             </div>
-            
-            <div class="text-center mt-12">
-                <a href="#contact" class="inline-block border-b-2 border-black pb-1 hover:text-teal-600 hover:border-teal-600 transition">找不到类似案例？提交需求索取方案 →</a>
-            </div>
+            <div class="text-center mt-12"><a href="#contact" class="inline-block border-b-2 border-black pb-1 hover:text-teal-600 hover:border-teal-600 transition">找不到类似案例？提交需求索取方案 →</a></div>
         </div>
     </section>
 
@@ -237,64 +336,53 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold mb-4">服务与参考价格 Services & Pricing</h2>
-                <p class="text-gray-600">以下为常见区间 (RMB)，正式报价依脚本、镜头与交付规格评估。</p>
+                <p class="text-gray-600">新版 AI 影片制作报价，共 24 项专业服务。价格透明，正式报价依脚本、镜头与交付规格评估。</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="pricing">
-                
-                <div class="border rounded-xl p-8 hover:shadow-xl transition relative bg-gray-50">
-                    <div class="text-teal-700 font-bold mb-2">FILM</div>
-                    <h3 class="text-2xl font-bold mb-4">影视广告</h3>
-                    <p class="text-sm text-gray-500 mb-6">适用：品牌片、产品片、发布会影像</p>
-                    <div class="text-3xl font-bold mb-6">¥30k <span class="text-sm font-normal text-gray-500">起/案</span></div>
-                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
-                        <li>✅ 基础版：¥120,000+</li>
-                        <li>⭐ 标准版：¥240,000+</li>
-                        <li>✅ 含多比例交付</li>
-                    </ul>
-                    <a href="#contact" class="block w-full text-center bg-black text-white py-2 rounded hover:bg-teal-600 transition">咨询方案</a>
+            <div id="pricing">
+                <div class="pricing-tabs" role="tablist" aria-label="报价分类">
+                    <button class="pricing-tab active" data-filter="featured">推荐服务 <span class="pricing-count">6</span></button>
+                    <button class="pricing-tab" data-filter="manju">AI漫剧 / 动态漫</button>
+                    <button class="pricing-tab" data-filter="commercial">AI商业影片</button>
+                    <button class="pricing-tab" data-filter="animation">AI动画 / CG / MV</button>
+                    <button class="pricing-tab" data-filter="digital">AI数字人</button>
+                    <button class="pricing-tab" data-filter="value">增值服务</button>
+                    <button class="pricing-tab" data-filter="all">全部服务 <span class="pricing-count">24</span></button>
                 </div>
+                <div class="pricing-grid" id="pricingGrid">
+                    <article class="pricing-card" data-service-id="m1" data-category="manju" data-featured="true"><div class="pricing-card-top"><span class="pricing-code">M-01</span><span class="pricing-category">AI漫剧 / 动态漫</span></div><h3>2D动态漫（标准档）</h3><p class="pricing-desc">AI生成+人工精修，人物动作自然，画面风格统一，适合网文改编与连载内容。</p><div class="pricing-price"><span class="currency">¥</span>1,200<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>脚本优化与分镜设计</li><li>AI画面生成与筛选</li><li>人工精修与一致性调整</li><li>AI配音与字幕</li><li>2次免费修改</li></ul><div class="pricing-meta"><span>交付：3-5天/集</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="m2" data-category="manju" data-featured="true"><div class="pricing-card-top"><span class="pricing-code">M-02</span><span class="pricing-category">AI漫剧 / 动态漫</span></div><h3>2D动态漫（精品档）</h3><p class="pricing-desc">角色一致性锁定，电影级光影与运镜，多轮精修，适合品牌合作与高变现账号。</p><div class="pricing-price"><span class="currency">¥</span>2,500<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>原创角色设定与锁定</li><li>电影级光影与分镜</li><li>多轮AI迭代+人工精修</li><li>原创配乐与多角色配音</li><li>高级特效与转场</li><li>3次免费修改</li></ul><div class="pricing-meta"><span>交付：5-7天/集</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="m3" data-category="manju" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">M-03</span><span class="pricing-category">AI漫剧 / 动态漫</span></div><h3>3D AI漫剧</h3><p class="pricing-desc">3D立体场景与镜头运动，适合玄幻、修仙、科幻、战斗等大场面题材。</p><div class="pricing-price"><span class="currency">¥</span>3,500<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>3D场景与角色构建</li><li>空间镜头运动设计</li><li>特效合成与后期</li><li>精品配音与配乐</li><li>风格统一管控</li></ul><div class="pricing-meta"><span>交付：5-8天/集</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="m4" data-category="manju" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">M-04</span><span class="pricing-category">AI漫剧 / 动态漫</span></div><h3>仿真人AI短剧</h3><p class="pricing-desc">接近真人实拍质感，口型对齐，情绪表演自然，适合都市情感、家庭伦理、古装权谋。</p><div class="pricing-price"><span class="currency">¥</span>2,000<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>仿真人角色生成</li><li>口型与表情对齐</li><li>多角色互动场景</li><li>真实光影与材质</li><li>专业配音与音效</li></ul><div class="pricing-meta"><span>交付：4-7天/集</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="m5" data-category="manju" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">M-05</span><span class="pricing-category">AI漫剧 / 动态漫</span></div><h3>整剧打包（30集精品）</h3><p class="pricing-desc">全剧策划+角色设定+统一风格+批量交付，适合平台定制与IP孵化项目。</p><div class="pricing-price"><span class="currency">¥</span>150,000<span class="pricing-unit"> / 部起</span></div><ul class="pricing-features"><li>全剧世界观与角色设定</li><li>统一美术风格与分镜体系</li><li>30集成片交付</li><li>专属项目经理对接</li><li>批量8折优惠</li><li>优先排期</li></ul><div class="pricing-meta"><span>交付：按集数协商</span><a href="#contact">咨询方案 →</a></div></article>
 
-                <div class="border rounded-xl p-8 hover:shadow-xl transition relative bg-gray-50">
-                    <div class="text-teal-700 font-bold mb-2">2D ANIMATION</div>
-                    <h3 class="text-2xl font-bold mb-4">2D 动画</h3>
-                    <p class="text-sm text-gray-500 mb-6">适用：资讯解释、流程说明、视觉包装</p>
-                    <div class="text-3xl font-bold mb-6">¥6k <span class="text-sm font-normal text-gray-500">起/分</span></div>
-                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
-                        <li>✅ MG 动画：¥24,000+</li>
-                        <li>⭐ 逐帧动画：¥120,000+</li>
-                        <li>✅ 风格定制开发</li>
-                    </ul>
-                    <a href="#contact" class="block w-full text-center bg-teal-600 text-white py-2 rounded hover:bg-teal-700 transition">咨询方案</a>
+                    <article class="pricing-card" data-service-id="c1" data-category="commercial" data-featured="true"><div class="pricing-card-top"><span class="pricing-code">C-01</span><span class="pricing-category">AI商业影片</span></div><h3>AI企业品牌宣传片</h3><p class="pricing-desc">1-3分钟企业形象片，含策划、分镜、AI画面、配音、字幕全流程。</p><div class="pricing-price"><span class="currency">¥</span>18,000<span class="pricing-unit"> / 条</span></div><ul class="pricing-features"><li>品牌策划与脚本撰写</li><li>分镜设计与视觉规划</li><li>AI画面生成与精修</li><li>专业配音与配乐</li><li>字幕与品牌包装</li><li>2次修改</li></ul><div class="pricing-meta"><span>交付：5-10天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="c2" data-category="commercial" data-featured="true"><div class="pricing-card-top"><span class="pricing-code">C-02</span><span class="pricing-category">AI商业影片</span></div><h3>AI产品广告 / TVC</h3><p class="pricing-desc">30-60秒产品广告，突出产品卖点，适合抖音、小红书、电商平台投放。</p><div class="pricing-price"><span class="currency">¥</span>8,000<span class="pricing-unit"> / 条</span></div><ul class="pricing-features"><li>产品卖点提炼与脚本</li><li>产品展示AI画面</li><li>品牌视觉统一</li><li>配音与音效设计</li><li>多版本适配（横/竖屏）</li></ul><div class="pricing-meta"><span>交付：4-7天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="c3" data-category="commercial" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">C-03</span><span class="pricing-category">AI商业影片</span></div><h3>AI电商短视频</h3><p class="pricing-desc">15-30秒电商种草视频，快速出片，适合淘宝、抖音、快手等平台日更需求。</p><div class="pricing-price"><span class="currency">¥</span>3,000<span class="pricing-unit"> / 条</span></div><ul class="pricing-features"><li>产品卖点脚本</li><li>AI场景化展示</li><li>快节奏剪辑</li><li>字幕与花字</li><li>1次修改</li></ul><div class="pricing-meta"><span>交付：2-4天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="c4" data-category="commercial" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">C-04</span><span class="pricing-category">AI商业影片</span></div><h3>AI文旅宣传片</h3><p class="pricing-desc">1-3分钟景区/城市/文化主题宣传片，AI还原历史场景与文旅意象。</p><div class="pricing-price"><span class="currency">¥</span>15,000<span class="pricing-unit"> / 条</span></div><ul class="pricing-features"><li>文旅主题策划</li><li>场景AI生成与还原</li><li>文化元素视觉化</li><li>旁白配音与氛围音乐</li><li>字幕与包装</li></ul><div class="pricing-meta"><span>交付：5-10天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="c5" data-category="commercial" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">C-05</span><span class="pricing-category">AI商业影片</span></div><h3>AI招商 / 形象片</h3><p class="pricing-desc">3-5分钟高端定制影片，适合招商推介、发布会、展会等重要场合。</p><div class="pricing-price"><span class="currency">¥</span>25,000<span class="pricing-unit"> / 条</span></div><ul class="pricing-features"><li>深度策划与创意脚本</li><li>高端AI视觉定制</li><li>多场景复杂运镜</li><li>电影级调色与特效</li><li>原创配乐</li><li>3次修改</li></ul><div class="pricing-meta"><span>交付：7-14天</span><a href="#contact">咨询方案 →</a></div></article>
+
+                    <article class="pricing-card" data-service-id="a1" data-category="animation" data-featured="true"><div class="pricing-card-top"><span class="pricing-code">A-01</span><span class="pricing-category">AI动画 / CG / MV</span></div><h3>AI 2D动画短片</h3><p class="pricing-desc">原创角色与完整剧情的2D动画短片，适合品牌故事、公益短片、独立创作。</p><div class="pricing-price"><span class="currency">¥</span>8,000<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>原创角色与场景设计</li><li>完整剧情分镜</li><li>AI动画生成与精修</li><li>配音配乐与音效</li><li>字幕与后期</li></ul><div class="pricing-meta"><span>交付：7-14天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="a2" data-category="animation" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">A-02</span><span class="pricing-category">AI动画 / CG / MV</span></div><h3>AI 3D动画 / CG</h3><p class="pricing-desc">含3D建模、渲染、特效的AI辅助三维动画，适合产品演示、建筑漫游、工业动画。</p><div class="pricing-price"><span class="currency">¥</span>15,000<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>3D建模与材质</li><li>AI辅助动画生成</li><li>渲染与光影合成</li><li>特效与后期</li><li>专业配音配乐</li></ul><div class="pricing-meta"><span>交付：10-20天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="a3" data-category="animation" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">A-03</span><span class="pricing-category">AI动画 / CG / MV</span></div><h3>AI游戏宣传CG</h3><p class="pricing-desc">3分钟内游戏开场动画或商店页宣传CG，AI大幅降低传统CG外包成本。</p><div class="pricing-price"><span class="currency">¥</span>12,000<span class="pricing-unit"> / 条</span></div><ul class="pricing-features"><li>游戏世界观视觉化</li><li>角色与场景AI生成</li><li>cinematic镜头设计</li><li>特效与音效合成</li><li>商店页规格适配</li></ul><div class="pricing-meta"><span>交付：7-14天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="a4" data-category="animation" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">A-04</span><span class="pricing-category">AI动画 / CG / MV</span></div><h3>AI音乐MV</h3><p class="pricing-desc">AI生成音乐视觉画面，含画面创意、分镜、剪辑，适配歌曲节奏与情绪。</p><div class="pricing-price"><span class="currency">¥</span>8,000<span class="pricing-unit"> / 支</span></div><ul class="pricing-features"><li>音乐情绪分析与视觉策划</li><li>AI画面生成与节奏剪辑</li><li>歌词字幕设计</li><li>色彩与风格统一</li><li>多平台尺寸适配</li></ul><div class="pricing-meta"><span>交付：5-10天</span><a href="#contact">咨询方案 →</a></div></article>
+
+                    <article class="pricing-card" data-service-id="d1" data-category="digital" data-featured="true"><div class="pricing-card-top"><span class="pricing-code">D-01</span><span class="pricing-category">AI数字人</span></div><h3>AI数字人口播</h3><p class="pricing-desc">数字人出镜口播视频，含形象、配音、字幕，适合知识分享、企业培训、产品介绍。</p><div class="pricing-price"><span class="currency">¥</span>500<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>数字人形象选择</li><li>文案转语音合成</li><li>口型自动对齐</li><li>字幕与背景</li><li>1次修改</li></ul><div class="pricing-meta"><span>交付：1-3天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="d2" data-category="digital" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">D-02</span><span class="pricing-category">AI数字人</span></div><h3>AI虚拟人形象定制</h3><p class="pricing-desc">原创虚拟人形象设计与克隆，含专属音色，可长期用于系列内容制作。</p><div class="pricing-price"><span class="currency">¥</span>5,000<span class="pricing-unit"> / 个</span></div><ul class="pricing-features"><li>原创形象设计</li><li>高精度克隆与绑定</li><li>专属音色定制</li><li>表情与动作库</li><li>使用培训与指南</li></ul><div class="pricing-meta"><span>交付：5-10天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="d3" data-category="digital" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">D-03</span><span class="pricing-category">AI数字人</span></div><h3>AI课程 / 知识视频</h3><p class="pricing-desc">数字人+课件+字幕的在线课程视频制作，多节打包享优惠。</p><div class="pricing-price"><span class="currency">¥</span>800<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>课件美化与排版</li><li>数字人讲解录制</li><li>知识点字幕标注</li><li>统一视觉模板</li><li>批量优惠</li></ul><div class="pricing-meta"><span>交付：3-7天/节</span><a href="#contact">咨询方案 →</a></div></article>
+
+                    <article class="pricing-card" data-service-id="v1" data-category="value" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">V-01</span><span class="pricing-category">增值服务</span></div><h3>脚本 / 分镜策划</h3><p class="pricing-desc">专业剧本优化与分镜表制作，含镜头描述、台词、时长规划。</p><div class="pricing-price"><span class="currency">¥</span>1,000<span class="pricing-unit"> / 集</span></div><ul class="pricing-features"><li>剧本结构优化</li><li>分镜表绘制</li><li>镜头语言设计</li><li>台词与时长标注</li></ul><div class="pricing-meta"><span>交付：2-3天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="v2" data-category="value" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">V-02</span><span class="pricing-category">增值服务</span></div><h3>角色设计（原创）</h3><p class="pricing-desc">原创角色三视图与表情设定，含风格参考，可用于长期系列内容。</p><div class="pricing-price"><span class="currency">¥</span>800<span class="pricing-unit"> / 个</span></div><ul class="pricing-features"><li>角色三视图</li><li>表情与姿态设定</li><li>配色与风格参考</li><li>AI生成提示词配套</li></ul><div class="pricing-meta"><span>交付：2-4天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="v3" data-category="value" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">V-03</span><span class="pricing-category">增值服务</span></div><h3>场景设计</h3><p class="pricing-desc">场景概念图与氛围参考，含昼夜/季节变体建议。</p><div class="pricing-price"><span class="currency">¥</span>500<span class="pricing-unit"> / 个</span></div><ul class="pricing-features"><li>场景概念图</li><li>氛围与光影参考</li><li>空间布局说明</li><li>AI生成提示词配套</li></ul><div class="pricing-meta"><span>交付：1-3天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="v4" data-category="value" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">V-04</span><span class="pricing-category">增值服务</span></div><h3>AI配音（多角色）</h3><p class="pricing-desc">多角色AI配音，含情绪区分、音色选择、基础混音。</p><div class="pricing-price"><span class="currency">¥</span>100<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>多角色音色分配</li><li>情绪与语气调整</li><li>基础混音处理</li><li>对口型时间轴</li></ul><div class="pricing-meta"><span>交付：1-2天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="v5" data-category="value" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">V-05</span><span class="pricing-category">增值服务</span></div><h3>原创配乐 / BGM</h3><p class="pricing-desc">定制背景音乐或商用授权音乐，适配影片情绪与节奏。</p><div class="pricing-price"><span class="currency">¥</span>1,500<span class="pricing-unit"> / 首</span></div><ul class="pricing-features"><li>情绪与风格定制</li><li>循环与变奏版本</li><li>商用授权</li><li>混音母带处理</li></ul><div class="pricing-meta"><span>交付：3-5天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="v6" data-category="value" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">V-06</span><span class="pricing-category">增值服务</span></div><h3>字幕 / 特效包装</h3><p class="pricing-desc">专业字幕、转场特效、花字包装，提升成片完成度。</p><div class="pricing-price"><span class="currency">¥</span>200<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>字幕设计与排版</li><li>转场特效</li><li>花字与标签</li><li>调色与输出</li></ul><div class="pricing-meta"><span>交付：1-3天</span><a href="#contact">咨询方案 →</a></div></article>
+                    <article class="pricing-card" data-service-id="v7" data-category="value" data-featured="false"><div class="pricing-card-top"><span class="pricing-code">V-07</span><span class="pricing-category">增值服务</span></div><h3>多语言本地化</h3><p class="pricing-desc">影片翻译、多语言配音、字幕本地化，支持英/日/韩等语种。</p><div class="pricing-price"><span class="currency">¥</span>30<span class="pricing-unit"> / 分钟</span></div><ul class="pricing-features"><li>专业翻译</li><li>多语言AI配音</li><li>字幕本地化</li><li>文化适配建议</li></ul><div class="pricing-meta"><span>交付：2-5天</span><a href="#contact">咨询方案 →</a></div></article>
                 </div>
-
-                <div class="border rounded-xl p-8 hover:shadow-xl transition relative bg-gray-50">
-                    <div class="text-teal-700 font-bold mb-2">3D VISUAL</div>
-                    <h3 class="text-2xl font-bold mb-4">3D 演示</h3>
-                    <p class="text-sm text-gray-500 mb-6">适用：产品结构、工业流程、装配演示</p>
-                    <div class="text-3xl font-bold mb-6">¥300 <span class="text-sm font-normal text-gray-500">起/秒</span></div>
-                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
-                        <li>✅ 基础展示：¥1200+</li>
-                        <li>⭐ 标准拆解：¥3200+</li>
-                        <li>✅ 高精度渲染</li>
-                    </ul>
-                    <a href="#contact" class="block w-full text-center bg-black text-white py-2 rounded hover:bg-teal-600 transition">咨询方案</a>
+                <div class="pricing-notes">
+                    <div class="pricing-note"><strong>批量合作</strong><span>10集以上 9折 · 30集以上 8折；长期项目可另行议定固定单价与排期。</span></div>
+                    <div class="pricing-note"><strong>修改规则</strong><span>标准项目按各服务卡所列修改次数执行；超出次数与重大方向调整另行报价。</span></div>
+                    <div class="pricing-note"><strong>版权与交付</strong><span>成片交付后商用版权归客户；具体交付周期依项目复杂度、集数及当前排期确认。</span></div>
                 </div>
-
-                <div class="border-2 border-teal-600 rounded-xl p-8 hover:shadow-xl transition relative bg-white transform md:-translate-y-2">
-                    <div class="absolute top-0 right-0 bg-teal-600 text-white text-xs px-3 py-1 rounded-bl-lg">趋势</div>
-                    <div class="text-teal-700 font-bold mb-2">AI SERVICE</div>
-                    <h3 class="text-2xl font-bold mb-4">AI 短剧制作</h3>
-                    <p class="text-sm text-gray-500 mb-6">适用：风格测试、动态分镜、AIGC 成片</p>
-                    <div class="text-3xl font-bold mb-6">¥20k <span class="text-sm font-normal text-gray-500">起/案</span></div>
-                    <ul class="space-y-3 text-sm text-gray-600 mb-8">
-                        <li>✅ 风格样片 (StyleFrame)</li>
-                        <li>⭐ 概念短片 (Concept)</li>
-                        <li>✅ 降本增效评估</li>
-                    </ul>
-                    <a href="#contact" class="block w-full text-center bg-teal-600 text-white py-2 rounded hover:bg-teal-700 transition">咨询方案</a>
-                </div>
-
             </div>
         </div>
     </section>
@@ -302,88 +390,29 @@
     <section id="process" class="py-20 bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-bold mb-12 text-center">合作流程 Process</h2>
-            
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4 text-center">
-                <div class="relative p-4">
-                    <div class="text-4xl mb-4 font-bold text-teal-400">01</div>
-                    <h3 class="font-bold mb-2">需求确认</h3>
-                    <p class="text-xs text-gray-400">确认目标、平台与交付规格</p>
-                </div>
-                <div class="relative p-4">
-                    <div class="text-4xl mb-4 font-bold text-teal-400">02</div>
-                    <h3 class="font-bold mb-2">脚本与分镜</h3>
-                    <p class="text-xs text-gray-400">方向锁定 (⭐重点确认)</p>
-                </div>
-                <div class="relative p-4">
-                    <div class="text-4xl mb-4 font-bold text-teal-400">03</div>
-                    <h3 class="font-bold mb-2">制作执行</h3>
-                    <p class="text-xs text-gray-400">拍摄 / 2D / 3D / 合成</p>
-                </div>
-                <div class="relative p-4">
-                    <div class="text-4xl mb-4 font-bold text-teal-400">04</div>
-                    <h3 class="font-bold mb-2">粗剪确认</h3>
-                    <p class="text-xs text-gray-400">确认节奏与信息正确</p>
-                </div>
-                <div class="relative p-4">
-                    <div class="text-4xl mb-4 font-bold text-teal-400">05</div>
-                    <h3 class="font-bold mb-2">修改与交付</h3>
-                    <p class="text-xs text-gray-400">按约定轮次与清单交付</p>
-                </div>
+                <div class="relative p-4"><div class="text-4xl mb-4 font-bold text-teal-400">01</div><h3 class="font-bold mb-2">需求确认</h3><p class="text-xs text-gray-400">确认目标、平台与交付规格</p></div>
+                <div class="relative p-4"><div class="text-4xl mb-4 font-bold text-teal-400">02</div><h3 class="font-bold mb-2">脚本与分镜</h3><p class="text-xs text-gray-400">方向锁定 (⭐重点确认)</p></div>
+                <div class="relative p-4"><div class="text-4xl mb-4 font-bold text-teal-400">03</div><h3 class="font-bold mb-2">制作执行</h3><p class="text-xs text-gray-400">拍摄 / 2D / 3D / 合成</p></div>
+                <div class="relative p-4"><div class="text-4xl mb-4 font-bold text-teal-400">04</div><h3 class="font-bold mb-2">粗剪确认</h3><p class="text-xs text-gray-400">确认节奏与信息正确</p></div>
+                <div class="relative p-4"><div class="text-4xl mb-4 font-bold text-teal-400">05</div><h3 class="font-bold mb-2">修改与交付</h3><p class="text-xs text-gray-400">按约定轮次与清单交付</p></div>
             </div>
         </div>
     </section>
 
     <section class="py-20 bg-gray-800 text-white border-t border-gray-700">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="text-teal-400 font-bold tracking-wider uppercase text-sm">Industry-Academia Collaboration</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2">HGG x 校园联盟：AIGC 影像实验室</h2>
-                <div class="w-24 h-1 bg-teal-500 mx-auto mt-6 rounded"></div>
-            </div>
-
+            <div class="text-center mb-16"><span class="text-teal-400 font-bold tracking-wider uppercase text-sm">Industry-Academia Collaboration</span><h2 class="text-3xl md:text-4xl font-bold mt-2">HGG x 校园联盟：AIGC 影像实验室</h2><div class="w-24 h-1 bg-teal-500 mx-auto mt-6 rounded"></div></div>
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 <div class="md:w-1/2">
-                    <div class="flex items-center gap-6 mb-8">
-                        <img src="images/director_photo.jpg" alt="Director Hsueh" class="w-32 h-32 rounded-full border-4 border-teal-500 shadow-lg object-cover bg-gray-700">
-                        <div>
-                            <h3 class="text-2xl font-bold text-white mb-1">薛导 (Tonk Hsueh)</h3>
-                            <p class="text-teal-400 font-medium tracking-wide">HGG 创始人 / AIGC 计划总监</p>
-                        </div>
-                    </div>
-
-                    <p class="text-lg text-gray-300 leading-relaxed mb-8">
-                        结合 <strong class="text-white">薛导</strong> 多年的影视实战经验，HGG 台湾团队致力于推动 AIGC 技术落地。我们与学校深入合作，将真实商业项目转化为教学实践，缩短“学校所学”与“业界所需”的距离。
-                    </p>
-                    <p class="text-teal-400 font-bold text-xl">
-                        打造台湾最强的 AIGC 创意聚落。
-                    </p>
+                    <div class="flex items-center gap-6 mb-8"><img src="images/director_photo.jpg" alt="Director Hsueh" class="w-32 h-32 rounded-full border-4 border-teal-500 shadow-lg object-cover bg-gray-700"><div><h3 class="text-2xl font-bold text-white mb-1">薛导 (Tonk Hsueh)</h3><p class="text-teal-400 font-medium tracking-wide">HGG 创始人 / AIGC 计划总监</p></div></div>
+                    <p class="text-lg text-gray-300 leading-relaxed mb-8">结合 <strong class="text-white">薛导</strong> 多年的影视实战经验，HGG 台湾团队致力于推动 AIGC 技术落地。我们与学校深入合作，将真实商业项目转化为教学实践，缩短“学校所学”与“业界所需”的距离。</p>
+                    <p class="text-teal-400 font-bold text-xl">打造台湾最强的 AIGC 创意聚落。</p>
                 </div>
-
                 <div class="md:w-1/2 grid gap-6">
-                    <div class="bg-gray-700 p-6 rounded-lg border-l-4 border-teal-500">
-                        <h3 class="text-xl font-bold mb-2 flex items-center">
-                            🔬 技术研发 (R&D)
-                        </h3>
-                        <p class="text-gray-300 text-sm">
-                            共同开发专属的 <span class="text-teal-300">LoRA 模型</span> 与 <span class="text-teal-300">ComfyUI</span> 自动化工作流，建立客制化影像生产线。
-                        </p>
-                    </div>
-                    <div class="bg-gray-700 p-6 rounded-lg border-l-4 border-teal-500">
-                        <h3 class="text-xl font-bold mb-2 flex items-center">
-                            🎓 人才培育
-                        </h3>
-                        <p class="text-gray-300 text-sm">
-                            让学生直接参与 <span class="text-teal-300">商业级 AI 短剧</span> 与广告制作，实战中学习最前沿技术。
-                        </p>
-                    </div>
-                    <div class="bg-gray-700 p-6 rounded-lg border-l-4 border-teal-500">
-                        <h3 class="text-xl font-bold mb-2 flex items-center">
-                            ⚡ 制程革新
-                        </h3>
-                        <p class="text-gray-300 text-sm">
-                            实验 AI 在 <span class="text-teal-300">分镜脚本 (Animatic)</span> 与 <span class="text-teal-300">美术设定 (Concept Art)</span> 的极限应用。
-                        </p>
-                    </div>
+                    <div class="bg-gray-700 p-6 rounded-lg border-l-4 border-teal-500"><h3 class="text-xl font-bold mb-2 flex items-center">🔬 技术研发 (R&D)</h3><p class="text-gray-300 text-sm">共同开发专属的 <span class="text-teal-300">LoRA 模型</span> 与 <span class="text-teal-300">ComfyUI</span> 自动化工作流，建立客制化影像生产线。</p></div>
+                    <div class="bg-gray-700 p-6 rounded-lg border-l-4 border-teal-500"><h3 class="text-xl font-bold mb-2 flex items-center">🎓 人才培育</h3><p class="text-gray-300 text-sm">让学生直接参与 <span class="text-teal-300">商业级 AI 短剧</span> 与广告制作，实战中学习最前沿技术。</p></div>
+                    <div class="bg-gray-700 p-6 rounded-lg border-l-4 border-teal-500"><h3 class="text-xl font-bold mb-2 flex items-center">⚡ 制程革新</h3><p class="text-gray-300 text-sm">实验 AI 在 <span class="text-teal-300">分镜脚本 (Animatic)</span> 与 <span class="text-teal-300">美术设定 (Concept Art)</span> 的极限应用。</p></div>
                 </div>
             </div>
         </div>
@@ -391,17 +420,11 @@
 
     <section id="about" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2">
-                <img src="images/team_photo.jpg" alt="About HGG" class="rounded-lg shadow-lg">
-            </div>
+            <div class="md:w-1/2"><img src="images/team_photo.jpg" alt="About HGG" class="rounded-lg shadow-lg"></div>
             <div class="md:w-1/2">
                 <h2 class="text-3xl font-bold mb-6">关于 HGG 罕呱呱</h2>
                 <h3 class="text-xl text-teal-700 font-bold mb-4">薛导领军 · 台湾 AIGC 影像先锋</h3>
-                <p class="text-gray-600 leading-relaxed mb-6">
-                    HGG 罕呱呱动画工作室由 **薛导 (Director Hsueh)** 于台湾创立。面对 AIGC 技術浪潮，我们不只是一家动画制作公司，更是影像革命的实验场。
-                    <br><br>
-                    我们与国内顶尖院校紧密合作，建立**“AIGC 产学研发基地”**。将业界的高标准製程与学界的创新能量结合，从 AI 辅助分镜、风格化模型训练到全流程生成，致力于培育下一代懂得驾驭 AI 的顶尖创作者。
-                </p>
+                <p class="text-gray-600 leading-relaxed mb-6">HGG 罕呱呱动画工作室由 **薛导 (Director Hsueh)** 于台湾创立。面对 AIGC 技術浪潮，我们不只是一家动画制作公司，更是影像革命的实验场。<br><br>我们与国内顶尖院校紧密合作，建立**“AIGC 产学研发基地”**。将业界的高标准製程与学界的创新能量结合，从 AI 辅助分镜、风格化模型训练到全流程生成，致力于培育下一代懂得驾驭 AI 的顶尖创作者。</p>
                 <img src="images/logo_header.png" class="h-8 opacity-50" alt="HGG Logo">
             </div>
         </div>
@@ -411,63 +434,17 @@
         <div class="max-w-5xl mx-auto px-4">
             <div class="bg-white p-10 md:p-16 rounded-xl shadow-lg text-center">
                 <h2 class="text-3xl font-bold mb-6">联系我们</h2>
-                <p class="text-gray-600 mb-12 text-lg">
-                    无论是影视广告、2D 或 3D 动画需求，欢迎直接联系我们。<br>
-                    我们将尽速回复您的询问并提供专业建议。
-                </p>
-
+                <p class="text-gray-600 mb-12 text-lg">无论是影视广告、2D 或 3D 动画需求，欢迎直接联系我们。<br>我们将尽速回复您的询问并提供专业建议。</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 group bg-gray-50 hover:bg-white">
-                        <div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">📞</div>
-                        <h3 class="font-bold text-xl mb-3">电话 Phone</h3>
-                        <p class="text-gray-600 font-medium text-lg">19947603560</p>
-                    </div>
-
-                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 group bg-gray-50 hover:bg-white">
-                        <div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">💬</div>
-                        <h3 class="font-bold text-xl mb-3">微信 WeChat</h3>
-                        <p class="text-gray-600 font-medium text-lg">liagaoo</p>
-                    </div>
-
-                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 group bg-gray-50 hover:bg-white">
-                        <div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">✉️</div>
-                        <h3 class="font-bold text-xl mb-3">邮箱 Email</h3>
-                        <a href="mailto:liagaoo@qq.com" class="text-teal-600 font-medium text-lg hover:underline break-all">
-                            liagaoo@qq.com
-                        </a>
-                    </div>
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 group bg-gray-50 hover:bg-white"><div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">📞</div><h3 class="font-bold text-xl mb-3">电话 Phone</h3><p class="text-gray-600 font-medium text-lg">19947603560</p></div>
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 group bg-gray-50 hover:bg-white"><div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">💬</div><h3 class="font-bold text-xl mb-3">微信 WeChat</h3><p class="text-gray-600 font-medium text-lg">liagaoo</p></div>
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 group bg-gray-50 hover:bg-white"><div class="text-4xl mb-4 group-hover:scale-110 transition duration-300">✉️</div><h3 class="font-bold text-xl mb-3">邮箱 Email</h3><a href="mailto:liagaoo@qq.com" class="text-teal-600 font-medium text-lg hover:underline break-all">liagaoo@qq.com</a></div>
                 </div>
-
-                <div class="relative flex py-5 items-center mb-12">
-                    <div class="flex-grow border-t border-gray-200"></div>
-                    <span class="flex-shrink-0 mx-4 text-gray-400 font-bold">服务据点 Office Locations</span>
-                    <div class="flex-grow border-t border-gray-200"></div>
-                </div>
-
+                <div class="relative flex py-5 items-center mb-12"><div class="flex-grow border-t border-gray-200"></div><span class="flex-shrink-0 mx-4 text-gray-400 font-bold">服务据点 Office Locations</span><div class="flex-grow border-t border-gray-200"></div></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 bg-white group text-left">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-4xl">🇹🇼</span>
-                            <h3 class="font-bold text-xl text-black">台湾总部 Taiwan</h3>
-                        </div>
-                        <p class="text-gray-600 font-medium text-lg leading-relaxed">
-                            桃园市大溪区长兴街二段158号<br>
-                            <span class="text-sm text-gray-400">Taoyuan City, Taiwan</span>
-                        </p>
-                    </div>
-                    
-                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 bg-white group text-left">
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-4xl">🇨🇳</span>
-                            <h3 class="font-bold text-xl text-black">武汉分部 Wuhan</h3>
-                        </div>
-                        <p class="text-gray-600 font-medium text-lg leading-relaxed">
-                            友谊大道万利广场A座1单元2203室<br>
-                            <span class="text-sm text-gray-400">Wuhan City, Hubei Province</span>
-                        </p>
-                    </div>
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 bg-white group text-left"><div class="flex items-center gap-3 mb-4"><span class="text-4xl">🇹🇼</span><h3 class="font-bold text-xl text-black">台湾总部 Taiwan</h3></div><p class="text-gray-600 font-medium text-lg leading-relaxed">桃园市大溪区长兴街二段158号<br><span class="text-sm text-gray-400">Taoyuan City, Taiwan</span></p></div>
+                    <div class="p-8 border border-gray-100 rounded-2xl hover:border-teal-600 hover:shadow-lg transition duration-300 bg-white group text-left"><div class="flex items-center gap-3 mb-4"><span class="text-4xl">🇨🇳</span><h3 class="font-bold text-xl text-black">武汉分部 Wuhan</h3></div><p class="text-gray-600 font-medium text-lg leading-relaxed">友谊大道万利广场A座1单元2203室<br><span class="text-sm text-gray-400">Wuhan City, Hubei Province</span></p></div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -476,50 +453,48 @@
         <div class="max-w-7xl mx-auto px-4">
             <img src="images/logo_footer.png" alt="HGG Footer Logo" class="h-12 mx-auto mb-6 opacity-80">
             <p class="mb-4 text-sm">© 2026 HGG Animation Studio | 罕呱呱动画工作室</p>
-            <div class="flex justify-center space-x-6 text-sm">
-                <a href="#" class="hover:text-white">作品</a>
-                <a href="#" class="hover:text-white">服务</a>
-                <a href="#" class="hover:text-white">隐私权政策</a>
-            </div>
+            <div class="flex justify-center space-x-6 text-sm"><a href="#" class="hover:text-white">作品</a><a href="#" class="hover:text-white">服务</a><a href="#" class="hover:text-white">隐私权政策</a></div>
         </div>
     </footer>
 
     <script>
     var btn = document.getElementById('mobile-menu-btn');
     var menu = document.getElementById('mobile-menu');
-
     if(btn && menu){
         btn.addEventListener('click', function(){
-            if(menu.className.indexOf('hidden') !== -1){
-                menu.classList.remove('hidden');
-            } else {
-                menu.classList.add('hidden');
-            }
+            if(menu.className.indexOf('hidden') !== -1){ menu.classList.remove('hidden'); }
+            else { menu.classList.add('hidden'); }
         });
     }
 
     function togglePlay(div){
         var v = div.querySelector('video');
         var o = div.querySelector('.overlay-content');
-        if(v.paused){
-            v.play();
-            o.style.opacity = '0';
-        } else {
-            v.pause();
-            o.style.opacity = '1';
-        }
+        if(v.paused){ v.play(); o.style.opacity = '0'; }
+        else { v.pause(); o.style.opacity = '1'; }
     }
 
-    // 新增：检查 VIP 密码的功能
+    function applyPricingFilter(filter){
+        var cards = document.querySelectorAll('.pricing-card');
+        cards.forEach(function(card){
+            var show = filter === 'all' || (filter === 'featured' && card.dataset.featured === 'true') || card.dataset.category === filter;
+            card.classList.toggle('is-hidden', !show);
+        });
+        document.querySelectorAll('.pricing-tab').forEach(function(tab){
+            tab.classList.toggle('active', tab.dataset.filter === filter);
+        });
+    }
+
+    document.querySelectorAll('.pricing-tab').forEach(function(tab){
+        tab.addEventListener('click', function(){ applyPricingFilter(tab.dataset.filter); });
+    });
+    applyPricingFilter('featured');
+
     function checkVipPassword() {
-        var password = "8888"; // 您的预设密码
+        var password = "8888";
         var input = prompt("请输入客户专区密码：");
-        
-        if (input === password) {
-            window.location.href = "client_vip.html";
-        } else if (input !== null) {
-            alert("密码错误，请联系 HGG 获取访问权限。");
-        }
+        if (input === password) { window.location.href = "client_vip.html"; }
+        else if (input !== null) { alert("密码错误，请联系 HGG 获取访问权限。"); }
     }
     </script>
 </body>
