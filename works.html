@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>作品 | HGG 罕呱呱动画工作室</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>:root{--teal:#008080}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}.filter{border:1px solid #d1d5db;border-radius:999px;padding:.55rem 1rem;background:#fff;font-size:.85rem;font-weight:700;white-space:nowrap}.filter.active,.filter:hover{background:var(--teal);border-color:var(--teal);color:#fff}.work-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 18px #1118270c;border:1px solid #e5e7eb;transition:.2s}.work-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px #11182718}.work-card video{aspect-ratio:16/10;object-fit:cover;width:100%;background:#111}</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <header class="bg-white border-b border-gray-100"><div class="max-w-7xl mx-auto px-5 py-6 flex items-center justify-between"><img src="images/logo_header.png" class="h-9" alt="HGG"><span class="text-sm text-gray-400">WORKS / 作品</span></div></header>
+  <main class="max-w-7xl mx-auto px-5 py-16"><div class="mb-10"><h1 class="text-4xl md:text-5xl font-bold tracking-tight">作品</h1><p class="mt-3 text-gray-500">影像、动画与原创内容。</p></div>
+    <div id="filters" class="flex gap-2 overflow-x-auto pb-2 mb-10"></div><div id="works" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div><div id="empty" class="hidden text-center py-24 text-gray-400">这个分类还没有作品。</div>
+  </main>
+  <footer class="bg-black text-gray-400 py-8 text-center"><img src="images/logo_footer.png" class="h-10 mx-auto mb-3" alt="HGG"><p class="text-xs">© 2026 HGG Animation Studio</p></footer>
+  <script>
+    const cats=['全部','品牌广告','AI影像','动画设计','原创IP','文创・游戏'];
+    const seed=[['品牌形象广告','品牌广告','images/work_01.jpg','images/work_01.mp4'],['AI 专项评估','AI影像','images/work_02.jpg','images/work_02.mp4'],['产品结构演示','动画设计','images/work_03.jpg','images/work_03.mp4'],['品牌故事短片','品牌广告','images/work_04.jpg','images/work_04.mp4'],['资讯解说视频','AI影像','images/work_05.jpg','images/work_05.mp4'],['HGG 原创 IP 动画','原创IP','images/work_06.jpg','images/work_06.mp4']];
+    const stored=JSON.parse(localStorage.getItem('hgg-works')||'null'); const data=stored||seed.map((x,i)=>({id:i+1,name:x[0],category:x[1],cover:x[2],video:x[3],visible:true,pinned:false,createdAt:Date.now()-i,order:i})); let current='全部';
+    function drawFilters(){filters.innerHTML=cats.map(c=>`<button class="filter ${c===current?'active':''}" onclick="current='${c}';draw()">${c}</button>`).join('')}
+    function draw(){drawFilters();const list=data.filter(x=>x.visible!==false&&(current==='全部'||x.category===current)).sort((a,b)=>(b.pinned-a.pinned)||(b.createdAt-a.createdAt)||(a.order||0)-(b.order||0));empty.classList.toggle('hidden',list.length>0);works.innerHTML=list.map(x=>`<article class="work-card"><video controls preload="metadata" poster="${x.cover}"><source src="${x.video}"></video><div class="p-5"><div class="text-xs text-teal-700 font-bold mb-2">${x.pinned?'置顶 · ':''}${x.category}</div><h2 class="font-bold text-lg">${x.name}</h2></div></article>`).join('')}
+    draw();
+  </script>
+</body></html>
